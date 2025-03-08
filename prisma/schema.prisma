@@ -27,11 +27,12 @@ model homeworks {
 }
 
 model parents {
-  id       BigInt  @id @default(autoincrement())
-  name     String  @db.VarChar(255)
-  phone    String  @db.VarChar(255)
-  email    String? @unique(map: "email") @db.VarChar(255)
-  password String  @db.VarChar(255)
+  id       BigInt       @id @default(autoincrement())
+  name     String       @db.VarChar(255)
+  phone    String       @db.VarChar(255)
+  email    String?      @unique(map: "email") @db.VarChar(255)
+  password String       @db.VarChar(255)
+  role     parents_role @default(PARENT)
 }
 
 model quizzes {
@@ -107,17 +108,19 @@ model students {
   phone_number String           @db.VarChar(255)
   password     String           @db.VarChar(255)
   parent_id    BigInt?
+  role         students_role    @default(STUDENT)
 
   @@index([center_id], map: "center_id")
   @@index([parent_id], map: "parent_id")
 }
 
 model teachers {
-  id       BigInt  @id @default(autoincrement())
-  name     String  @db.VarChar(255)
-  email    String? @unique(map: "email") @db.VarChar(255)
-  phone    String  @db.VarChar(255)
-  password String  @db.VarChar(255)
+  id       BigInt        @id @default(autoincrement())
+  name     String        @db.VarChar(255)
+  email    String?       @unique(map: "email") @db.VarChar(255)
+  phone    String        @db.VarChar(255)
+  password String        @db.VarChar(255)
+  role     teachers_role @default(TEACHER)
 }
 
 model trials {
@@ -166,4 +169,16 @@ enum trials_section {
   nd_sec_scientific @map("2nd sec scientific")
   nd_sec_literary   @map("2nd sec literary")
   rd_sec            @map("3rd sec")
+}
+
+enum teachers_role {
+  TEACHER
+}
+
+enum parents_role {
+  PARENT
+}
+
+enum students_role {
+  STUDENT
 }
