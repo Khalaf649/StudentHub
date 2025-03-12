@@ -11,48 +11,41 @@ model centers {
   id       BigInt @id @default(autoincrement())
   name     String @db.VarChar(255)
   location String @db.VarChar(255)
-  contact  String @db.VarChar(255)
+  phone    String @unique(map: "phone") @db.VarChar(255)
 }
 
 model homeworks {
-  id          BigInt            @id @default(autoincrement())
+  id          BigInt   @id @default(autoincrement())
   session_id  BigInt
-  description String            @db.VarChar(255)
-  due_date    DateTime          @db.DateTime(0)
-  center_id   BigInt
-  section     homeworks_section
+  description String   @db.VarChar(255)
+  due_date    DateTime @db.DateTime(0)
 
-  @@index([center_id], map: "center_id")
   @@index([session_id], map: "session_id")
 }
 
 model parents {
-  id       BigInt       @id @default(autoincrement())
-  name     String       @db.VarChar(255)
-  phone    String       @db.VarChar(255)
-  email    String?      @unique(map: "email") @db.VarChar(255)
-  password String       @db.VarChar(255)
-  role     parents_role @default(PARENT)
+  id       BigInt  @id @default(autoincrement())
+  name     String  @db.VarChar(255)
+  phone    String  @unique(map: "phone") @db.VarChar(255)
+  email    String? @unique(map: "email") @db.VarChar(255)
+  password String  @db.VarChar(255)
 }
 
 model quizzes {
-  id         BigInt          @id @default(autoincrement())
+  id         BigInt   @id @default(autoincrement())
   session_id BigInt
   max_score  Int
-  date       DateTime        @db.DateTime(0)
-  center_id  BigInt
-  section    quizzes_section
+  date       DateTime @db.DateTime(0)
 
-  @@index([center_id], map: "center_id")
   @@index([session_id], map: "session_id")
 }
 
 model sessions {
   id         BigInt           @id @default(autoincrement())
-  teacher_id BigInt
+  teacher_id BigInt?
   date       DateTime         @db.DateTime(0)
   topic      String           @db.VarChar(255)
-  center_id  BigInt
+  center_id  BigInt?
   section    sessions_section
 
   @@index([center_id], map: "center_id")
@@ -60,10 +53,11 @@ model sessions {
 }
 
 model student_homeworks {
-  id          BigInt @id @default(autoincrement())
-  homework_id BigInt
-  student_id  BigInt
-  status      String @db.VarChar(255)
+  id              BigInt   @id @default(autoincrement())
+  homework_id     BigInt
+  student_id      BigInt
+  status          String   @db.VarChar(255)
+  submission_date DateTime @db.DateTime(0)
 
   @@index([homework_id], map: "homework_id")
   @@index([student_id], map: "student_id")
@@ -80,10 +74,11 @@ model student_quizzes {
 }
 
 model student_sessions {
-  id         BigInt  @id @default(autoincrement())
-  session_id BigInt
-  student_id BigInt
-  notes      String? @db.VarChar(255)
+  id                BigInt                              @id @default(autoincrement())
+  session_id        BigInt
+  student_id        BigInt
+  notes             String?                             @db.VarChar(255)
+  attendance_status student_sessions_attendance_status? @default(absent)
 
   @@index([session_id], map: "session_id")
   @@index([student_id], map: "student_id")
@@ -100,85 +95,85 @@ model student_trials {
 }
 
 model students {
-  id           BigInt           @id @default(autoincrement())
-  name         String           @db.VarChar(255)
-  email        String?          @unique(map: "email") @db.VarChar(255)
-  section      students_section
-  center_id    BigInt?
-  phone_number String           @db.VarChar(255)
-  password     String           @db.VarChar(255)
-  parent_id    BigInt?
-  role         students_role    @default(STUDENT)
+  id        BigInt           @id @default(autoincrement())
+  name      String           @db.VarChar(255)
+  email     String?          @unique(map: "email") @db.VarChar(255)
+  section   students_section
+  center_id BigInt?
+  phone     String           @unique(map: "phone") @db.VarChar(255)
+  password  String           @db.VarChar(255)
 
   @@index([center_id], map: "center_id")
-  @@index([parent_id], map: "parent_id")
 }
 
 model teachers {
-  id       BigInt        @id @default(autoincrement())
-  name     String        @db.VarChar(255)
-  email    String?       @unique(map: "email") @db.VarChar(255)
-  phone    String        @db.VarChar(255)
-  password String        @db.VarChar(255)
-  role     teachers_role @default(TEACHER)
+  id       BigInt @id @default(autoincrement())
+  name     String @db.VarChar(255)
+  email    String @unique(map: "email") @db.VarChar(255)
+  phone    String @unique(map: "phone") @db.VarChar(255)
+  password String @db.VarChar(255)
 }
 
 model trials {
   id          BigInt         @id @default(autoincrement())
   description String         @db.VarChar(255)
   date        DateTime       @db.DateTime(0)
-  center_id   BigInt
   max_score   Int
   section     trials_section
-  teacher_id  BigInt
+  teacher_id  BigInt?
+  center_id   BigInt?
 
   @@index([center_id], map: "center_id")
   @@index([teacher_id], map: "teacher_id")
 }
 
+model student_parents {
+  id           BigInt                       @id @default(autoincrement())
+  student_id   BigInt
+  parent_id    BigInt
+  relationship student_parents_relationship
+
+  @@unique([student_id, parent_id], map: "student_id")
+  @@index([parent_id], map: "parent_id")
+}
+
+model teacher_centers {
+  id         BigInt @id @default(autoincrement())
+  teacher_id BigInt
+  center_id  BigInt
+
+  @@index([center_id], map: "center_id")
+  @@index([teacher_id], map: "teacher_id")
+}
+
+enum student_parents_relationship {
+  father
+  mother
+  guardian
+}
+
+enum student_sessions_attendance_status {
+  present
+  absent
+}
+
 enum students_section {
-  st_sec            @map("1st sec")
-  nd_sec_scientific @map("2nd sec scientific")
-  nd_sec_literary   @map("2nd sec literary")
-  rd_sec            @map("3rd sec")
-}
-
-enum sessions_section {
-  st_sec            @map("1st sec")
-  nd_sec_scientific @map("2nd sec scientific")
-  nd_sec_literary   @map("2nd sec literary")
-  rd_sec            @map("3rd sec")
-}
-
-enum quizzes_section {
-  st_sec            @map("1st sec")
-  nd_sec_scientific @map("2nd sec scientific")
-  nd_sec_literary   @map("2nd sec literary")
-  rd_sec            @map("3rd sec")
-}
-
-enum homeworks_section {
-  st_sec            @map("1st sec")
-  nd_sec_scientific @map("2nd sec scientific")
-  nd_sec_literary   @map("2nd sec literary")
-  rd_sec            @map("3rd sec")
+  first_sec
+  second_sec_scientific
+  second_sec_literary
+  third_sec
 }
 
 enum trials_section {
-  st_sec            @map("1st sec")
-  nd_sec_scientific @map("2nd sec scientific")
-  nd_sec_literary   @map("2nd sec literary")
-  rd_sec            @map("3rd sec")
+  first_sec
+  second_sec_scientific
+  second_sec_literary
+  third_sec
 }
 
-enum teachers_role {
-  TEACHER
-}
-
-enum parents_role {
-  PARENT
-}
-
-enum students_role {
-  STUDENT
+enum sessions_section {
+  first_sec
+  second_sec_scientific
+  second_sec_literary
+  third_sec
 }
