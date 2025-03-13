@@ -21,3 +21,6 @@ export const getStudentCenter=async(req:AuthRequest,res:Response,next:NextFuncti
 export const getStudentParents=async(req:AuthRequest,res:Response,next:NextFunction)=>{
 // Get parents of a student
 }
+export const getStudentInfo=async(req:AuthRequest,res:Response,next:NextFunction)=>{
+// Get info of a student
+}
