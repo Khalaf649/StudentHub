@@ -1,7 +1,7 @@
 export  interface CreateCenterBody {
     name: string;
     location: string;
-    phone:String;
+    phone:string;
   }
   
   export interface CreateSessionBody {
@@ -13,19 +13,19 @@ export  interface CreateCenterBody {
 
   }
   
-  export interface HomeworkRequestBody {
+  export interface CreateHomeworkRequestBody {
     sessionId: number; // ID of the session the homework is linked to
     description: string; // Homework description
     dueDate: string; // ISO 8601 date string (e.g., "2025-03-15T23:59:59Z")
   }
   
-  export interface QuizRequestBody {
+  export interface CreateQuizRequestBody {
     sessionId: number; // ID of the session the quiz is linked to
     maxScore: number; // Maximum possible score for the quiz
     date: string; // ISO 8601 date string (e.g., "2025-03-15T10:00:00Z")
   }
   
-  export interface TrialRequestBody {
+  export interface CreateTrialRequestBody {
     description: string; // Description of the trial
     date: string; // ISO 8601 date string (e.g., "2025-03-15T10:00:00Z")
     maxScore: number; // Maximum possible score for the trial
@@ -34,15 +34,15 @@ export  interface CreateCenterBody {
     centerId?: number; // Optional, center ID (nullable)
   }
   
-  export interface StudentRequestBody {
+  export interface CreateStudentRequestBody {
     name: string;
-    phone?: string;
-    email?: string;
+    phone: string;
+    email?: string|null;
     password: string;
     section: "first_sec" | "second_sec_scientific" | "second_sec_literary" | "third_sec";
-    center_id?: number;
+    center_id?: number|null;
   }
-  export interface ParentRequestBody {
+  export interface CreateParentRequestBody {
     name: string;
     phone: string;
     email?: string;

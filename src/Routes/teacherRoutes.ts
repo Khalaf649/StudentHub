@@ -10,4 +10,5 @@ router.post("/quiz", authMiddleware, teacherMiddleware, createQuiz);
 router.post("/trial", authMiddleware, teacherMiddleware, createTrial);
 router.post("/parent", authMiddleware, teacherMiddleware, createParent);
 router.post("/student", authMiddleware, teacherMiddleware, createStudent);
+
 export default router;

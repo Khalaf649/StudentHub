@@ -1,4 +1,4 @@
 export default interface tokenPayload {
-    id:bigint;
+    id:number;
     role:"student" | "teacher";
 }

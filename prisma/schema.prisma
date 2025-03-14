@@ -8,15 +8,15 @@ datasource db {
 }
 
 model centers {
-  id       BigInt @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   name     String @db.VarChar(255)
   location String @db.VarChar(255)
   phone    String @unique(map: "phone") @db.VarChar(255)
 }
 
 model homeworks {
-  id          BigInt   @id @default(autoincrement())
-  session_id  BigInt
+  id          Int      @id @default(autoincrement())
+  session_id  Int
   description String   @db.VarChar(255)
   due_date    DateTime @db.DateTime(0)
 
@@ -24,7 +24,7 @@ model homeworks {
 }
 
 model parents {
-  id       BigInt  @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   name     String  @db.VarChar(255)
   phone    String  @unique(map: "phone") @db.VarChar(255)
   email    String? @unique(map: "email") @db.VarChar(255)
@@ -32,8 +32,8 @@ model parents {
 }
 
 model quizzes {
-  id         BigInt   @id @default(autoincrement())
-  session_id BigInt
+  id         Int      @id @default(autoincrement())
+  session_id Int
   max_score  Int
   date       DateTime @db.DateTime(0)
 
@@ -41,11 +41,11 @@ model quizzes {
 }
 
 model sessions {
-  id         BigInt           @id @default(autoincrement())
-  teacher_id BigInt?
+  id         Int              @id @default(autoincrement())
+  teacher_id Int?
   date       DateTime         @db.DateTime(0)
   topic      String           @db.VarChar(255)
-  center_id  BigInt?
+  center_id  Int?
   section    sessions_section
 
   @@index([center_id], map: "center_id")
@@ -53,9 +53,9 @@ model sessions {
 }
 
 model student_homeworks {
-  id              BigInt   @id @default(autoincrement())
-  homework_id     BigInt
-  student_id      BigInt
+  id              Int      @id @default(autoincrement())
+  homework_id     Int
+  student_id      Int
   status          String   @db.VarChar(255)
   submission_date DateTime @db.DateTime(0)
 
@@ -63,10 +63,20 @@ model student_homeworks {
   @@index([student_id], map: "student_id")
 }
 
+model student_parents {
+  id           Int                          @id @default(autoincrement())
+  student_id   Int
+  parent_id    Int
+  relationship student_parents_relationship
+
+  @@unique([student_id, parent_id], map: "student_id")
+  @@index([parent_id], map: "parent_id")
+}
+
 model student_quizzes {
-  id         BigInt @id @default(autoincrement())
-  quiz_id    BigInt
-  student_id BigInt
+  id         Int @id @default(autoincrement())
+  quiz_id    Int
+  student_id Int
   score      Int
 
   @@index([quiz_id], map: "quiz_id")
@@ -74,9 +84,9 @@ model student_quizzes {
 }
 
 model student_sessions {
-  id                BigInt                              @id @default(autoincrement())
-  session_id        BigInt
-  student_id        BigInt
+  id                Int                                 @id @default(autoincrement())
+  session_id        Int
+  student_id        Int
   notes             String?                             @db.VarChar(255)
   attendance_status student_sessions_attendance_status? @default(absent)
 
@@ -85,9 +95,9 @@ model student_sessions {
 }
 
 model student_trials {
-  id         BigInt @id @default(autoincrement())
-  trial_id   BigInt
-  student_id BigInt
+  id         Int    @id @default(autoincrement())
+  trial_id   Int
+  student_id Int
   result     String @db.VarChar(255)
 
   @@index([student_id], map: "student_id")
@@ -95,19 +105,28 @@ model student_trials {
 }
 
 model students {
-  id        BigInt           @id @default(autoincrement())
+  id        Int              @id @default(autoincrement())
   name      String           @db.VarChar(255)
   email     String?          @unique(map: "email") @db.VarChar(255)
   section   students_section
-  center_id BigInt?
+  center_id Int?
   phone     String           @unique(map: "phone") @db.VarChar(255)
   password  String           @db.VarChar(255)
 
   @@index([center_id], map: "center_id")
 }
 
+model teacher_centers {
+  id         Int @id @default(autoincrement())
+  teacher_id Int
+  center_id  Int
+
+  @@index([center_id], map: "center_id")
+  @@index([teacher_id], map: "teacher_id")
+}
+
 model teachers {
-  id       BigInt @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   name     String @db.VarChar(255)
   email    String @unique(map: "email") @db.VarChar(255)
   phone    String @unique(map: "phone") @db.VarChar(255)
@@ -115,32 +134,13 @@ model teachers {
 }
 
 model trials {
-  id          BigInt         @id @default(autoincrement())
+  id          Int            @id @default(autoincrement())
   description String         @db.VarChar(255)
   date        DateTime       @db.DateTime(0)
   max_score   Int
   section     trials_section
-  teacher_id  BigInt?
-  center_id   BigInt?
-
-  @@index([center_id], map: "center_id")
-  @@index([teacher_id], map: "teacher_id")
-}
-
-model student_parents {
-  id           BigInt                       @id @default(autoincrement())
-  student_id   BigInt
-  parent_id    BigInt
-  relationship student_parents_relationship
-
-  @@unique([student_id, parent_id], map: "student_id")
-  @@index([parent_id], map: "parent_id")
-}
-
-model teacher_centers {
-  id         BigInt @id @default(autoincrement())
-  teacher_id BigInt
-  center_id  BigInt
+  teacher_id  Int?
+  center_id   Int?
 
   @@index([center_id], map: "center_id")
   @@index([teacher_id], map: "teacher_id")
@@ -152,16 +152,16 @@ enum student_parents_relationship {
   guardian
 }
 
-enum student_sessions_attendance_status {
-  present
-  absent
-}
-
 enum students_section {
   first_sec
   second_sec_scientific
   second_sec_literary
   third_sec
+}
+
+enum student_sessions_attendance_status {
+  present
+  absent
 }
 
 enum trials_section {
