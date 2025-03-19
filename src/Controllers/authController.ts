@@ -23,6 +23,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         user = await prisma.teachers.findUnique({
             where: { email },
         });
+        
     }
     else{
         res.status(400).json({ message: 'Invalid Credintials' });
@@ -39,7 +40,6 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
         return;
     }
     const tokenPayload: TokenPayload = { id: user.id, role: role };
-    console.log(tokenPayload);
     const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '1h' });
     res.json({ token,role });
 

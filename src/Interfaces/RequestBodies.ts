@@ -22,7 +22,8 @@ export  interface CreateCenterBody {
   export interface CreateQuizRequestBody {
     sessionId: number; // ID of the session the quiz is linked to
     maxScore: number; // Maximum possible score for the quiz
-    date: string; // ISO 8601 date string (e.g., "2025-03-15T10:00:00Z")
+    date: string; // ISO 8601 date string (e.g., "2025-03-15T10:00:00Z"),
+    desc: string; // Description of the quiz
   }
   
   export interface CreateTrialRequestBody {

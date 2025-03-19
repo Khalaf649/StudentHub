@@ -32,10 +32,11 @@ model parents {
 }
 
 model quizzes {
-  id         Int      @id @default(autoincrement())
-  session_id Int
-  max_score  Int
-  date       DateTime @db.DateTime(0)
+  id          Int      @id @default(autoincrement())
+  session_id  Int
+  max_score   Int
+  date        DateTime @db.DateTime(0)
+  description String?  @db.VarChar(255)
 
   @@index([session_id], map: "session_id")
 }
@@ -50,6 +51,18 @@ model sessions {
 
   @@index([center_id], map: "center_id")
   @@index([teacher_id], map: "teacher_id")
+}
+
+model students {
+  id        Int              @id @default(autoincrement())
+  name      String           @db.VarChar(255)
+  email     String?          @unique(map: "email") @db.VarChar(255)
+  section   students_section
+  center_id Int?
+  phone     String           @unique(map: "phone") @db.VarChar(255)
+  password  String           @db.VarChar(255)
+
+  @@index([center_id], map: "center_id")
 }
 
 model student_homeworks {
@@ -102,18 +115,6 @@ model student_trials {
 
   @@index([student_id], map: "student_id")
   @@index([trial_id], map: "trial_id")
-}
-
-model students {
-  id        Int              @id @default(autoincrement())
-  name      String           @db.VarChar(255)
-  email     String?          @unique(map: "email") @db.VarChar(255)
-  section   students_section
-  center_id Int?
-  phone     String           @unique(map: "phone") @db.VarChar(255)
-  password  String           @db.VarChar(255)
-
-  @@index([center_id], map: "center_id")
 }
 
 model teacher_centers {

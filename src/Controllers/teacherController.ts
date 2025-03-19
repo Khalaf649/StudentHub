@@ -1,11 +1,16 @@
 import AuthRequest from "../Interfaces/AuthRequest";
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import { validationResult } from "express-validator";
 import { CreateCenterBody,CreateSessionBody,CreateHomeworkRequestBody,CreateParentRequestBody,CreateQuizRequestBody,CreateStudentRequestBody,CreateTrialRequestBody } from "../Interfaces/RequestBodies";
 const prisma = new PrismaClient();
 export const createCenter=async(req:AuthRequest,res:Response,next:NextFunction)=>{
     // Create a center
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+         res.status(400).json({errors:errors.array()});
+    }
     const body:CreateCenterBody=req.body;
     try{
         const center=await prisma.centers.create({
@@ -22,6 +27,10 @@ export const createCenter=async(req:AuthRequest,res:Response,next:NextFunction)=
 }
 export const createSession=async(req:AuthRequest,res:Response,next:NextFunction)=>{
     // Create a session
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).json({errors:errors.array()});
+    }
     const body:CreateSessionBody=req.body;
     try{
         const session=await prisma.sessions.create({
@@ -35,11 +44,15 @@ export const createSession=async(req:AuthRequest,res:Response,next:NextFunction)
         });
         res.status(201).json(session);
     }catch(err){
-        res.status(500).send("Internal Server Error");
+        next(err);
     }
 }
 export const createHomework=async(req:AuthRequest,res:Response,next:NextFunction)=>{
     // Create a homework
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).json({errors:errors.array()});
+    }
     const body:CreateHomeworkRequestBody=req.body;
     try{
         const homework=await prisma.homeworks.create({
@@ -51,17 +64,23 @@ export const createHomework=async(req:AuthRequest,res:Response,next:NextFunction
         });
         res.status(201).json(homework);
     }catch(err){
+        console.log(err);
         res.status(500).send("Internal Server Error");
     }
 }
 export const createQuiz=async(req:AuthRequest,res:Response,next:NextFunction)=>{
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).json({errors:errors.array()});
+    }
     const body:CreateQuizRequestBody=req.body;
     try{
         const quiz=await prisma.quizzes.create({
             data:{
                 session_id:body.sessionId,
                 max_score:body.maxScore,
-                date:body.date
+                date:body.date,
+                description:body.desc
             }
         });
         res.status(201).json(quiz);
@@ -91,6 +110,10 @@ export const createTrial=async(req:AuthRequest,res:Response,next:NextFunction)=>
 }
 export const createParent=async(req:AuthRequest,res:Response,next:NextFunction)=>{
     // Create a parent
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).json({errors:errors.array()});
+    }
     const body:CreateParentRequestBody=req.body;
     const hashedPassword=await bcrypt.hash(body.password,10);
     try{
@@ -110,13 +133,17 @@ export const createParent=async(req:AuthRequest,res:Response,next:NextFunction)=
                 relationship:body.relationship
             }
         })
-        res.status(201).json([parent,parentRealtion]);
+        res.status(201).json({parent,parentRealtion});
     }
     catch(err){
         res.status(500).json("Internal Server Error");
     }
 }
 export const createStudent=async(req:AuthRequest,res:Response,next:NextFunction)=>{
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).json({errors:errors.array()});
+    }
     const body:CreateStudentRequestBody=req.body;
     const hashedPassword=await bcrypt.hash(body.password,10);
     try{
