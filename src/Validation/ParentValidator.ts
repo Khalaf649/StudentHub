@@ -1,6 +1,6 @@
 import { check } from "express-validator";
 
-export const validateCreateParent = [
+export default   [
   check("name")
     .isString()
     .notEmpty()

@@ -79,6 +79,7 @@ CREATE TABLE Homeworks (
 CREATE TABLE Quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     session_id INT NOT NULL,
+    description VARCHAR(255) NOT NULL,
     max_score INTEGER NOT NULL,
     date DATETIME NOT NULL,
     FOREIGN KEY (session_id) REFERENCES Sessions(id) ON DELETE cascade
@@ -113,7 +114,7 @@ CREATE TABLE Student_Trials (
     id INT AUTO_INCREMENT PRIMARY KEY,
     trial_id INT NOT NULL,
     student_id INT NOT NULL,
-    result VARCHAR(255) NOT NULL,
+    result INT NOT NULL,
     FOREIGN KEY (trial_id) REFERENCES Trials(id) ON DELETE CASCADE,
     FOREIGN KEY (student_id) REFERENCES Students(id) ON DELETE CASCADE
 );

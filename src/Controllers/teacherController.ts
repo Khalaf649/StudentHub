@@ -10,6 +10,7 @@ export const createCenter=async(req:AuthRequest,res:Response,next:NextFunction)=
     const errors=validationResult(req);
     if(!errors.isEmpty()){
          res.status(400).json({errors:errors.array()});
+            return;
     }
     const body:CreateCenterBody=req.body;
     try{
@@ -22,7 +23,7 @@ export const createCenter=async(req:AuthRequest,res:Response,next:NextFunction)=
         });
         res.status(201).json(center);
     }catch(err){
-        res.status(500).send("Internal Server Error");
+        res.status(500).json("Internal Server Error");
     }
 }
 export const createSession=async(req:AuthRequest,res:Response,next:NextFunction)=>{
@@ -30,6 +31,7 @@ export const createSession=async(req:AuthRequest,res:Response,next:NextFunction)
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         res.status(400).json({errors:errors.array()});
+        return;
     }
     const body:CreateSessionBody=req.body;
     try{
@@ -52,6 +54,7 @@ export const createHomework=async(req:AuthRequest,res:Response,next:NextFunction
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         res.status(400).json({errors:errors.array()});
+       return
     }
     const body:CreateHomeworkRequestBody=req.body;
     try{
@@ -65,13 +68,14 @@ export const createHomework=async(req:AuthRequest,res:Response,next:NextFunction
         res.status(201).json(homework);
     }catch(err){
         console.log(err);
-        res.status(500).send("Internal Server Error");
+        res.status(500).json("Internal Server Error");
     }
 }
 export const createQuiz=async(req:AuthRequest,res:Response,next:NextFunction)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         res.status(400).json({errors:errors.array()});
+        return;
     }
     const body:CreateQuizRequestBody=req.body;
     try{
@@ -85,11 +89,16 @@ export const createQuiz=async(req:AuthRequest,res:Response,next:NextFunction)=>{
         });
         res.status(201).json(quiz);
     }catch(err){
-        res.status(500).send("Internal Server Error");
+        res.status(500).json("Internal Server Error");
     }
     // Create a quiz
 }
 export const createTrial=async(req:AuthRequest,res:Response,next:NextFunction)=>{
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).json({errors:errors.array()});
+        return;
+    }
     const body:CreateTrialRequestBody=req.body;
     try{
         const trial=await prisma.trials.create({
@@ -104,7 +113,7 @@ export const createTrial=async(req:AuthRequest,res:Response,next:NextFunction)=>
         });
         res.status(201).json(trial);
     }catch(err){
-        res.status(500).send("Internal Server Error");
+        res.status(500).json("Internal Server Error");
     }
     // Create a trial
 }
@@ -113,6 +122,7 @@ export const createParent=async(req:AuthRequest,res:Response,next:NextFunction)=
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         res.status(400).json({errors:errors.array()});
+        return;
     }
     const body:CreateParentRequestBody=req.body;
     const hashedPassword=await bcrypt.hash(body.password,10);
@@ -142,7 +152,8 @@ export const createParent=async(req:AuthRequest,res:Response,next:NextFunction)=
 export const createStudent=async(req:AuthRequest,res:Response,next:NextFunction)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty()){
-        res.status(400).json({errors:errors.array()});
+         res.status(400).json({errors:errors.array()});
+            return;
     }
     const body:CreateStudentRequestBody=req.body;
     const hashedPassword=await bcrypt.hash(body.password,10);
@@ -159,7 +170,7 @@ export const createStudent=async(req:AuthRequest,res:Response,next:NextFunction)
         });
         res.status(201).json(student);
     }catch(err){
-        res.status(500).send("Internal Server Error");
+        res.status(500).json("Internal Server Error");
     }
 }
 
