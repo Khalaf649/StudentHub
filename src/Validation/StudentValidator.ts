@@ -1,6 +1,9 @@
 import { check } from "express-validator";
+import { PrismaClient } from "@prisma/client";
 
-export default  [
+const prisma = new PrismaClient();
+
+export default [
   check("name")
     .isString()
     .notEmpty()
@@ -8,11 +11,12 @@ export default  [
 
   check("phone")
     .isString()
+    .notEmpty()
     .matches(/^\d{11}$/) // Enforces exactly 11 digits
     .withMessage("Phone must be exactly 11 digits"),
 
   check("email")
-    .optional()
+    .notEmpty()
     .isEmail()
     .withMessage("Email must be a valid email address"),
 
@@ -29,5 +33,14 @@ export default  [
     .notEmpty()
     .withMessage("Center ID is required")
     .isInt()
-    .withMessage("Center ID must be an integer"),
+    .withMessage("Center ID must be an integer")
+    .bail()
+    .custom(async (value) => {
+      const center = await prisma.centers.findUnique({
+        where: { id: Number(value) },
+      });
+      if (!center) {
+        return Promise.reject("Center ID does not exist");
+      }
+    }),
 ];

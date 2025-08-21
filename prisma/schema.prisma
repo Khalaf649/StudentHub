@@ -3,216 +3,34 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model homeworks {
-  id                Int                 @id @default(autoincrement())
-  session_id        Int
-  description       String              @db.VarChar(255)
-  due_date          DateTime            @db.DateTime(0)
-  sessions          sessions            @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "homeworks_ibfk_1")
-  student_homeworks student_homeworks[]
-
-  @@index([session_id], map: "session_id")
+model centers {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  location String     @db.VarChar(255)
+  phone    String     @unique @db.VarChar(255)
+  students students[]
 }
 
-model parents {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  phone           String            @unique(map: "phone") @db.VarChar(255)
-  email           String?           @unique(map: "email") @db.VarChar(255)
-  password        String            @db.VarChar(255)
-  student_parents student_parents[]
-}
-
-model quizzes {
-  id              Int               @id @default(autoincrement())
-  session_id      Int
-  description     String            @db.VarChar(255)
-  max_score       Int
-  date            DateTime          @db.DateTime(0)
-  sessions        sessions          @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "quizzes_ibfk_1")
-  student_quizzes student_quizzes[]
-
-  @@index([session_id], map: "session_id")
-}
-
-model sessions {
-  id               Int                @id @default(autoincrement())
-  teacher_id       Int?
-  date             DateTime           @db.DateTime(0)
-  topic            String             @db.VarChar(255)
-  center_id        Int?
-  section          sessions_section
-  homeworks        homeworks[]
-  quizzes          quizzes[]
-  teachers         teachers?          @relation(fields: [teacher_id], references: [id], onUpdate: NoAction, map: "sessions_ibfk_1")
-  centers          center?            @relation(fields: [center_id], references: [id], onUpdate: NoAction, map: "sessions_ibfk_2")
-  student_sessions student_sessions[]
-
-  @@index([center_id], map: "center_id")
-  @@index([teacher_id], map: "teacher_id")
-}
-
-model student_homeworks {
-  id              Int       @id @default(autoincrement())
-  homework_id     Int
-  student_id      Int
-  status          String    @db.VarChar(255)
-  submission_date DateTime  @db.DateTime(0)
-  homeworks       homeworks @relation(fields: [homework_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_homeworks_ibfk_1")
-  students        students  @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_homeworks_ibfk_2")
-
-  @@index([homework_id], map: "homework_id")
-  @@index([student_id], map: "student_id")
-}
-
-model student_parents {
-  id           Int                          @id @default(autoincrement())
-  student_id   Int
-  parent_id    Int
-  relationship student_parents_relationship
-  students     students                     @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_parents_ibfk_1")
-  parents      parents                      @relation(fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_parents_ibfk_2")
-
-  @@unique([student_id, parent_id], map: "student_id")
-  @@index([parent_id], map: "parent_id")
-}
-
-model student_quizzes {
-  id         Int      @id @default(autoincrement())
-  quiz_id    Int
-  student_id Int
-  score      Int
-  quizzes    quizzes  @relation(fields: [quiz_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_quizzes_ibfk_1")
-  students   students @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_quizzes_ibfk_2")
-
-  @@index([quiz_id], map: "quiz_id")
-  @@index([student_id], map: "student_id")
-}
-
-model student_sessions {
-  id                Int                                 @id @default(autoincrement())
-  session_id        Int
-  student_id        Int
-  notes             String?                             @db.VarChar(255)
-  attendance_status student_sessions_attendance_status? @default(absent)
-  sessions          sessions                            @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_sessions_ibfk_1")
-  students          students                            @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_sessions_ibfk_2")
-
-  @@index([session_id], map: "session_id")
-  @@index([student_id], map: "student_id")
-}
-
-model student_trials {
-  id         Int      @id @default(autoincrement())
-  trial_id   Int
-  student_id Int
-  result     Int
-  trials     trials   @relation(fields: [trial_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_trials_ibfk_1")
-  students   students @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_trials_ibfk_2")
-
-  @@index([student_id], map: "student_id")
-  @@index([trial_id], map: "trial_id")
-}
-
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model students {
-  id                Int                 @id @default(autoincrement())
-  name              String              @db.VarChar(255)
-  email             String?             @unique(map: "email") @db.VarChar(255)
-  section           students_section
-  center_id         Int?
-  phone             String              @unique(map: "phone") @db.VarChar(255)
-  password          String              @db.VarChar(255)
-  student_homeworks student_homeworks[]
-  student_parents   student_parents[]
-  student_quizzes   student_quizzes[]
-  student_sessions  student_sessions[]
-  student_trials    student_trials[]
-  centers           center?             @relation(fields: [center_id], references: [id], onUpdate: NoAction, map: "students_ibfk_1")
-
-  @@index([center_id], map: "center_id")
-}
-
-model teacher_centers {
-  id         Int      @id @default(autoincrement())
-  teacher_id Int
-  center_id  Int
-  teachers   teachers @relation(fields: [teacher_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "teacher_centers_ibfk_1")
-  centers    center   @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "teacher_centers_ibfk_2")
-
-  @@index([center_id], map: "center_id")
-  @@index([teacher_id], map: "teacher_id")
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  section   String   @db.VarChar(50)
+  center_id Int?
+  phone     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  centers   centers? @relation(fields: [center_id], references: [id], onUpdate: NoAction)
 }
 
 model teachers {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  email           String            @unique(map: "email") @db.VarChar(255)
-  phone           String            @unique(map: "phone") @db.VarChar(255)
-  password        String            @db.VarChar(255)
-  sessions        sessions[]
-  teacher_centers teacher_centers[]
-  trials          trials[]
-}
-
-model trials {
-  id             Int              @id @default(autoincrement())
-  description    String           @db.VarChar(255)
-  date           DateTime         @db.DateTime(0)
-  max_score      Int
-  section        trials_section
-  teacher_id     Int?
-  center_id      Int?
-  student_trials student_trials[]
-  teachers       teachers?        @relation(fields: [teacher_id], references: [id], onUpdate: NoAction, map: "trials_ibfk_1")
-  centers        center?          @relation(fields: [center_id], references: [id], onUpdate: NoAction, map: "trials_ibfk_2")
-
-  @@index([center_id], map: "center_id")
-  @@index([teacher_id], map: "teacher_id")
-}
-
-model center {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(255)
-  location        String            @db.VarChar(255)
-  phone           String            @unique(map: "phone") @db.VarChar(255)
-  sessions        sessions[]
-  students        students[]
-  teacher_centers teacher_centers[]
-  trials          trials[]
-}
-
-enum student_parents_relationship {
-  father
-  mother
-  guardian
-}
-
-enum students_section {
-  first_sec
-  second_sec_scientific
-  second_sec_literary
-  third_sec
-}
-
-enum student_sessions_attendance_status {
-  present
-  absent
-}
-
-enum trials_section {
-  first_sec
-  second_sec_scientific
-  second_sec_literary
-  third_sec
-}
-
-enum sessions_section {
-  first_sec
-  second_sec_scientific
-  second_sec_literary
-  third_sec
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(255)
+  email    String @unique @db.VarChar(255)
+  phone    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
 }

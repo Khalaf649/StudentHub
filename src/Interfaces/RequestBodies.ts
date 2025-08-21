@@ -35,13 +35,13 @@ export  interface CreateCenterBody {
     centerId?: number; // Optional, center ID (nullable)
   }
   
-  export interface CreateStudentRequestBody {
+  export interface RegisterStudentRequestBody {
     name: string;
     phone: string;
-    email?: string|null;
+    email: string;
     password: string;
     section: "first_sec" | "second_sec_scientific" | "second_sec_literary" | "third_sec";
-    center_id?: number|null;
+    center_id: number;
   }
   export interface CreateParentRequestBody {
     name: string;
@@ -50,6 +50,11 @@ export  interface CreateCenterBody {
     password: string;
     student_id: number; // Student ID to create relation
     relationship: "father" | "mother" | "guardian";
+  }
+  export interface LoginRequestBody {
+    email: string;
+    password: string;
+    role: string;
   }
     
   

@@ -1,16 +1,27 @@
-import { Router } from "express";
-import { getStudentSessions, getStudentHomeworks, getStudentQuizzes, getStudentTrials, getStudentCenter,getStudentParents,getStudentInfo } from "../Controllers/studentController";
-import authMiddleware from "../Middlewares/authMiddleware";
-import studentMiddleware from "../Middlewares/studentMiddleware";
-const router = Router();
+// import { Router } from "express";
+// import { 
+//   getStudentSessions, 
+//   getStudentHomeworks, 
+//   getStudentQuizzes, 
+//   getStudentTrials, 
+//   getStudentCenter,
+//   getStudentParents,
+//   getStudentInfo 
+// } from "../Controllers/studentController";
+// import authMiddleware from "../Middlewares/authMiddleware";
+// import roleMiddleware from "../Middlewares/roleMiddleware";
 
-router.get("/sessions", authMiddleware,studentMiddleware, getStudentSessions);
-router.get("/homeworks", authMiddleware,studentMiddleware, getStudentHomeworks);
-router.get("/quizzes", authMiddleware, studentMiddleware,getStudentQuizzes);
-router.get("/trials", authMiddleware, studentMiddleware,getStudentTrials);
-router.get("/center", authMiddleware, studentMiddleware,getStudentCenter);
-router.get("/parents", authMiddleware, studentMiddleware,getStudentParents);
-router.get("/info", authMiddleware, studentMiddleware,getStudentInfo);
+// const router = Router();
 
+// // Apply auth and role middleware to all routes below
+// router.use(authMiddleware, roleMiddleware("student"));
 
-export default router;
+// router.get("/sessions", getStudentSessions);
+// router.get("/homeworks", getStudentHomeworks);
+// router.get("/quizzes", getStudentQuizzes);
+// router.get("/trials", getStudentTrials);
+// router.get("/center", getStudentCenter);
+// router.get("/parents", getStudentParents);
+// router.get("/info", getStudentInfo);
+
+// export default router;
