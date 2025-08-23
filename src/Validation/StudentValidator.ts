@@ -13,12 +13,30 @@ export default [
     .isString()
     .notEmpty()
     .matches(/^\d{11}$/) // Enforces exactly 11 digits
-    .withMessage("Phone must be exactly 11 digits"),
+    .withMessage("Phone must be exactly 11 digits")
+    .bail()
+    .custom(async (value) => {
+      const student = await prisma.students.findUnique({
+        where: { phone: value },
+      });
+      if (student) {
+        return Promise.reject("Phone number is already registered");
+      }
+    }),
 
   check("email")
     .notEmpty()
     .isEmail()
-    .withMessage("Email must be a valid email address"),
+    .withMessage("Email must be a valid email address")
+    .bail()
+    .custom(async (value) => {
+      const student = await prisma.students.findUnique({
+        where: { email: value },
+      });
+      if (student) {
+        return Promise.reject("Email is already registered");
+      }
+    }),
 
   check("password")
     .isString()
