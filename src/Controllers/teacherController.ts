@@ -21,6 +21,15 @@ export const createCenter=async(req:AuthRequest,res:Response,next:NextFunction)=
         res.status(500).json("Internal Server Error");
     }
 }
+export const getCenters=async(req:AuthRequest,res:Response,next:NextFunction)=>{
+    try{
+        const centers=await prisma.centers.findMany();
+        res.status(200).json(centers);
+    }catch(err){
+        res.status(500).json("Internal Server Error");
+    }
+}
+
 // export const createSession=async(req:AuthRequest,res:Response,next:NextFunction)=>{
 //     // Create a session
 //     const errors=validationResult(req);
