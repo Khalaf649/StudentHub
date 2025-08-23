@@ -6,12 +6,6 @@ import { validationResult } from "express-validator";
 import { CreateCenterBody,CreateSessionBody,CreateHomeworkRequestBody,CreateParentRequestBody,CreateQuizRequestBody,CreateTrialRequestBody } from "../Interfaces/RequestBodies";
 const prisma = new PrismaClient();
 export const createCenter=async(req:AuthRequest,res:Response,next:NextFunction)=>{
-    // Create a center
-    const errors=validationResult(req);
-    if(!errors.isEmpty()){
-         res.status(400).json({errors:errors.array()});
-            return;
-    }
     const body:CreateCenterBody=req.body;
     try{
         const center=await prisma.centers.create({
