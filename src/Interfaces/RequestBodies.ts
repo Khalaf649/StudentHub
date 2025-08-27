@@ -4,21 +4,30 @@ export  interface CreateCenterBody {
     phone:string;
   }
   
-  export interface CreateSessionBody {
-    teacherId: number;
-    date: string;
-    centerId: number;
-    topic: string;
-    section: "first_sec" | "second_sec_scientific" | "second_sec_literary" | "third_sec"; // Valid sections
+export interface CreateSessionBody {
+  title: string; 
+  description: string; 
+  centerId: number; 
+  section: "first_sec" | "second_sec_scientific" | "second_sec_literary" | "third_sec"; 
+  sessionDatetime: string;
+}
+export interface StudentHomeworkRequestBody {
+  studentId: number;        // The student assigned to the homework
+  homeworkId: number;       // The homework assigned to the student
+  grade?: number;           // Grade the student achieved (optional until graded)
+  submissionDate?: string;  // ISO 8601 date string (optional until submitted)
+}
 
-  }
   
-  export interface CreateHomeworkRequestBody {
-    sessionId: number; // ID of the session the homework is linked to
-    description: string; // Homework description
-    dueDate: string; // ISO 8601 date string (e.g., "2025-03-15T23:59:59Z")
-  }
-  
+export interface CreateHomeworkRequestBody {
+  sessionId: number;          // ID of the session the homework is linked to
+  title: string;              // Homework title
+  startDate: string;          // ISO 8601 date string (e.g., "2025-03-01T08:00:00Z")
+  description: string;        // Homework description
+  dueDate: string;            // ISO 8601 date string (e.g., "2025-03-15T23:59:59Z")
+  fullMark: number;           // Maximum grade for the homework
+}
+
   export interface CreateQuizRequestBody {
     sessionId: number; // ID of the session the quiz is linked to
     maxScore: number; // Maximum possible score for the quiz

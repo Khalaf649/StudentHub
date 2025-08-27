@@ -12,19 +12,21 @@ model centers {
   name     String     @db.VarChar(255)
   location String     @db.VarChar(255)
   phone    String     @unique @db.VarChar(255)
+  sessions sessions[]
   students students[]
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model students {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  email     String   @unique @db.VarChar(255)
-  section   String   @db.VarChar(50)
-  center_id Int?
-  phone     String   @unique @db.VarChar(255)
-  password  String   @db.VarChar(255)
-  centers   centers? @relation(fields: [center_id], references: [id], onUpdate: NoAction)
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  email            String             @unique @db.VarChar(255)
+  section          String             @db.VarChar(50)
+  center_id        Int?
+  phone            String             @unique @db.VarChar(255)
+  password         String             @db.VarChar(255)
+  student_homework student_homework[]
+  centers          centers?           @relation(fields: [center_id], references: [id], onUpdate: NoAction)
 }
 
 model teachers {
@@ -33,4 +35,40 @@ model teachers {
   email    String @unique @db.VarChar(255)
   phone    String @unique @db.VarChar(255)
   password String @db.VarChar(255)
+}
+
+model homeworks {
+  id               Int                @id @default(autoincrement())
+  session_id       Int
+  title            String             @db.VarChar(255)
+  start_date       DateTime           @db.Timestamp(6)
+  description      String             @db.VarChar(255)
+  due_date         DateTime           @db.Timestamp(6)
+  full_mark        Int
+  sessions         sessions           @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  student_homework student_homework[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model sessions {
+  id               Int         @id @default(autoincrement())
+  title            String      @db.VarChar(255)
+  description      String      @db.VarChar(255)
+  center_id        Int
+  section          String      @db.VarChar(50)
+  session_datetime DateTime    @db.Timestamp(6)
+  homeworks        homeworks[]
+  centers          centers     @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model student_homework {
+  id              Int       @id @default(autoincrement())
+  student_id      Int
+  homework_id     Int
+  grade           Int?
+  submission_date DateTime? @db.Timestamp(6)
+  homeworks       homeworks @relation(fields: [homework_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  students        students  @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([student_id, homework_id], map: "uq_student_homework")
 }

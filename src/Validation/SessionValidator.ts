@@ -1,24 +1,37 @@
-import { check } from "express-validator";
+import { body } from "express-validator";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 export default   [
-  check("teacherId")
-    .isInt()
-    .withMessage("Teacher ID must be an integer").notEmpty().withMessage("Teacher ID is required"),
+  body("title")
+    .notEmpty().withMessage("Title is required")
+    .isString().withMessage("Title must be a string")
+    .isLength({ max: 255 }).withMessage("Title must be less than 255 characters"),
 
-  check("date")
-    .isISO8601()
-    .withMessage("Date must be a valid ISO 8601 string").notEmpty().withMessage("Date is required"),
+  body("description")
+    .notEmpty().withMessage("Description is required")
+    .isString().withMessage("Description must be a string"),
 
-  check("centerId")
-    .isInt()
-    .withMessage("Center ID must be an integer").notEmpty().withMessage("Center ID is required"),
+  body("centerId")
+    .notEmpty().withMessage("Center ID is required")
+    .isInt({ gt: 0 }).withMessage("Center ID must be a positive integer")
+    .bail()
+    .custom(async (value) => {
+      const center = await prisma.centers.findUnique({
+        where: { id: Number(value) },
+      });
+      if (!center) {
+        throw new Error("Center does not exist");
+      }
+      return true;
+    }),
 
-  check("topic")
-    .isString()
-    .notEmpty()
-    .withMessage("Topic is required"),
-
-  check("section")
+  body("section")
+    .notEmpty().withMessage("Section is required")
     .isIn(["first_sec", "second_sec_scientific", "second_sec_literary", "third_sec"])
-    .withMessage("Invalid section. Allowed values: first_sec, second_sec_scientific, second_sec_literary, third_sec"),
+    .withMessage("Invalid section"),
+
+  body("sessionDatetime")
+    .notEmpty().withMessage("Session datetime is required")
+    .isISO8601().withMessage("Invalid date format, must be ISO8601 (e.g. 2025-08-27T15:00:00Z)")
 ];
