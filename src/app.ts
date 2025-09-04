@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 dotenv.config();
 const port=process.env.PORT;
 import bodyparser from "body-parser";
-//import StudentRouter from "./Routes/studentRoutes";
+import StudentRouter from "./Routes/studentRoutes";
 import TeacherRouter from "./Routes/teacherRoutes";
 import AuthRouter from "./Routes/authRoutes";
 import cors from "cors";
 const app=express();
 app.use(cors());
 app.use(bodyparser.json());
-//app.use("/student",StudentRouter);
+app.use("/student",StudentRouter);
 app.use("/teacher",TeacherRouter);
 app.use("/auth",AuthRouter);
 

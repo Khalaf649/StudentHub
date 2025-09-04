@@ -1,44 +1,71 @@
-// import AuthRequest from "../Interfaces/AuthRequest";
-// import { Request, Response, NextFunction } from "express";
-// import { PrismaClient } from "@prisma/client";
+import AuthRequest from "../Interfaces/AuthRequest";
+import { Request, Response, NextFunction } from "express";
+import { PrismaClient } from "@prisma/client";
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
-// export const getStudentSessions = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   const studentId = req.user?.id;
-//   if (!studentId) {
-//     res.status(400).json({ message: "Student ID is required" });
-//     return;
-//   }
+export const getStudentSessions = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const studentId = req.user?.id;
 
-//   try {
-//     const sessions = await prisma.student_sessions.findMany({
-//       where: { student_id: studentId },
-//       include: { sessions: true },
-//     });
+  try {
+    const sessions = await prisma.student_sessions.findMany({
+      where: { student_id: studentId },
+      select: {
+        id: true,          
+        status: true,      
 
-//     res.status(200).json(sessions);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
+        sessions: {         
+          select: {
+            title: true,
+            session_datetime: true,
+            description: true,
+            section: true,
+          }
+        }
+      }
+    });
 
-// export const getStudentHomeworks = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   const studentId = req.user?.id;
-//   if (!studentId) {
-//     res.status(400).json({ message: "Student ID is required" });
-//     return;
-//   }
+    res.status(200).json(sessions);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
+
+export const getStudentHomeworks = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+  const studentId = req.user?.id;
+
+  try {
+    const homeworks = await prisma.student_homework.findMany({
+      where: { student_id: studentId },
+      select: {
+        id: true,
+        grade:true,
+        submission_date:true,
+        homeworks: {
+          select: {
+            start_date: true,
+            due_date: true,
+            description: true,
+            title:true,
+            full_mark:true
+          
+          }
+        }
+      }
+    });
+
+    res.status(200).json(homeworks);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 //   try {
 //     const homeworks = await prisma.student_homeworks.findMany({
 //       where: { student_id: studentId },
