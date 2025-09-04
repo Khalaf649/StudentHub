@@ -26,6 +26,7 @@ model students {
   phone            String             @unique @db.VarChar(255)
   password         String             @db.VarChar(255)
   student_homework student_homework[]
+  student_parents  student_parents[]
   student_sessions student_sessions[]
   centers          centers?           @relation(fields: [center_id], references: [id], onUpdate: NoAction)
 }
@@ -86,7 +87,32 @@ model student_sessions {
   @@unique([student_id, session_id], map: "unique_student_session")
 }
 
+model parents {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(100)
+  phone           String            @db.VarChar(20)
+  email           String            @unique @db.VarChar(100)
+  student_parents student_parents[]
+}
+
+model student_parents {
+  id         Int         @id @default(autoincrement())
+  student_id Int
+  parent_id  Int
+  role       parent_role
+  parents    parents     @relation(fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent")
+  students   students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+
+  @@unique([student_id, parent_id, role], map: "unique_student_parent")
+}
+
 enum attendance_status {
   present
   absent
+}
+
+enum parent_role {
+  father
+  mother
+  guardian
 }

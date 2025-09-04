@@ -6,7 +6,7 @@ import {
   //getStudentTrials, 
   //getStudentCenter,
   //getStudentParents,
- // getStudentInfo 
+  getStudentInfo
 } from "../Controllers/studentController";
 import authMiddleware from "../Middlewares/authMiddleware";
 import roleMiddleware from "../Middlewares/roleMiddleware";
@@ -22,6 +22,6 @@ router.get("/sessions", getStudentSessions);
 // router.get("/trials", getStudentTrials);
 // router.get("/center", getStudentCenter);
 // router.get("/parents", getStudentParents);
-// router.get("/info", getStudentInfo);
+ router.get("/info", getStudentInfo);
 
 export default router;
