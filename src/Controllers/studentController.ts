@@ -41,21 +41,26 @@ export const getStudentHomeworks = async (req: AuthRequest, res: Response, next:
   const studentId = req.user?.id;
 
   try {
-    const student = await prisma.students.findUnique({
-      where: { id: studentId },
+    const homeworks = await prisma.student_homework.findMany({
+      where: { student_id: studentId },
       select: {
         id: true,
-        section: true,
-        name: true,
-        email: true,
-        phone: true,
-
-      
+        grade:true,
+        submission_date:true,
+        homeworks: {
+          select: {
+            start_date: true,
+            due_date: true,
+            description: true,
+            title:true,
+            full_mark:true
+          
+          }
         }
       }
-    );
+    });
 
-    res.status(200).json(student);
+    res.status(200).json(homeworks);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
@@ -78,13 +83,6 @@ export const getStudentInfo = async (req: AuthRequest, res: Response, next: Next
         email: true,
         phone: true,
         section: true,
-        centers: {
-          select: {
-            name: true,
-            location: true,
-            phone: true,
-          },
-        },
       },
     });
 
