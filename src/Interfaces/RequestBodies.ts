@@ -55,9 +55,7 @@ export interface CreateHomeworkRequestBody {
   export interface CreateParentRequestBody {
     name: string;
     phone: string;
-    email?: string;
-    password: string;
-    student_id: number; // Student ID to create relation
+    email: string;
     relationship: "father" | "mother" | "guardian";
   }
   export interface LoginRequestBody {

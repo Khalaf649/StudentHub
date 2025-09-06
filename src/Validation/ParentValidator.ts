@@ -1,33 +1,38 @@
-import { check } from "express-validator";
+import { body } from "express-validator";
+import { PrismaClient } from "@prisma/client";
 
-export default   [
-  check("name")
-    .isString()
-    .notEmpty()
-    .withMessage("Name is required"),
+const prisma = new PrismaClient();
 
-  check("phone")
-    .isString()
-    .matches(/^\d{11}$/) // Enforces exactly 11 digits
-    .withMessage("Phone must be exactly 11 digits"),
+export default [
+  body("name")
+    .trim()
+    .notEmpty().withMessage("Name is required")
+    .isString().withMessage("Name must be a string")
+    .isLength({ max: 100 }).withMessage("Name must be at most 100 characters"),
 
-  check("email")
-    .optional()
-    .isEmail()
-    .withMessage("Email must be a valid email address"),
+  body("phone")
+    .trim()
+    .notEmpty().withMessage("Phone is required")
+    .matches(/^\+?[0-9]{7,15}$/).withMessage("Phone must be a valid number (7–15 digits, optional +)"),
 
-  check("password")
-    .isString()
-    .isLength({ min: 6 })
-    .withMessage("Password must be at least 6 characters long"),
+  body("email")
+    .trim()
+    .notEmpty().withMessage("Email is required")
+    .isEmail().withMessage("Invalid email format")
+    .normalizeEmail()
+    .custom(async (email) => {
+      const existingParent = await prisma.parents.findUnique({
+        where: { email },
+      });
 
-  check("student_id")
-    .notEmpty()
-    .withMessage("Student ID is required")
-    .isInt()
-    .withMessage("Student ID must be an integer"),
+      if (existingParent) {
+        throw new Error("Email already exists");
+      }
+      return true;
+    }),
 
-  check("relationship")
+  body("relationship")
+    .notEmpty().withMessage("Relationship is required")
     .isIn(["father", "mother", "guardian"])
-    .withMessage("Relationship must be one of: father, mother, guardian"),
+    .withMessage("Relationship must be 'father', 'mother', or 'guardian'"),
 ];

@@ -91,6 +91,35 @@ export const getStudentInfo = async (req: AuthRequest, res: Response, next: Next
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+export const createStudentParent = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+  const studentId = req.user!.id;
+  const { name, phone, email, relationship } = req.body;
+
+
+  try {
+    const parent = await prisma.parents.create({
+      data: {
+        name,
+        phone,
+        email,
+      },
+    });
+
+    await prisma.student_parents.create({
+      data: {
+        student_id: studentId,
+        parent_id: parent.id,
+        role: relationship,
+      },
+    });
+
+    res.status(201).json(parent);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const getStudentParents = async (
   req: AuthRequest,
   res: Response,
