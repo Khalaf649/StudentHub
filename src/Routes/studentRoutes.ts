@@ -3,7 +3,7 @@ import {
   getStudentSessions, 
   getStudentHomeworks, 
   createStudentParent,
-  //getStudentQuizzes, 
+  getStudentQuizzes, 
   //getStudentTrials, 
   //getStudentCenter,
   getStudentParents,
@@ -22,8 +22,8 @@ router.use(authMiddleware, roleMiddleware("student"));
 router.get("/sessions", getStudentSessions);
  router.get("/homeworks", getStudentHomeworks);
  router.post("/parents", parentValidator, validationMiddleware, createStudentParent);
- 
-// router.get("/quizzes", getStudentQuizzes);
+
+router.get("/quizzes", getStudentQuizzes);
 // router.get("/trials", getStudentTrials);
 // router.get("/center", getStudentCenter);
 router.get("/parents", getStudentParents);

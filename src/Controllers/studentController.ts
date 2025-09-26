@@ -154,40 +154,30 @@ export const getStudentParents = async (
 };
 
 
-//   try {
-//     const homeworks = await prisma.student_homeworks.findMany({
-//       where: { student_id: studentId },
-//       include: { homeworks: true },
-//     });
 
-//     res.status(200).json(homeworks);
-//   } catch (err) {
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
 
-// export const getStudentQuizzes = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   const studentId = req.user?.id;
-//   if (!studentId) {
-//     res.status(400).json({ message: "Student ID is required" });
-//     return;
-//   }
+export const getStudentQuizzes = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const studentId = req.user?.id;
+  if (!studentId) {
+    res.status(400).json({ message: "Student ID is required" });
+    return;
+  }
 
-//   try {
-//     const quizzes = await prisma.student_quizzes.findMany({
-//       where: { student_id: studentId },
-//       include: { quizzes: true },
-//     });
+  try {
+    const quizzes = await prisma.student_quizzes.findMany({
+      where: { student_id: studentId },
+      include: { quizzes: true },
+    });
 
-//     res.status(200).json(quizzes);
-//   } catch (err) {
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
+    res.status(200).json(quizzes);
+  } catch (err) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 // export const getStudentTrials = async (
 //   req: AuthRequest,
@@ -212,88 +202,7 @@ export const getStudentParents = async (
 //   }
 // };
 
-// export const getStudentCenter = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   const studentId = req.user?.id;
-//   if (!studentId) {
-//     res.status(400).json({ message: "Student ID is required" });
-//     return;
-//   }
 
-//   try {
-//     const center = await prisma.students.findUnique({
-//       where: { id: studentId },
-//       include:{centers:true}
-//     });
-//     res.status(200).json(center);
-//   } catch (err) {
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
 
-// export const getStudentParents = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   const studentId = req.user?.id;
-//   if (!studentId) {
-//      res.status(400).json({ message: "Student ID is required" });
-//     return;
-//   }
 
-//   try {
-//     const parents = await prisma.student_parents.findMany({
-//       where: { student_id: studentId },
-//       include: { parents: true },
-//     });
 
-//     res.status(200).json(parents);
-//   } catch (err) {
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
-
-// export const getStudentInfo = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   const studentId = req.user?.id;
-//   if (!studentId) {
-//      res.status(400).json({ message: "Student ID is required" });
-//     return;
-//   }
-
-//   try {
-//     const student = await prisma.students.findUnique({
-//       where: { id: studentId },
-//       select: {
-//         id: true,
-//         name: true,
-//         email: true,
-//         phone: true,
-//         section: true,
-//         centers: {
-//           select: {
-//             name: true,
-//             location: true,
-//             phone: true,
-//           },
-//         },
-//       },
-//     });
-
-//     if (!student) {
-//        res.status(404).json({ message: "Student not found" });
-//        return;
-//     }
-
-//     res.status(200).json(student);
-//   } catch (err) {
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
