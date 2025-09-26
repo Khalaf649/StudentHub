@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createCenter,createSession,createHomework,StudentHomeworkController } from "../Controllers/teacherController";
+import { createCenter,createSession,createHomework,StudentHomeworkController,createQuiz,StudentQuizController } from "../Controllers/teacherController";
 import authMiddleware from "../Middlewares/authMiddleware";
 import roleMiddleware from "../Middlewares/roleMiddleware";
 import centerValidator from "../Validation/centerValidator";
@@ -9,6 +9,7 @@ import QuizValidator from "../Validation/QuizValidator";
 import TrialValidator from "../Validation/TrialValidator";
 import StudentValidator from "../Validation/StudentValidator";
 import ParentValidator from "../Validation/ParentValidator";
+import StudentQuizValidator from "../Validation/StudentQuizValidator";
 import StudentHomeworkValidator from "../Validation/StudentHomeworkValidator";
 import { getCenters } from "../Controllers/teacherController";
 import { validationMiddleware } from "../Middlewares/validationMiddleware";
@@ -23,7 +24,8 @@ router.post("/center", centerValidator, validationMiddleware, createCenter);
  router.post("/session", SessionValidator, validationMiddleware, createSession);
  router.post("/homework", homeworkValidator, validationMiddleware, createHomework);
  router.post('/homework/assign', StudentHomeworkValidator, validationMiddleware, StudentHomeworkController);
-// router.post("/quiz", QuizValidator, createQuiz);
+ router.post("/quiz", QuizValidator, validationMiddleware, createQuiz);
+ router.post("/quiz/assign", StudentQuizValidator, validationMiddleware, StudentQuizController);
 // router.post("/trial", TrialValidator, createTrial);
 // router.post("/parent", ParentValidator, createParent);
 

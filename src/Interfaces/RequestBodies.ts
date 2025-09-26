@@ -17,8 +17,13 @@ export interface StudentHomeworkRequestBody {
   grade?: number;           // Grade the student achieved (optional until graded)
   submissionDate?: string;  // ISO 8601 date string (optional until submitted)
 }
+export interface StudentQuizRequestBody {
+  studentId: number;        // The student taking the quiz
+  quizId: number;           // The quiz assigned to the student
+  grade: number;           // Grade the student achieved (optional until graded)
 
-  
+}
+
 export interface CreateHomeworkRequestBody {
   sessionId: number;          // ID of the session the homework is linked to
   title: string;              // Homework title
@@ -29,10 +34,10 @@ export interface CreateHomeworkRequestBody {
 }
 
   export interface CreateQuizRequestBody {
-    sessionId: number; // ID of the session the quiz is linked to
-    maxScore: number; // Maximum possible score for the quiz
-    date: string; // ISO 8601 date string (e.g., "2025-03-15T10:00:00Z"),
-    desc: string; // Description of the quiz
+    session_id: number; // ID of the session the quiz is linked to
+    title: string; // Title of the quiz
+    description: string; // Description of the quiz
+    full_mark: number; // Maximum possible score for the quiz
   }
   
   export interface CreateTrialRequestBody {
@@ -55,7 +60,6 @@ export interface CreateHomeworkRequestBody {
   export interface CreateParentRequestBody {
     name: string;
     phone: string;
-    email: string;
     relationship: "father" | "mother" | "guardian";
   }
   export interface LoginRequestBody {

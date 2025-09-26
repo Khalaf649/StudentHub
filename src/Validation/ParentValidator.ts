@@ -15,21 +15,7 @@ export default [
     .notEmpty().withMessage("Phone is required")
     .matches(/^\+?[0-9]{7,15}$/).withMessage("Phone must be a valid number (7–15 digits, optional +)"),
 
-  body("email")
-    .trim()
-    .notEmpty().withMessage("Email is required")
-    .isEmail().withMessage("Invalid email format")
-    .normalizeEmail()
-    .custom(async (email) => {
-      const existingParent = await prisma.parents.findUnique({
-        where: { email },
-      });
-
-      if (existingParent) {
-        throw new Error("Email already exists");
-      }
-      return true;
-    }),
+  
 
   body("relationship")
     .notEmpty().withMessage("Relationship is required")

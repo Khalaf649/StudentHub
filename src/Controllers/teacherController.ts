@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
-import { CreateCenterBody,CreateSessionBody,CreateHomeworkRequestBody,CreateParentRequestBody,CreateQuizRequestBody,CreateTrialRequestBody,StudentHomeworkRequestBody } from "../Interfaces/RequestBodies";
+import { CreateCenterBody,CreateSessionBody,CreateHomeworkRequestBody,CreateParentRequestBody,CreateQuizRequestBody,CreateTrialRequestBody,StudentHomeworkRequestBody,StudentQuizRequestBody } from "../Interfaces/RequestBodies";
 const prisma = new PrismaClient();
 export const createCenter=async(req:AuthRequest,res:Response,next:NextFunction)=>{
     const body:CreateCenterBody=req.body;
@@ -86,29 +86,37 @@ export const StudentHomeworkController =  async (req: AuthRequest, res: Response
     }
   }
 
-
-// export const createQuiz=async(req:AuthRequest,res:Response,next:NextFunction)=>{
-//     const errors=validationResult(req);
-//     if(!errors.isEmpty()){
-//         res.status(400).json({errors:errors.array()});
-//         return;
-//     }
-//     const body:CreateQuizRequestBody=req.body;
-//     try{
-//         const quiz=await prisma.quizzes.create({
-//             data:{
-//                 session_id:body.sessionId,
-//                 max_score:body.maxScore,
-//                 date:body.date,
-//                 description:body.desc
-//             }
-//         });
-//         res.status(201).json(quiz);
-//     }catch(err){
-//         res.status(500).json("Internal Server Error");
-//     }
-//     // Create a quiz
-// }
+ export const createQuiz=async(req:AuthRequest,res:Response,next:NextFunction)=>{
+  const body:CreateQuizRequestBody=req.body;
+  try{
+      const quiz=await prisma.quizzes.create({
+          data:{
+              session_id:body.session_id,
+              full_mark:body.full_mark,
+              title:body.title,
+              description:body.description
+          }
+      });
+      res.status(201).json(quiz);
+  }catch(err){
+      res.status(500).json("Internal Server Error");
+  }
+}
+export const StudentQuizController =  async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const { studentId, quizId, grade }: StudentQuizRequestBody = req.body;
+    try {
+      const assignment = await prisma.student_quizzes.create({
+        data: {
+          student_id: studentId,
+          quiz_id: quizId,
+          grade,
+        },
+      });
+      res.status(201).json(assignment);
+    } catch (err) {
+      res.status(500).json("Internal Server Error");
+    }
+}
 // export const createTrial=async(req:AuthRequest,res:Response,next:NextFunction)=>{
 //     const errors=validationResult(req);
 //     if(!errors.isEmpty()){

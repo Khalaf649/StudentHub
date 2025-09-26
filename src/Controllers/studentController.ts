@@ -78,11 +78,16 @@ export const getStudentInfo = async (req: AuthRequest, res: Response, next: Next
     const student = await prisma.students.findUnique({
       where: { id: studentId },
       select: {
-        id: true,
-        name: true,
-        email: true,
-        phone: true,
-        section: true,
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      section: true,
+      centers: {
+        select: {
+        name: true
+        }
+      }
       },
     });
 
@@ -93,7 +98,7 @@ export const getStudentInfo = async (req: AuthRequest, res: Response, next: Next
 };
 export const createStudentParent = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
   const studentId = req.user!.id;
-  const { name, phone, email, relationship } = req.body;
+  const { name, phone, relationship } = req.body;
 
 
   try {
@@ -101,7 +106,6 @@ export const createStudentParent = async (req: AuthRequest, res: Response, next:
       data: {
         name,
         phone,
-        email,
       },
     });
 
@@ -137,7 +141,6 @@ export const getStudentParents = async (
             id: true,
             name: true,
             phone: true,
-            email: true,
           }
         }
       }

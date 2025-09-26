@@ -27,6 +27,7 @@ model students {
   password         String             @db.VarChar(255)
   student_homework student_homework[]
   student_parents  student_parents[]
+  student_quizzes  student_quizzes[]
   student_sessions student_sessions[]
   centers          centers?           @relation(fields: [center_id], references: [id], onUpdate: NoAction)
 }
@@ -60,6 +61,7 @@ model sessions {
   section          String             @db.VarChar(50)
   session_datetime DateTime           @db.Timestamp(6)
   homeworks        homeworks[]
+  quizzes          quizzes[]
   centers          centers            @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
   student_sessions student_sessions[]
 }
@@ -91,7 +93,6 @@ model parents {
   id              Int               @id @default(autoincrement())
   name            String            @db.VarChar(100)
   phone           String            @db.VarChar(20)
-  email           String            @unique @db.VarChar(100)
   student_parents student_parents[]
 }
 
@@ -104,6 +105,28 @@ model student_parents {
   students   students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
 
   @@unique([student_id, parent_id, role], map: "unique_student_parent")
+}
+
+model quizzes {
+  quiz_id         Int               @id @default(autoincrement())
+  title           String            @db.VarChar(255)
+  description     String?
+  session_id      Int
+  full_mark       Int
+  sessions        sessions          @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_session")
+  student_quizzes student_quizzes[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model student_quizzes {
+  student_quiz_id Int      @id @default(autoincrement())
+  student_id      Int
+  quiz_id         Int
+  grade           Int?
+  quizzes         quizzes  @relation(fields: [quiz_id], references: [quiz_id], onDelete: Cascade, onUpdate: NoAction, map: "fk_quiz")
+  students        students @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_student")
+
+  @@unique([student_id, quiz_id], map: "uq_student_quiz")
 }
 
 enum attendance_status {

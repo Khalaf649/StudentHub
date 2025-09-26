@@ -1,23 +1,36 @@
 import { check } from "express-validator";
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 export default   [
-  check("sessionId")
-    .isInt()
-    .withMessage("Session ID must be an integer")
-    .notEmpty().withMessage("Session ID is required"),
+    check("session_id")
+      .custom(async (value, { req }) => {
+        if (!value) {
+            throw new Error("Session ID is required");
+          }
+         const session=await prisma.sessions.findUnique({
+            where:{id:Number(value)}
+         })
+         if(!session){
+            throw new Error("Session ID does not exist (Prisma)");
+         }
+          return true;
+      }),
 
-  check("maxScore")
-    .isInt({ min: 1 })
-    .withMessage("Max Score must be a positive integer")
-    .notEmpty().withMessage("Max Score is required"),
+    check("title")
+      .isString()
+      .notEmpty()
+      .withMessage("Title is required"),
 
-  check("date")
-    .isISO8601()
-    .withMessage("Date must be a valid ISO 8601 string")
-    .notEmpty().withMessage("Date is required"),
+    check("description")
+      .isString()
+      .notEmpty()
+      .withMessage("Description is required"),
 
-  check("desc")
-    .isString()
-    .notEmpty()
-    .withMessage("Description is required"),
+    check("full_mark")
+      .isInt({ min: 1 })
+      .withMessage("Full mark must be a positive integer")
+      .notEmpty()
+      .withMessage("Full mark is required"),
+
 ];
