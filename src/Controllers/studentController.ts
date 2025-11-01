@@ -1,4 +1,5 @@
 import AuthRequest from "../Interfaces/AuthRequest";
+import { CreateParentRequestBody } from "../Interfaces/RequestBodies";
 import { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 
@@ -15,18 +16,18 @@ export const getStudentSessions = async (
     const sessions = await prisma.student_sessions.findMany({
       where: { student_id: studentId },
       select: {
-        id: true,          
-        status: true,      
+        id: true,
+        status: true,
 
-        sessions: {         
+        sessions: {
           select: {
             title: true,
             session_datetime: true,
             description: true,
             section: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     res.status(200).json(sessions);
@@ -36,8 +37,11 @@ export const getStudentSessions = async (
   }
 };
 
-
-export const getStudentHomeworks = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+export const getStudentHomeworks = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const studentId = req.user?.id;
 
   try {
@@ -45,19 +49,18 @@ export const getStudentHomeworks = async (req: AuthRequest, res: Response, next:
       where: { student_id: studentId },
       select: {
         id: true,
-        grade:true,
-        submission_date:true,
+        grade: true,
+        submission_date: true,
         homeworks: {
           select: {
             start_date: true,
             due_date: true,
             description: true,
-            title:true,
-            full_mark:true
-          
-          }
-        }
-      }
+            title: true,
+            full_mark: true,
+          },
+        },
+      },
     });
 
     res.status(200).json(homeworks);
@@ -67,7 +70,11 @@ export const getStudentHomeworks = async (req: AuthRequest, res: Response, next:
   }
 };
 
-export const getStudentInfo = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+export const getStudentInfo = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const studentId = req.user?.id;
   if (!studentId) {
     res.status(400).json({ message: "Student ID is required" });
@@ -78,16 +85,16 @@ export const getStudentInfo = async (req: AuthRequest, res: Response, next: Next
     const student = await prisma.students.findUnique({
       where: { id: studentId },
       select: {
-      id: true,
-      name: true,
-      email: true,
-      phone: true,
-      section: true,
-      centers: {
-        select: {
-        name: true
-        }
-      }
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        section: true,
+        centers: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 
@@ -96,10 +103,13 @@ export const getStudentInfo = async (req: AuthRequest, res: Response, next: Next
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-export const createStudentParent = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+export const createStudentParent = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   const studentId = req.user!.id;
-  const { name, phone, relationship } = req.body;
-
+  const { name, phone, relationship }: CreateParentRequestBody = req.body;
 
   try {
     const parent = await prisma.parents.create({
@@ -135,15 +145,16 @@ export const getStudentParents = async (
     const parents = await prisma.student_parents.findMany({
       where: { student_id: studentId },
       select: {
-        role: true,   // role in student_parents (father, mother, guardian)
-        parents: {     // join with parents table
+        role: true, // role in student_parents (father, mother, guardian)
+        parents: {
+          // join with parents table
           select: {
             id: true,
             name: true,
             phone: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     res.status(200).json(parents);
@@ -152,9 +163,6 @@ export const getStudentParents = async (
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-
-
 
 export const getStudentQuizzes = async (
   req: AuthRequest,
@@ -178,31 +186,3 @@ export const getStudentQuizzes = async (
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
-// export const getStudentTrials = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ): Promise<void> => {
-//   const studentId = req.user?.id;
-//   if (!studentId) {
-//     res.status(400).json({ message: "Student ID is required" });
-//     return;
-//   }
-
-//   try {
-//     const trials = await prisma.student_trials.findMany({
-//       where: { student_id: studentId },
-//       include: { trials: true },
-//     });
-
-//     res.status(200).json(trials);
-//   } catch (err) {
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
-
-
-
-
-
