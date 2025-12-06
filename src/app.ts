@@ -18,5 +18,5 @@ app.use("/teacher", TeacherRouter);
 app.use("/auth", AuthRouter);
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

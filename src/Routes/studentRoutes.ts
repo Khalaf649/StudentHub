@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { 
-  getStudentSessions, 
-  getStudentHomeworks, 
+import {
+  getStudentSessions,
+  getStudentHomeworks,
   createStudentParent,
-  getStudentQuizzes, 
-  //getStudentTrials, 
+  getStudentQuizzes,
+  //getStudentTrials,
   //getStudentCenter,
   getStudentParents,
-  getStudentInfo
+  getStudentInfo,
 } from "../Controllers/studentController";
 import authMiddleware from "../Middlewares/authMiddleware";
 import roleMiddleware from "../Middlewares/roleMiddleware";
@@ -20,14 +20,16 @@ const router = Router();
 router.use(authMiddleware, roleMiddleware("student"));
 
 router.get("/sessions", getStudentSessions);
- router.get("/homeworks", getStudentHomeworks);
- router.post("/parents", parentValidator, validationMiddleware, createStudentParent);
+router.get("/homeworks", getStudentHomeworks);
+router.post(
+  "/parents",
+  parentValidator,
+  validationMiddleware,
+  createStudentParent
+);
 
 router.get("/quizzes", getStudentQuizzes);
-// router.get("/trials", getStudentTrials);
-// router.get("/center", getStudentCenter);
 router.get("/parents", getStudentParents);
 router.get("/info", getStudentInfo);
-
 
 export default router;
