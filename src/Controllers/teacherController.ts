@@ -4,7 +4,7 @@ import createCenterService from "../Services/TeacherService/createCenter";
 import getCentersService from "../Services/TeacherService/getCentersService";
 import createSessionService from "../Services/TeacherService/createSessionService";
 import createHomeworkService from "../Services/TeacherService/createHomeworkService";
-import assignHomeworkService from "../Services/assignHomeworkService";
+import assignHomeworkService from "../Services/TeacherService/assignHomeworkService";
 import createQuizService from "../Services/TeacherService/createQuizService";
 import assignQuizService from "../Services/TeacherService/assignQuizService";
 import assignSessionService from "../Services/TeacherService/assignSessionService";

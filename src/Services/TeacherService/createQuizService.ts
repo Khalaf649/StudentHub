@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../../prisma";
 async function createQuizService(
   session_id: number,
   full_mark: number,

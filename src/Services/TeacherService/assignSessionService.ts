@@ -1,5 +1,5 @@
-import { PrismaClient, attendance_status } from "@prisma/client";
-const prisma = new PrismaClient();
+import { attendance_status } from "@prisma/client";
+import prisma from "../../prisma";
 async function assignSessionService(
   studentId: number,
   sessionId: number,
