@@ -1,8 +1,13 @@
 import prisma from "../../prisma";
-import HomeworkFilters from "../../Interfaces/HomeworkFilter";
+import HomeworkFilters from "../../Interfaces/HomeworkFilter"; // fixed import
 
 export async function getHomeworksService(filters: HomeworkFilters) {
   const where: any = {};
+
+  // Apply filters
+  if (filters.id) where.id = filters.id;
+  if (filters.section) where.section = filters.section;
+  if (filters.center_id) where.center_id = filters.center_id;
 
   const homeworks = await prisma.homeworks.findMany({
     where,
@@ -23,6 +28,7 @@ export async function getHomeworksService(filters: HomeworkFilters) {
       },
     },
   });
+
   return homeworks;
 }
 

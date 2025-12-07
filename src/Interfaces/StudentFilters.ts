@@ -1,4 +1,5 @@
 export default interface StudentFilters {
+  id?: number;
   section?: string;
   center_id?: number;
   session_id?: number;

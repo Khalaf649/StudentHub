@@ -1,32 +1,53 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
-import { ApolloServer } from "apollo-server-express";
-import { typeDefs } from "./GraphQl/schems";
-import { resolvers } from "./GraphQl/resolvers/index";
 
-const PORT = process.env.PORT;
-import bodyparser from "body-parser";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/dist/";
+import typeDefs from "./GraphQl/schems";
+import resolvers from "./GraphQl/index";
+import graphqlMiddleware from "./Middlewares/graphMiddleware";
+
+import bodyParser from "body-parser";
+import cors from "cors";
+
 import StudentRouter from "./Routes/studentRoutes";
 import TeacherRouter from "./Routes/teacherRoutes";
 import AuthRouter from "./Routes/authRoutes";
-import cors from "cors";
+
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 app.use(cors());
-app.use(bodyparser.json());
+app.use(bodyParser.json());
 
 app.use("/student", StudentRouter);
 app.use("/teacher", TeacherRouter);
 app.use("/auth", AuthRouter);
-async function startGraphQL() {
-  const server = new ApolloServer({ typeDefs, resolvers });
+
+async function startServer() {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
+
   await server.start();
-  server.applyMiddleware({ app, path: "/graphql" });
+
+  // Connect Apollo with Express
+  app.use(
+    "/graphql",
+    bodyParser.json(),
+    expressMiddleware(server, {
+      context: async ({ req, res }) => {
+        // Your custom GraphQL auth/role middleware
+        return graphqlMiddleware(req, res);
+      },
+    })
+  );
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}/graphql`);
+  });
 }
 
-startGraphQL();
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+startServer();

@@ -1,7 +1,16 @@
 import prisma from "../../prisma";
 import QuizFilters from "../../Interfaces/QuizFilter";
-export async function getStudentQuizzesService(filters: QuizFilters) {
+
+export async function getQuizzesService(filters: QuizFilters) {
+  const where: any = {};
+
+  // Apply filters
+  if (filters.id) where.id = filters.id;
+  if (filters.section) where.section = filters.section;
+  if (filters.center_id) where.center_id = filters.center_id;
+
   const quizzes = await prisma.quizzes.findMany({
+    where,
     select: {
       id: true,
       title: true,
@@ -17,7 +26,8 @@ export async function getStudentQuizzesService(filters: QuizFilters) {
       },
     },
   });
+
   return quizzes;
 }
 
-export default getStudentQuizzesService;
+export default getQuizzesService;

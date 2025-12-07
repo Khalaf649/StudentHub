@@ -1,83 +1,76 @@
 import { gql } from "apollo-server-express";
 
-export const typeDefs = gql`
-  type Center {
-    id: ID!
-    name: String!
-  }
-
-  type Parent {
-    id: ID!
-    name: String!
-    phone: String!
-    role: String
-  }
-
+const typeDefs = gql`
   type Student {
-    id: ID!
+    id: Int!
     name: String!
-    email: String!
+    email: String
     phone: String
     section: String
-    centers: Center
-    parents: [Parent!]!
   }
 
-  type Session {
-    id: ID!
-    title: String!
-    description: String
-    session_datetime: String!
-    section: String!
-    centers: Center!
+  type Center {
+    id: Int!
+    name: String!
   }
 
   type Homework {
-    id: ID!
+    id: Int!
     title: String!
     description: String
-    start_date: String!
-    due_date: String!
-    full_mark: Int!
+    start_date: String
+    due_date: String
+    full_mark: Int
   }
 
   type Quiz {
-    id: ID!
+    id: Int!
     title: String!
     description: String
-    full_mark: Int!
+    full_mark: Int
   }
 
-  input StudentFiltersInput {
+  type Session {
+    id: Int!
+    title: String!
+    description: String
+    session_datetime: String
+    section: String
+  }
+
+  input StudentFilters {
+    id: Int
     section: String
     center_id: Int
     session_id: Int
-    session_status: String
     homework_id: Int
     quiz_id: Int
   }
 
-  input SessionFiltersInput {
+  input SessionFilters {
+    id: Int
     section: String
     center_id: Int
-    status: String
   }
 
-  input HomeworkFiltersInput {
+  input HomeworkFilters {
+    id: Int
     section: String
     center_id: Int
-    submitted: Boolean
   }
 
-  input QuizFiltersInput {
+  input QuizFilters {
+    id: Int
     section: String
     center_id: Int
   }
 
   type Query {
-    students(filters: StudentFiltersInput): [Student!]!
-    sessions(filters: SessionFiltersInput): [Session!]!
-    homeworks(filters: HomeworkFiltersInput): [Homework!]!
-    quizzes(filters: QuizFiltersInput): [Quiz!]!
+    students(filters: StudentFilters): [Student!]!
+    sessions(filters: SessionFilters): [Session!]!
+    homeworks(filters: HomeworkFilters): [Homework!]!
+    quizzes(filters: QuizFilters): [Quiz!]!
   }
 `;
+
+export default typeDefs;

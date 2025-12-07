@@ -1,5 +1,5 @@
 export default interface QuizFilters {
-  quiz_id?: number;
+  id?: number;
   section?: string;
   center_id?: number;
 }

@@ -1,9 +1,14 @@
 import prisma from "../../prisma";
-import StudentFilters from "../../Interfaces/studentFilters";
+import StudentFilters from "../../Interfaces/StudentFilters";
 
 export async function getStudentsService(filters: StudentFilters) {
   const where: any = {};
 
+  if (filters.id) {
+    where.id = filters.id;
+  }
+
+  // Existing filters
   where.section = filters.section || undefined;
   where.center_id = filters.center_id || undefined;
 
@@ -50,11 +55,9 @@ export async function getStudentsService(filters: StudentFilters) {
       },
 
       student_parents: {
-        // pivot table
         select: {
-          role: true, // from pivot
+          role: true,
           parents: {
-            // join to parents table
             select: {
               id: true,
               name: true,
@@ -65,6 +68,7 @@ export async function getStudentsService(filters: StudentFilters) {
       },
     },
   });
+
   return students;
 }
 
