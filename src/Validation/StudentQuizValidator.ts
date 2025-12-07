@@ -5,7 +5,8 @@ const prisma = new PrismaClient();
 
 export default [
   body("studentId")
-    .isInt().withMessage("studentId must be an integer")
+    .isInt()
+    .withMessage("studentId must be an integer")
     .custom(async (value) => {
       const student = await prisma.students.findUnique({
         where: { id: Number(value) },
@@ -16,10 +17,11 @@ export default [
     }),
 
   body("quizId")
-    .isInt().withMessage("quizId must be an integer")
+    .isInt()
+    .withMessage("quizId must be an integer")
     .custom(async (value) => {
       const quiz = await prisma.quizzes.findUnique({
-        where: { quiz_id: Number(value) },
+        where: { id: Number(value) },
       });
       if (!quiz) {
         return Promise.reject("quiz_id does not exist in the database");
@@ -27,7 +29,6 @@ export default [
     }),
 
   body("grade")
-    .isFloat({ min: 0 }).withMessage("grade must be a number greater than or equal to 0"),
+    .isFloat({ min: 0 })
+    .withMessage("grade must be a number greater than or equal to 0"),
 ];
-
-

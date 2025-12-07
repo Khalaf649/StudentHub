@@ -1,23 +1,24 @@
-import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
 import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/dist/";
+import { startStandaloneServer } from "@apollo/server/standalone";
+
 import typeDefs from "./GraphQl/schems";
 import resolvers from "./GraphQl/index";
-import graphqlMiddleware from "./Middlewares/graphMiddleware";
 
-import bodyParser from "body-parser";
+import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 import StudentRouter from "./Routes/studentRoutes";
 import TeacherRouter from "./Routes/teacherRoutes";
 import AuthRouter from "./Routes/authRoutes";
 
-const PORT = process.env.PORT || 4000;
-const app = express();
+const PORT: number = Number(process.env.PORT) || 4000;
 
+// --- Express App for REST routes ---
+const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -25,29 +26,24 @@ app.use("/student", StudentRouter);
 app.use("/teacher", TeacherRouter);
 app.use("/auth", AuthRouter);
 
+// --- Apollo Server ---
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
 async function startServer() {
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+  // startStandaloneServer automatically handles HTTP
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: PORT },
+    context: async ({ req }) => {
+      // Here you can attach auth info from headers
+      return { user: req.headers.user || null };
+    },
   });
 
-  await server.start();
-
-  // Connect Apollo with Express
-  app.use(
-    "/graphql",
-    bodyParser.json(),
-    expressMiddleware(server, {
-      context: async ({ req, res }) => {
-        // Your custom GraphQL auth/role middleware
-        return graphqlMiddleware(req, res);
-      },
-    })
-  );
-
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}/graphql`);
-  });
+  console.log(` GraphQL server running at ${url}`);
+  console.log(`REST server running at http://localhost:${PORT}`);
 }
 
 startServer();
