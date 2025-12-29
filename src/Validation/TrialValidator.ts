@@ -1,4 +1,5 @@
 import { check } from "express-validator";
+import Section from "../constants/section";
 
 export default [
   check("description")
@@ -19,16 +20,20 @@ export default [
     .withMessage("Max Score must be a positive integer"),
 
   check("section")
-    .isIn(["first_sec", "second_sec_scientific", "second_sec_literary", "third_sec"])
-    .withMessage("Section must be one of: first_sec, second_sec_scientific, second_sec_literary, third_sec"),
+    .isIn(Object.values(Section))
+    .withMessage(
+      `Section must be one of: ${Object.values(Section).join(", ")}`
+    ),
 
   check("teacherId")
-    .notEmpty().withMessage("Teacher ID is required")
+    .notEmpty()
+    .withMessage("Teacher ID is required")
     .isInt()
     .withMessage("Teacher ID must be an integer"),
 
   check("centerId")
-     .notEmpty().withMessage("Center ID is required")
+    .notEmpty()
+    .withMessage("Center ID is required")
     .isInt()
     .withMessage("Center ID must be an integer"),
 ];

@@ -7,7 +7,7 @@ import {
   createQuiz,
   StudentQuizController,
   StudentSessionController,
-} from "../Controllers/teacherController";
+} from "../Controllers/teacherCenterController";
 import authMiddleware from "../Middlewares/authMiddleware";
 import roleMiddleware from "../Middlewares/roleMiddleware";
 import centerValidator from "../Validation/centerValidator";
@@ -20,7 +20,7 @@ import ParentValidator from "../Validation/ParentValidator";
 import StudentQuizValidator from "../Validation/StudentQuizValidator";
 import StudentHomeworkValidator from "../Validation/StudentHomeworkValidator";
 import validateStudentSession from "../Validation/StudentSessionValidator";
-import { getCenters } from "../Controllers/teacherController";
+import { getCenters } from "../Controllers/teacherCenterController";
 import { validationMiddleware } from "../Middlewares/validationMiddleware";
 const router = Router();
 

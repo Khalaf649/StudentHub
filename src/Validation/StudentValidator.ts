@@ -1,13 +1,9 @@
 import { check } from "express-validator";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "../prisma";
+import Section from "../constants/section";
 
 export default [
-  check("name")
-    .isString()
-    .notEmpty()
-    .withMessage("Name is required"),
+  check("name").isString().notEmpty().withMessage("Name is required"),
 
   check("phone")
     .isString()
@@ -44,8 +40,10 @@ export default [
     .withMessage("Password must be at least 6 characters long"),
 
   check("section")
-    .isIn(["first_sec", "second_sec_scientific", "second_sec_literary", "third_sec"])
-    .withMessage("Section must be one of: first_sec, second_sec_scientific, second_sec_literary, third_sec"),
+    .isIn(Object.values(Section))
+    .withMessage(
+      `Section must be one of: ${Object.values(Section).join(", ")}`
+    ),
 
   check("center_id")
     .notEmpty()

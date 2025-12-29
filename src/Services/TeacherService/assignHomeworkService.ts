@@ -1,4 +1,11 @@
 import prisma from "../../prisma";
+class teacherHomeweworkService {
+
+  async function assignHomeworkService(params:type) {
+    
+  }
+}
+
 async function assignHomeworkService(
   studentId: number,
   homeworkId: number,

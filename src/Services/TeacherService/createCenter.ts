@@ -1,9 +1,7 @@
 import prisma from "../../prisma";
-async function createCenterService(
-  name: string,
-  location: string,
-  phone: string
-) {
+import { CreateCenterBody } from "../../Interfaces/RequestBodies";
+async function createCenterService(requestBody: CreateCenterBody) {
+  const { name, location, phone } = requestBody;
   const center = await prisma.centers.create({
     data: {
       name,

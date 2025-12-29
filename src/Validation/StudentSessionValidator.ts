@@ -1,7 +1,6 @@
 import { body } from "express-validator";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "../prisma";
+import StudentStatus from "../constants/studentStatus";
 const validateStudentSession = [
   body("studentId").custom(async (value) => {
     if (!value) throw new Error("studentId is required");
@@ -24,8 +23,10 @@ const validateStudentSession = [
   body("status")
     .notEmpty()
     .withMessage("status is required")
-    .isIn(["attended", "absent"])
-    .withMessage("status must be either 'attended' or 'absent'"),
+    .isIn(Object.values(StudentStatus))
+    .withMessage(
+      `status must be one of: ${Object.values(StudentStatus).join(", ")}`
+    ),
 ];
 
 export default validateStudentSession;

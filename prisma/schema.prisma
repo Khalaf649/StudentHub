@@ -1,10 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model centers {
@@ -14,6 +14,95 @@ model centers {
   phone    String     @unique @db.VarChar(255)
   sessions sessions[]
   students students[]
+}
+
+model homeworks {
+  id               Int                @id @default(autoincrement())
+  session_id       Int
+  title            String             @db.VarChar(255)
+  start_date       DateTime           @db.Timestamp(6)
+  description      String             @db.VarChar(255)
+  due_date         DateTime           @db.Timestamp(6)
+  full_mark        Int
+  sessions         sessions           @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  student_homework student_homework[]
+}
+
+model parents {
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(100)
+  phone           String            @db.VarChar(20)
+  student_parents student_parents[]
+}
+
+model quizzes {
+  id              Int               @id @default(autoincrement())
+  title           String            @db.VarChar(255)
+  description     String?
+  session_id      Int
+  full_mark       Int
+  sessions        sessions          @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_session")
+  student_quizzes student_quizzes[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model sessions {
+  id               Int                @id @default(autoincrement())
+  title            String             @db.VarChar(255)
+  description      String             @db.VarChar(255)
+  center_id        Int
+  section          Section
+  session_datetime DateTime           @db.Timestamp(6)
+  homeworks        homeworks[]
+  quizzes          quizzes[]
+  centers          centers            @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  student_sessions student_sessions[]
+}
+
+model student_homework {
+  id              Int       @id @default(autoincrement())
+  student_id      Int
+  homework_id     Int
+  grade           Int?
+  submission_date DateTime? @db.Timestamp(6)
+  homeworks       homeworks @relation(fields: [homework_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  students        students  @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([student_id, homework_id], map: "uq_student_homework")
+}
+
+model student_parents {
+  id         Int         @id @default(autoincrement())
+  student_id Int
+  parent_id  Int
+  role       parent_role
+  parents    parents     @relation(fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent")
+  students   students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+
+  @@unique([student_id, parent_id, role], map: "unique_student_parent")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model student_quizzes {
+  student_quiz_id Int      @id @default(autoincrement())
+  student_id      Int
+  quiz_id         Int
+  grade           Int?
+  quizzes         quizzes  @relation(fields: [quiz_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_quiz")
+  students        students @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_student")
+
+  @@unique([student_id, quiz_id], map: "uq_student_quiz")
+}
+
+model student_sessions {
+  id         Int               @id @default(autoincrement())
+  student_id Int
+  session_id Int
+  status     attendance_status @default(absent)
+  sessions   sessions          @relation(fields: [session_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session")
+  students   students          @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+
+  @@unique([student_id, session_id], map: "unique_student_session")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -40,93 +129,11 @@ model teachers {
   password String @db.VarChar(255)
 }
 
-model homeworks {
-  id               Int                @id @default(autoincrement())
-  session_id       Int
-  title            String             @db.VarChar(255)
-  start_date       DateTime           @db.Timestamp(6)
-  description      String             @db.VarChar(255)
-  due_date         DateTime           @db.Timestamp(6)
-  full_mark        Int
-  sessions         sessions           @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  student_homework student_homework[]
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model sessions {
-  id               Int                @id @default(autoincrement())
-  title            String             @db.VarChar(255)
-  description      String             @db.VarChar(255)
-  center_id        Int
-  section          String             @db.VarChar(50)
-  session_datetime DateTime           @db.Timestamp(6)
-  homeworks        homeworks[]
-  quizzes          quizzes[]
-  centers          centers            @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  student_sessions student_sessions[]
-}
-
-model student_homework {
-  id              Int       @id @default(autoincrement())
-  student_id      Int
-  homework_id     Int
-  grade           Int?
-  submission_date DateTime? @db.Timestamp(6)
-  homeworks       homeworks @relation(fields: [homework_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  students        students  @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@unique([student_id, homework_id], map: "uq_student_homework")
-}
-
-model student_sessions {
-  id         Int               @id @default(autoincrement())
-  student_id Int
-  session_id Int
-  status     attendance_status @default(absent)
-  sessions   sessions          @relation(fields: [session_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session")
-  students   students          @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
-
-  @@unique([student_id, session_id], map: "unique_student_session")
-}
-
-model parents {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(100)
-  phone           String            @db.VarChar(20)
-  student_parents student_parents[]
-}
-
-model student_parents {
-  id         Int         @id @default(autoincrement())
-  student_id Int
-  parent_id  Int
-  role       parent_role
-  parents    parents     @relation(fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent")
-  students   students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
-
-  @@unique([student_id, parent_id, role], map: "unique_student_parent")
-}
-
-model quizzes {
-  id              Int               @id @default(autoincrement())
-  title           String            @db.VarChar(255)
-  description     String?
-  session_id      Int
-  full_mark       Int
-  sessions        sessions          @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_session")
-  student_quizzes student_quizzes[]
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model student_quizzes {
-  student_quiz_id Int      @id @default(autoincrement())
-  student_id      Int
-  quiz_id         Int
-  grade           Int?
-  quizzes         quizzes  @relation(fields: [quiz_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_quiz")
-  students        students @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_student")
-
-  @@unique([student_id, quiz_id], map: "uq_student_quiz")
+enum Section {
+  first_sec
+  second_sec_scientific
+  second_sec_literary
+  third_sec
 }
 
 enum attendance_status {

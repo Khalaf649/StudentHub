@@ -1,6 +1,5 @@
 import { Request } from "express";
+import tokenPayload from "./TokenPayload";
 export default interface AuthRequest extends Request {
-  user?: { id: number; role: "student" | "teacher" };
+  user?: tokenPayload;
 }
-
-

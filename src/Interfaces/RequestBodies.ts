@@ -1,20 +1,3 @@
-export interface CreateCenterBody {
-  name: string;
-  location: string;
-  phone: string;
-}
-
-export interface CreateSessionBody {
-  title: string;
-  description: string;
-  centerId: number;
-  section:
-    | "first_sec"
-    | "second_sec_scientific"
-    | "second_sec_literary"
-    | "third_sec";
-  sessionDatetime: string;
-}
 export interface StudentSessionRequestBody {
   studentId: number; // The student attending the session
   sessionId: number; // The session being attended
