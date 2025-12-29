@@ -1,4 +1,4 @@
-import { Section } from "../../generated/prisma/enums";
+import { Section, attendance_status } from "../../generated/prisma/enums";
 export interface createSessionDTO {
   title: string;
   description: string;
@@ -20,4 +20,10 @@ export interface SessionFilters {
   id?: number;
   section?: Section;
   center_id?: number;
+}
+
+export interface assignSessionDTO {
+  student_id: number;
+  session_id: number;
+  status: attendance_status;
 }

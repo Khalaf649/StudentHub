@@ -47,16 +47,16 @@ model quizzes {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model sessions {
-  id               Int                @id @default(autoincrement())
-  title            String             @db.VarChar(255)
-  description      String             @db.VarChar(255)
+  id               Int           @id @default(autoincrement())
+  title            String        @db.VarChar(255)
+  description      String        @db.VarChar(255)
   center_id        Int
   section          Section
-  session_datetime DateTime           @db.Timestamp(6)
+  session_datetime DateTime      @db.Timestamp(6)
+  attendances      attendances[]
   homeworks        homeworks[]
   quizzes          quizzes[]
-  centers          centers            @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  student_sessions student_sessions[]
+  centers          centers       @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model student_homework {
@@ -94,17 +94,6 @@ model student_quizzes {
   @@unique([student_id, quiz_id], map: "uq_student_quiz")
 }
 
-model student_sessions {
-  id         Int               @id @default(autoincrement())
-  student_id Int
-  session_id Int
-  status     attendance_status @default(absent)
-  sessions   sessions          @relation(fields: [session_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session")
-  students   students          @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
-
-  @@unique([student_id, session_id], map: "unique_student_session")
-}
-
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model students {
   id               Int                @id @default(autoincrement())
@@ -114,10 +103,10 @@ model students {
   center_id        Int?
   phone            String             @unique @db.VarChar(255)
   password         String             @db.VarChar(255)
+  attendances      attendances[]
   student_homework student_homework[]
   student_parents  student_parents[]
   student_quizzes  student_quizzes[]
-  student_sessions student_sessions[]
   centers          centers?           @relation(fields: [center_id], references: [id], onUpdate: NoAction)
 }
 
@@ -127,6 +116,17 @@ model teachers {
   email    String @unique @db.VarChar(255)
   phone    String @unique @db.VarChar(255)
   password String @db.VarChar(255)
+}
+
+model attendances {
+  id         Int               @id(map: "student_sessions_pkey") @default(autoincrement())
+  student_id Int
+  session_id Int
+  status     attendance_status @default(absent)
+  sessions   sessions          @relation(fields: [session_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session")
+  students   students          @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+
+  @@unique([student_id, session_id], map: "unique_student_session")
 }
 
 enum Section {
@@ -145,4 +145,9 @@ enum parent_role {
   father
   mother
   guardian
+}
+
+enum role {
+  student
+  teacher
 }

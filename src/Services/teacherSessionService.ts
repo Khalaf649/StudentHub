@@ -1,6 +1,7 @@
 import prisma from "../lib/prisma";
 import { ITeacherSessionService } from "./interfaces/teacherSession.service.interface";
 import {
+  assignSessionDTO,
   createSessionDTO,
   getSessionDTO,
   SessionFilters,
@@ -45,5 +46,15 @@ class TeacherSessionService implements ITeacherSessionService {
     });
 
     return sessions;
+  }
+  async assignSession(data: assignSessionDTO): Promise<void> {
+    const { student_id, session_id, status } = data;
+    await prisma.attendances.create({
+      data: {
+        student_id,
+        session_id,
+        status,
+      },
+    });
   }
 }

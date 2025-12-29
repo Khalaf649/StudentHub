@@ -12,8 +12,8 @@ import bodyParser from "body-parser";
 import typeDefs from "./GraphQl/schems";
 import resolvers from "./GraphQl/index";
 
-import StudentRouter from "./Routes/studentRoutes";
-import TeacherRouter from "./Routes/teacherRoutes";
+// import StudentRouter from "./Routes/studentRoutes";
+// import TeacherRouter from "./Routes/teacherRoutes";
 import AuthRouter from "./Routes/authRoutes";
 
 // Define an interface for your Context
@@ -39,8 +39,8 @@ async function startServer() {
   app.use(cors());
   app.use(bodyParser.json());
 
-  app.use("/student", StudentRouter);
-  app.use("/teacher", TeacherRouter);
+  // app.use("/student", StudentRouter);
+  // app.use("/teacher", TeacherRouter);
   app.use("/auth", AuthRouter);
 
   // Fix: Explicitly type the context argument or the generic
