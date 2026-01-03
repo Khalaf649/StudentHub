@@ -1,25 +1,35 @@
-import { IAuthService } from "../Services/interfaces/auth.service.interface";
 import { Request, Response, NextFunction } from "express";
+import { IAuthService } from "../Services/interfaces/auth.service.interface";
 import { RegisterStudentDTO, LoginDTO } from "../dtos/auth.dto";
+import AuthService from "../Services/authService";
+
 class AuthController {
-  constructor(private authService: IAuthService) {}
+  constructor(private readonly authService: IAuthService) {}
+
   async registerStudent(req: Request, res: Response, next: NextFunction) {
+    const requestBody: RegisterStudentDTO = req.body;
     try {
-      const requestBody: RegisterStudentDTO = req.body;
       await this.authService.registerStudent(requestBody);
       res.status(201).json({ message: "Student registered successfully" });
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
   }
+
   async login(req: Request, res: Response, next: NextFunction) {
+    const requestBody: LoginDTO = req.body;
     try {
-      const requestBody: LoginDTO = req.body;
       const token = await this.authService.login(requestBody);
       res.status(200).json({ token });
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
   }
 }
+const authService = new AuthService();
+const authController = new AuthController(authService);
+export const registerStudent =
+  authController.registerStudent.bind(authController);
+export const login = authController.login.bind(authController);
+
 export default AuthController;

@@ -2,7 +2,7 @@ import prisma from "../lib/prisma";
 import { ITeacherHomeworkService } from "./interfaces/teacherHomework.service.interface";
 import {
   CreateHomeworkDTO,
-  AssignHomeWorkDTO,
+  AssignHomeworkDTO,
   HomeworkFilters,
   HomeworkDTO,
 } from "../dtos/teacherHomework.dto";
@@ -23,7 +23,7 @@ class TeacherHomeworkService implements ITeacherHomeworkService {
       },
     });
   }
-  async assignHomework(data: AssignHomeWorkDTO): Promise<void> {
+  async assignHomework(data: AssignHomeworkDTO): Promise<void> {
     const { student_id, homework_id, grade, submission_date } = data;
 
     await prisma.homework_submissions.create({

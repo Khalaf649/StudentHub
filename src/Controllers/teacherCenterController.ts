@@ -1,29 +1,10 @@
 import AuthRequest from "../Interfaces/AuthRequest";
 import { Request, Response, NextFunction } from "express";
-// import createCenterService from "../Services/TeacherService/createCenter";
-// import getCentersService from "../Services/TeacherService/getCentersService";
-// import createSessionService from "../Services/TeacherService/createSessionService";
-// import createHomeworkService from "../Services/TeacherService/createHomeworkService";
-// import assignHomeworkService from "../Services/TeacherService/assignHomeworkService";
-// import createQuizService from "../Services/TeacherService/createQuizService";
-// import assignQuizService from "../Services/TeacherService/assignQuizService";
-// import assignSessionService from "../Services/TeacherService/assignSessionService";
 import { ITeacherCenterService } from "../Services/interfaces/teacherCenter.service.interface";
-
-// import bcrypt from "bcrypt";
-// import { validationResult } from "express-validator";
-// import {
-//   CreateSessionBody,
-//   CreateHomeworkRequestBody,
-//   CreateParentRequestBody,
-//   CreateQuizRequestBody,
-//   CreateTrialRequestBody,
-//   StudentHomeworkRequestBody,
-//   StudentQuizRequestBody,
-//   StudentSessionRequestBody,
-// } from "../Interfaces/RequestBodies";
 import { CreateCenterDTO, getCenterDTO } from "../dtos/teacherCenter.dto";
-class teacherCenterController {
+import TeacherCenterService from "../Services/teacherCenterService";
+
+class TeacherCenterController {
   constructor(
     private readonly teacherControllerService: ITeacherCenterService
   ) {}
@@ -34,7 +15,7 @@ class teacherCenterController {
       await this.teacherControllerService.createCenter(requestBody);
       res.status(201).json("Center created successfully");
     } catch (err) {
-      res.status(500).json("Internal Server Error");
+      next(err);
     }
   }
 
@@ -44,135 +25,19 @@ class teacherCenterController {
         await this.teacherControllerService.getCenters();
       res.status(200).json(centers);
     } catch (err) {
-      res.status(500).json("Internal Server Error");
+      next(err);
     }
   }
 }
 
-// export const createSession = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const {
-//     title,
-//     description,
-//     centerId,
-//     section,
-//     sessionDatetime,
-//   }: CreateSessionBody = req.body;
-//   try {
-//     const session = await createSessionService(
-//       title,
-//       description,
-//       centerId,
-//       section,
-//       sessionDatetime
-//     );
-
-//     res.status(201).json(session);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json("Internal Server Error");
-//   }
-// };
-
-// export const createHomework = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   // Create a homewor
-//   const {
-//     sessionId,
-//     title,
-//     startDate,
-//     description,
-//     dueDate,
-//     fullMark,
-//   }: CreateHomeworkRequestBody = req.body;
-//   const homework = await createHomeworkService(
-//     title,
-//     description,
-//     startDate,
-//     fullMark,
-//     sessionId,
-//     dueDate
-//   );
-//   try {
-//     res.status(201).json(homework);
-//   } catch (err) {
-//     res.status(500).json("Internal Server Error");
-//   }
-// };
-// export const StudentHomeworkController = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const {
-//     studentId,
-//     homeworkId,
-//     grade,
-//     submissionDate,
-//   }: StudentHomeworkRequestBody = req.body;
-//   try {
-//     const assignment = await assignHomeworkService(
-//       studentId,
-//       homeworkId,
-//       grade,
-//       submissionDate
-//     );
-//     res.status(201).json(assignment);
-//   } catch (err) {
-//     res.status(500).json("Internal Server Error");
-//   }
-// };
-
-// export const createQuiz = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const { session_id, full_mark, title, description }: CreateQuizRequestBody =
-//     req.body;
-//   try {
-//     const quiz = await createQuizService(
-//       session_id,
-//       full_mark,
-//       title,
-//       description
-//     );
-//     res.status(201).json(quiz);
-//   } catch (err) {
-//     res.status(500).json("Internal Server Error");
-//   }
-// };
-// export const StudentQuizController = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const { studentId, quizId, grade }: StudentQuizRequestBody = req.body;
-//   try {
-//     const assignment = await assignQuizService(studentId, quizId, grade);
-//     res.status(201).json(assignment);
-//   } catch (err) {
-//     res.status(500).json("Internal Server Error");
-//   }
-// };
-// export const StudentSessionController = async (
-//   req: AuthRequest,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const { studentId, sessionId, status }: StudentSessionRequestBody = req.body;
-//   console.log(req.body);
-//   try {
-//     const assignment = await assignSessionService(studentId, sessionId, status);
-//     res.status(201).json(assignment);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json("Internal Server Error");
-//   }
-// };
+export default TeacherCenterController;
+const teacherCenterService = new TeacherCenterService();
+const teacherCenterController = new TeacherCenterController(
+  teacherCenterService
+);
+export const createCenter = teacherCenterController.createCenter.bind(
+  teacherCenterController
+);
+export const getCenters = teacherCenterController.getCenters.bind(
+  teacherCenterController
+);

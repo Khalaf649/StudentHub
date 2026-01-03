@@ -58,3 +58,5 @@ class TeacherQuizService implements ITeacherQuizService {
     return quizzes;
   }
 }
+
+export default TeacherQuizService;

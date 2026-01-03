@@ -1,60 +1,16 @@
 import { Router } from "express";
-import {
-  createCenter,
-  createSession,
-  createHomework,
-  StudentHomeworkController,
-  createQuiz,
-  StudentQuizController,
-  StudentSessionController,
-} from "../Controllers/teacherCenterController";
-import authMiddleware from "../Middlewares/authMiddleware";
-import roleMiddleware from "../Middlewares/roleMiddleware";
-import centerValidator from "../Validation/centerValidator";
-import homeworkValidator from "../Validation/HomeworkValidator";
-import SessionValidator from "../Validation/SessionValidator";
-import QuizValidator from "../Validation/QuizValidator";
-import TrialValidator from "../Validation/TrialValidator";
-import StudentValidator from "../Validation/StudentValidator";
-import ParentValidator from "../Validation/ParentValidator";
-import StudentQuizValidator from "../Validation/StudentQuizValidator";
-import StudentHomeworkValidator from "../Validation/StudentHomeworkValidator";
-import validateStudentSession from "../Validation/StudentSessionValidator";
-import { getCenters } from "../Controllers/teacherCenterController";
-import { validationMiddleware } from "../Middlewares/validationMiddleware";
+import teacherCenterRoutes from "./teacherCenterRoutes";
+import teacherHomeworkRoutes from "./teacherHomeworkRoutes";
+import teacherQuizRoutes from "./teacherQuizRoutes";
+import teacherSessionRoutes from "./teacherSessionRoutes";
+import teacherStudentRoutes from "./teacherStudentRoutes";
+
 const router = Router();
 
-// Apply authMiddleware and roleMiddleware("teacher") to all routes in this router
-router.get("/center", getCenters);
-router.use(authMiddleware, roleMiddleware("teacher"));
-
-router.post("/center", centerValidator, validationMiddleware, createCenter);
-
-router.post("/session", SessionValidator, validationMiddleware, createSession);
-router.post(
-  "/homework",
-  homeworkValidator,
-  validationMiddleware,
-  createHomework
-);
-router.post(
-  "/session/assign",
-  validateStudentSession,
-  validationMiddleware,
-  StudentSessionController
-);
-router.post(
-  "/homework/assign",
-  StudentHomeworkValidator,
-  validationMiddleware,
-  StudentHomeworkController
-);
-router.post("/quiz", QuizValidator, validationMiddleware, createQuiz);
-router.post(
-  "/quiz/assign",
-  StudentQuizValidator,
-  validationMiddleware,
-  StudentQuizController
-);
+router.use("/center", teacherCenterRoutes);
+router.use("/homework", teacherHomeworkRoutes);
+router.use("/quiz", teacherQuizRoutes);
+router.use("/session", teacherSessionRoutes);
+router.use("/student", teacherStudentRoutes);
 
 export default router;

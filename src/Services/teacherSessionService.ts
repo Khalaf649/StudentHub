@@ -58,3 +58,5 @@ class TeacherSessionService implements ITeacherSessionService {
     });
   }
 }
+
+export default TeacherSessionService;

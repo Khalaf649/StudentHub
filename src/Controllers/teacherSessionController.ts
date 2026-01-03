@@ -1,26 +1,62 @@
-import { ITeacherSessionService } from "../Services/interfaces/teacherSession.service.interface";
-import AuthRequest from "../Interfaces/AuthRequest";
 import { Request, Response, NextFunction } from "express";
-import { createSessionDTO, assignSessionDTO } from "../dtos/teacherSession.dto";
-class teacherSessionController {
-  constructor(private teacherSessionService: ITeacherSessionService) {}
+import AuthRequest from "../Interfaces/AuthRequest";
+import { ITeacherSessionService } from "../Services/interfaces/teacherSession.service.interface";
+import {
+  createSessionDTO,
+  assignSessionDTO,
+  SessionFilters,
+  getSessionDTO,
+} from "../dtos/teacherSession.dto";
+import TeacherSessionService from "../Services/teacherSessionService";
+
+class TeacherSessionController {
+  constructor(private readonly teacherSessionService: ITeacherSessionService) {}
 
   async createSession(req: AuthRequest, res: Response, next: NextFunction) {
+    const requestBody: createSessionDTO = req.body;
     try {
-      const requestBody: createSessionDTO = req.body;
       await this.teacherSessionService.createSession(requestBody);
       res.status(201).json({ message: "Session created successfully" });
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
   }
+
   async assignSession(req: AuthRequest, res: Response, next: NextFunction) {
+    const requestBody: assignSessionDTO = req.body;
     try {
-      const requestBody: assignSessionDTO = req.body;
       await this.teacherSessionService.assignSession(requestBody);
-      res.status(201).json({ message: "Session assigned successfully" });
-    } catch (error) {
-      next(error);
+      res.status(200).json({ message: "Session assigned successfully" });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getSessions(req: AuthRequest, res: Response, next: NextFunction) {
+    const filters: SessionFilters = req.query;
+    try {
+      const sessions: getSessionDTO[] =
+        await this.teacherSessionService.getSessions(filters);
+      res.status(200).json(sessions);
+    } catch (err) {
+      next(err);
     }
   }
 }
+
+const teacherSessionService = new TeacherSessionService();
+const teacherSessionController = new TeacherSessionController(
+  teacherSessionService
+);
+
+export const createSession = teacherSessionController.createSession.bind(
+  teacherSessionController
+);
+export const assignSession = teacherSessionController.assignSession.bind(
+  teacherSessionController
+);
+export const getSessions = teacherSessionController.getSessions.bind(
+  teacherSessionController
+);
+
+export default TeacherSessionController;

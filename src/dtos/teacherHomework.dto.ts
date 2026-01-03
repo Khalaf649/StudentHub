@@ -7,7 +7,7 @@ export interface CreateHomeworkDTO {
   due_date: Date; // ISO 8601 date string (e.g., "2025-03-15T23:59:59Z")
   full_mark: number; // Maximum grade for the homework
 }
-export interface AssignHomeWorkDTO {
+export interface AssignHomeworkDTO {
   student_id: number; // The student assigned to the homework
   homework_id: number; // The homework assigned to the student
   grade: number; // Grade the student achieved (optional until graded)

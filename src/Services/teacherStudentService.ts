@@ -71,3 +71,5 @@ class TeacherStudentService implements ITeacherStudentService {
     return students;
   }
 }
+
+export default TeacherStudentService;
