@@ -28,13 +28,13 @@ async function startServer() {
   const httpServer = http.createServer(app);
 
   // Pass the Context type to ApolloServer
-  const server = new ApolloServer<MyContext>({
-    typeDefs,
-    resolvers,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-  });
+  // const server = new ApolloServer<MyContext>({
+  //   typeDefs,
+  //   resolvers,
+  //   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  // });
 
-  await server.start();
+  // await server.start();
 
   app.use(cors());
   app.use(bodyParser.json());
@@ -44,16 +44,16 @@ async function startServer() {
   app.use("/auth", AuthRouter);
 
   // Fix: Explicitly type the context argument or the generic
-  app.use(
-    "/graphql",
-    expressMiddleware(server, {
-      context: async ({ req }: { req: Request }): Promise<MyContext> => {
-        return {
-          user: req.headers.user || null,
-        };
-      },
-    })
-  );
+  // app.use(
+  //   "/graphql",
+  //   expressMiddleware(server, {
+  //     context: async ({ req }: { req: Request }): Promise<MyContext> => {
+  //       return {
+  //         user: req.headers.user || null,
+  //       };
+  //     },
+  //   })
+  // );
 
   httpServer.listen(PORT, () => {
     console.log(` Server ready at Port ${PORT}`);

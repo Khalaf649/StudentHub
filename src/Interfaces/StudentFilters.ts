@@ -1,4 +1,4 @@
-export default interface StudentFilters {
+export interface StudentFilters {
   id?: number;
   section?: string;
   center_id?: number;
