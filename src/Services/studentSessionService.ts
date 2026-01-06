@@ -1,5 +1,5 @@
 import prisma from "../lib/prisma.js";
-import { IStudentSessionService } from "./interfaces/StudentSession.service.interface.js";
+import { IStudentSessionService } from "./interfaces/studentSession.service.interface.js";
 import { getStudentSessionsDTO } from "../dtos/studentSession.dto.js";
 
 class StudentSessionService implements IStudentSessionService {

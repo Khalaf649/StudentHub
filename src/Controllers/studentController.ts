@@ -3,7 +3,7 @@ import { AuthRequest } from "../dtos/auth.dto.js";
 import { IStudentInfoService } from "../Services/interfaces/studentInfo.service.interface.js";
 import { IStudentHomeworkService } from "../Services/interfaces/studentHomework.service.interface.js";
 import { IStudentQuizService } from "../Services/interfaces/studentQuiz.service.interface.js";
-import { IStudentSessionService } from "../Services/interfaces/StudentSession.service.interface.js";
+import { IStudentSessionService } from "../Services/interfaces/studentSession.service.interface.js";
 import { IStudentParentService } from "../Services/interfaces/studentParent.service.interface.js";
 import { createStudentParentDTO } from "../dtos/studentParent.dto.js";
 import StudentInfoService from "../Services/studentInfoService.js";
