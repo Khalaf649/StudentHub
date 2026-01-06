@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import AuthRequest from "../Interfaces/AuthRequest";
-import { ITeacherStudentService } from "../Services/interfaces/teacherStudnet.service.interface";
-import { StudentFilters, StudentDTO } from "../dtos/teacherStudent.dto";
-import TeacherStudentService from "../Services/teacherStudentService";
+import { AuthRequest } from "../dtos/auth.dto.js";
+import { ITeacherStudentService } from "../Services/interfaces/teacherStudnet.service.interface.js";
+import { StudentFilters, StudentDTO } from "../dtos/teacherStudent.dto.js";
+import TeacherStudentService from "../Services/teacherStudentService.js";
 
 class TeacherStudentController {
   constructor(private readonly teacherStudentService: ITeacherStudentService) {}

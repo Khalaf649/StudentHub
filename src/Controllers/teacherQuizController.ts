@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import AuthRequest from "../Interfaces/AuthRequest";
-import { ITeacherQuizService } from "../Services/interfaces/teacherQuiz.service.interface";
+import { AuthRequest } from "../dtos/auth.dto.js";
+import { ITeacherQuizService } from "../Services/interfaces/teacherQuiz.service.interface.js";
 import {
   CreateQuizDTO,
   AssignQuizDTO,
   QuizFilters,
   QuizDTO,
-} from "../dtos/teacherQuiz.dto";
-import TeacherQuizService from "../Services/teacherQuizService";
+} from "../dtos/teacherQuiz.dto.js";
+import TeacherQuizService from "../Services/teacherQuizService.js";
 
 class TeacherQuizController {
   constructor(private readonly teacherQuizService: ITeacherQuizService) {}

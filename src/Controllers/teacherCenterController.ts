@@ -1,8 +1,8 @@
-import AuthRequest from "../Interfaces/AuthRequest";
+import { AuthRequest } from "../dtos/auth.dto.js";
 import { Request, Response, NextFunction } from "express";
-import { ITeacherCenterService } from "../Services/interfaces/teacherCenter.service.interface";
-import { CreateCenterDTO, getCenterDTO } from "../dtos/teacherCenter.dto";
-import TeacherCenterService from "../Services/teacherCenterService";
+import { ITeacherCenterService } from "../Services/interfaces/teacherCenter.service.interface.js";
+import { CreateCenterDTO, getCenterDTO } from "../dtos/teacherCenter.dto.js";
+import TeacherCenterService from "../Services/teacherCenterService.js";
 
 class TeacherCenterController {
   constructor(

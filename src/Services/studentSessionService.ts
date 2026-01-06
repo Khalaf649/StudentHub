@@ -1,0 +1,28 @@
+import prisma from "../lib/prisma.js";
+import { IStudentSessionService } from "./interfaces/StudentSession.service.interface.js";
+import { getStudentSessionsDTO } from "../dtos/studentSession.dto.js";
+
+class StudentSessionService implements IStudentSessionService {
+  async getStudentSessions(
+    studentId: number
+  ): Promise<getStudentSessionsDTO[]> {
+    const sessions = await prisma.attendances.findMany({
+      where: { student_id: studentId },
+      select: {
+        id: true,
+        status: true,
+        sessions: {
+          select: {
+            title: true,
+            session_datetime: true,
+            description: true,
+            section: true,
+          },
+        },
+      },
+    });
+    return sessions;
+  }
+}
+
+export default StudentSessionService;

@@ -1,4 +1,4 @@
-import { Section } from "../../generated/prisma/enums";
+import { section } from "../generated/client/enums.js";
 export interface CreateHomeworkDTO {
   session_id: number; // ID of the session the homework is linked to
   title: string; // Homework title
@@ -14,7 +14,7 @@ export interface AssignHomeworkDTO {
   submission_date: Date;
 }
 export interface HomeworkFilters {
-  section?: Section;
+  section?: section;
   center_id?: number;
   id?: number;
 }
@@ -28,7 +28,7 @@ export interface HomeworkDTO {
   sessions: {
     id: number;
     title: string;
-    section: Section;
+    section: section;
     center_id: number;
   };
 }

@@ -8,11 +8,11 @@ import {
   //getStudentCenter,
   getStudentParents,
   getStudentInfo,
-} from "../Controllers/studentController";
-import authMiddleware from "../Middlewares/authMiddleware";
-import roleMiddleware from "../Middlewares/roleMiddleware";
-import parentValidator from "../Validation/ParentValidator";
-import { validationMiddleware } from "../Middlewares/validationMiddleware";
+} from "../Controllers/studentController.js";
+import authMiddleware from "../Middlewares/authMiddleware.js";
+import roleMiddleware from "../Middlewares/roleMiddleware.js";
+import parentValidator from "../Validation/ParentValidator.js";
+import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
 
 const router = Router();
 

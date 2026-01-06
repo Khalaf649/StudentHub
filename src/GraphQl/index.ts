@@ -1,8 +1,8 @@
-import teacherResolvers from "./Resolvers/teacherResolvers";
+// import teacherResolvers from "./Resolvers/teacherResolvers";
 
-const resolvers = {
-  Query: {
-    ...teacherResolvers.Query,
-  },
-};
-export default resolvers;
+// const resolvers = {
+//   Query: {
+//     ...teacherResolvers.Query,
+//   },
+// };
+// export default resolvers;

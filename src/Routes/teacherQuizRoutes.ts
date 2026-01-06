@@ -3,12 +3,12 @@ import {
   createQuiz,
   assignQuiz,
   getQuizzes,
-} from "../Controllers/teacherQuizController";
-import authMiddleware from "../Middlewares/authMiddleware";
-import roleMiddleware from "../Middlewares/roleMiddleware";
-import QuizValidator from "../Validation/QuizValidator";
-import StudentQuizValidator from "../Validation/StudentQuizValidator";
-import { validationMiddleware } from "../Middlewares/validationMiddleware";
+} from "../Controllers/teacherQuizController.js";
+import authMiddleware from "../Middlewares/authMiddleware.js";
+import roleMiddleware from "../Middlewares/roleMiddleware.js";
+import QuizValidator from "../Validation/QuizValidator.js";
+import StudentQuizValidator from "../Validation/StudentQuizValidator.js";
+import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
 
 const router = Router();
 

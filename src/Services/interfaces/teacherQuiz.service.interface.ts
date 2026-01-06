@@ -3,7 +3,7 @@ import {
   AssignQuizDTO,
   QuizFilters,
   QuizDTO,
-} from "../../dtos/teacherQuiz.dto";
+} from "../../dtos/teacherQuiz.dto.js";
 
 export interface ITeacherQuizService {
   createQuiz(data: CreateQuizDTO): Promise<void>;

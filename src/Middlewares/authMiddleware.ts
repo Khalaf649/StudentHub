@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import tokenPayload from "../Interfaces/TokenPayload";
-import AuthRequest from "../Interfaces/AuthRequest";
+import { AuthRequest, TokenDTO } from "../dtos/auth.dto.js";
 const JWT_SECRET = process.env.JWT_SECRET as string;
 // Middleware to authenticate and differentiate roles
 export default (req: AuthRequest, res: Response, next: NextFunction): void => {
@@ -12,7 +11,7 @@ export default (req: AuthRequest, res: Response, next: NextFunction): void => {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as tokenPayload;
+    const decoded = jwt.verify(token, JWT_SECRET) as TokenDTO;
     req.user = { id: decoded.id, role: decoded.role }; // Attach user info to request
     next();
   } catch (err) {

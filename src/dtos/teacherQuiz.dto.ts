@@ -1,4 +1,4 @@
-import { Section } from "../../generated/prisma/enums";
+import { section } from "../generated/client/enums.js";
 export interface CreateQuizDTO {
   session_id: number; // ID of the session the quiz is linked to
   title: string; // Title of the quiz
@@ -23,7 +23,7 @@ export interface QuizDTO {
   sessions: {
     id: number;
     title: string;
-    section: Section;
+    section: section;
     center_id: number;
   };
 }

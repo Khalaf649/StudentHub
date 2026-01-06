@@ -1,6 +1,6 @@
 import { body } from "express-validator";
-import prisma from "../prisma";
-import StudentStatus from "../constants/studentStatus";
+import prisma from "../lib/prisma.js";
+import { attendance_status } from "../generated/client/enums.js";
 const validateStudentSession = [
   body("studentId").custom(async (value) => {
     if (!value) throw new Error("studentId is required");
@@ -23,9 +23,9 @@ const validateStudentSession = [
   body("status")
     .notEmpty()
     .withMessage("status is required")
-    .isIn(Object.values(StudentStatus))
+    .isIn(Object.values(attendance_status))
     .withMessage(
-      `status must be one of: ${Object.values(StudentStatus).join(", ")}`
+      `status must be one of: ${Object.values(attendance_status).join(", ")}`
     ),
 ];
 

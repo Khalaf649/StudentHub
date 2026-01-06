@@ -1,6 +1,6 @@
 import { check } from "express-validator";
-import prisma from "../prisma";
-import Section from "../constants/section";
+import prisma from "../lib/prisma.js";
+import { section } from "../generated/client/enums.js";
 
 export default [
   check("name").isString().notEmpty().withMessage("Name is required"),
@@ -40,9 +40,9 @@ export default [
     .withMessage("Password must be at least 6 characters long"),
 
   check("section")
-    .isIn(Object.values(Section))
+    .isIn(Object.values(section))
     .withMessage(
-      `Section must be one of: ${Object.values(Section).join(", ")}`
+      `Section must be one of: ${Object.values(section).join(", ")}`
     ),
 
   check("center_id")

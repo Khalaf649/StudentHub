@@ -2,11 +2,13 @@
   "name": "studenthub",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && nodemon dist/app.js"
+    "build": "tsc",
+    "generate": "prisma generate",
+    "start": "node dist/app.js",
+    "dev": "nodemon --exec tsx src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -43,6 +45,7 @@
     "nodemon": "^3.1.11",
     "prisma": "^7.2.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }

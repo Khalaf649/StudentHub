@@ -1,7 +1,7 @@
-import { Section, parent_role } from "../../generated/prisma/enums";
+import { section, parent_role } from "../generated/client/enums.js";
 export interface StudentFilters {
   id?: number;
-  section?: Section;
+  section?: section;
   center_id?: number;
   session_id?: number;
   homework_id?: number;
@@ -12,7 +12,7 @@ export interface StudentDTO {
   name: string;
   email: string;
   phone: string;
-  section: Section;
+  section: section;
 
   centers: {
     id: number;

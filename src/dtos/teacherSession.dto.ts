@@ -1,15 +1,15 @@
-import { Section, attendance_status } from "../../generated/prisma/enums";
+import { section, attendance_status } from "../generated/client/enums.js";
 export interface createSessionDTO {
   title: string;
   description: string;
   center_id: number;
-  section: Section;
+  section: section;
   session_datetime: Date;
 }
 export interface getSessionDTO {
   id: number;
   description: string;
-  section: Section;
+  section: section;
   session_datetime: Date;
   centers: {
     id: number;
@@ -18,7 +18,7 @@ export interface getSessionDTO {
 }
 export interface SessionFilters {
   id?: number;
-  section?: Section;
+  section?: section;
   center_id?: number;
 }
 

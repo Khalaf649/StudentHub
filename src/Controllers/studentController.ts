@@ -1,188 +1,138 @@
-import AuthRequest from "../Interfaces/AuthRequest";
-import { CreateParentRequestBody } from "../Interfaces/RequestBodies";
 import { Request, Response, NextFunction } from "express";
-import { PrismaClient } from "@prisma/client";
+import { AuthRequest } from "../dtos/auth.dto.js";
+import { IStudentInfoService } from "../Services/interfaces/studentInfo.service.interface.js";
+import { IStudentHomeworkService } from "../Services/interfaces/studentHomework.service.interface.js";
+import { IStudentQuizService } from "../Services/interfaces/studentQuiz.service.interface.js";
+import { IStudentSessionService } from "../Services/interfaces/StudentSession.service.interface.js";
+import { IStudentParentService } from "../Services/interfaces/studentParent.service.interface.js";
+import { createStudentParentDTO } from "../dtos/studentParent.dto.js";
+import StudentInfoService from "../Services/studentInfoService.js";
+import StudentHomeworkService from "../Services/studentHomeworkService.js";
+import StudentQuizService from "../Services/studentQuizService.js";
+import StudentSessionService from "../Services/studentSessionService.js";
+import StudentParentService from "../Services/studentParentService.js";
 
-const prisma = new PrismaClient();
+class StudentController {
+  constructor(
+    private readonly studentInfoService: IStudentInfoService,
+    private readonly studentHomeworkService: IStudentHomeworkService,
+    private readonly studentQuizService: IStudentQuizService,
+    private readonly studentSessionService: IStudentSessionService,
+    private readonly studentParentService: IStudentParentService
+  ) {}
 
-export const getStudentSessions = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const studentId = req.user?.id;
-
-  try {
-    const sessions = await prisma.student_sessions.findMany({
-      where: { student_id: studentId },
-      select: {
-        id: true,
-        status: true,
-
-        sessions: {
-          select: {
-            title: true,
-            session_datetime: true,
-            description: true,
-            section: true,
-          },
-        },
-      },
-    });
-
-    res.status(200).json(sessions);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const getStudentHomeworks = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const studentId = req.user?.id;
-
-  try {
-    const homeworks = await prisma.student_homework.findMany({
-      where: { student_id: studentId },
-      select: {
-        id: true,
-        grade: true,
-        submission_date: true,
-        homeworks: {
-          select: {
-            start_date: true,
-            due_date: true,
-            description: true,
-            title: true,
-            full_mark: true,
-          },
-        },
-      },
-    });
-
-    res.status(200).json(homeworks);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const getStudentInfo = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const studentId = req.user?.id;
-  if (!studentId) {
-    res.status(400).json({ message: "Student ID is required" });
-    return;
+  async getStudentInfo(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const studentId = req.user!.id;
+      const studentInfo = await this.studentInfoService.getStudentInfo(
+        studentId
+      );
+      res.status(200).json(studentInfo);
+    } catch (err) {
+      next(err);
+    }
   }
 
-  try {
-    const student = await prisma.students.findUnique({
-      where: { id: studentId },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        phone: true,
-        section: true,
-        centers: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
-
-    res.status(200).json(student);
-  } catch (err) {
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-export const createStudentParent = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const studentId = req.user!.id;
-  const { name, phone, relationship }: CreateParentRequestBody = req.body;
-
-  try {
-    const parent = await prisma.parents.create({
-      data: {
-        name,
-        phone,
-      },
-    });
-
-    await prisma.student_parents.create({
-      data: {
-        student_id: studentId,
-        parent_id: parent.id,
-        role: relationship,
-      },
-    });
-
-    res.status(201).json(parent);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const getStudentParents = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const studentId = req.user?.id;
-
-  try {
-    const parents = await prisma.student_parents.findMany({
-      where: { student_id: studentId },
-      select: {
-        role: true, // role in student_parents (father, mother, guardian)
-        parents: {
-          // join with parents table
-          select: {
-            id: true,
-            name: true,
-            phone: true,
-          },
-        },
-      },
-    });
-
-    res.status(200).json(parents);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const getStudentQuizzes = async (
-  req: AuthRequest,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const studentId = req.user?.id;
-  if (!studentId) {
-    res.status(400).json({ message: "Student ID is required" });
-    return;
+  async getStudentHomeworks(
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const studentId = req.user!.id;
+      const homeworks = await this.studentHomeworkService.getStudentHomework(
+        studentId
+      );
+      res.status(200).json(homeworks);
+    } catch (err) {
+      next(err);
+    }
   }
 
-  try {
-    const quizzes = await prisma.student_quizzes.findMany({
-      where: { student_id: studentId },
-      include: { quizzes: true },
-    });
-
-    res.status(200).json(quizzes);
-  } catch (err) {
-    res.status(500).json({ message: "Internal Server Error" });
+  async getStudentQuizzes(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const studentId = req.user!.id;
+      const quizzes = await this.studentQuizService.getStudentQuizzes(
+        studentId
+      );
+      res.status(200).json(quizzes);
+    } catch (err) {
+      next(err);
+    }
   }
-};
+
+  async getStudentSessions(
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const studentId = req.user!.id;
+      const sessions = await this.studentSessionService.getStudentSessions(
+        studentId
+      );
+      res.status(200).json(sessions);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async createStudentParent(
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+  ) {
+    const requestBody: createStudentParentDTO = req.body;
+    try {
+      const studentId = req.user!.id;
+      await this.studentParentService.createStudentParent(
+        studentId,
+        requestBody
+      );
+      res.status(201).json({ message: "Parent created successfully" });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getStudentParents(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const studentId = req.user!.id;
+      const parents = await this.studentParentService.getStudentParents(
+        studentId
+      );
+      res.status(200).json(parents);
+    } catch (err) {
+      next(err);
+    }
+  }
+}
+
+const studentInfoService = new StudentInfoService();
+const studentHomeworkService = new StudentHomeworkService();
+const studentQuizService = new StudentQuizService();
+const studentSessionService = new StudentSessionService();
+const studentParentService = new StudentParentService();
+
+const studentController = new StudentController(
+  studentInfoService,
+  studentHomeworkService,
+  studentQuizService,
+  studentSessionService,
+  studentParentService
+);
+
+export const getStudentInfo =
+  studentController.getStudentInfo.bind(studentController);
+export const getStudentHomeworks =
+  studentController.getStudentHomeworks.bind(studentController);
+export const getStudentQuizzes =
+  studentController.getStudentQuizzes.bind(studentController);
+export const getStudentSessions =
+  studentController.getStudentSessions.bind(studentController);
+export const createStudentParent =
+  studentController.createStudentParent.bind(studentController);
+export const getStudentParents =
+  studentController.getStudentParents.bind(studentController);
+
+export default StudentController;

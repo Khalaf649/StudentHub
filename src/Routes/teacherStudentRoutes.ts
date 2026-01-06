@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getStudents } from "../Controllers/teacherStudentController";
-import authMiddleware from "../Middlewares/authMiddleware";
-import roleMiddleware from "../Middlewares/roleMiddleware";
+import { getStudents } from "../Controllers/teacherStudentController.js";
+import authMiddleware from "../Middlewares/authMiddleware.js";
+import roleMiddleware from "../Middlewares/roleMiddleware.js";
 
 const router = Router();
 

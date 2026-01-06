@@ -3,12 +3,12 @@ import {
   createHomework,
   assignHomework,
   getHomeworks,
-} from "../Controllers/teacherHomeworkController";
-import authMiddleware from "../Middlewares/authMiddleware";
-import roleMiddleware from "../Middlewares/roleMiddleware";
-import homeworkValidator from "../Validation/HomeworkValidator";
-import StudentHomeworkValidator from "../Validation/StudentHomeworkValidator";
-import { validationMiddleware } from "../Middlewares/validationMiddleware";
+} from "../Controllers/teacherHomeworkController.js";
+import authMiddleware from "../Middlewares/authMiddleware.js";
+import roleMiddleware from "../Middlewares/roleMiddleware.js";
+import homeworkValidator from "../Validation/HomeworkValidator.js";
+import StudentHomeworkValidator from "../Validation/StudentHomeworkValidator.js";
+import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
 
 const router = Router();
 

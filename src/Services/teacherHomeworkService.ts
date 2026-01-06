@@ -1,11 +1,11 @@
-import prisma from "../lib/prisma";
-import { ITeacherHomeworkService } from "./interfaces/teacherHomework.service.interface";
+import prisma from "../lib/prisma.js";
+import { ITeacherHomeworkService } from "./interfaces/teacherHomework.service.interface.js";
 import {
   CreateHomeworkDTO,
   AssignHomeworkDTO,
   HomeworkFilters,
   HomeworkDTO,
-} from "../dtos/teacherHomework.dto";
+} from "../dtos/teacherHomework.dto.js";
 
 class TeacherHomeworkService implements ITeacherHomeworkService {
   async createHomework(data: CreateHomeworkDTO): Promise<void> {

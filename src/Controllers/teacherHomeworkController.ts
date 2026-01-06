@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import AuthRequest from "../Interfaces/AuthRequest";
-import { ITeacherHomeworkService } from "../Services/interfaces/teacherHomework.service.interface";
+import { AuthRequest } from "../dtos/auth.dto.js";
+import { ITeacherHomeworkService } from "../Services/interfaces/teacherHomework.service.interface.js";
 import {
   CreateHomeworkDTO,
   AssignHomeworkDTO,
   HomeworkFilters,
   HomeworkDTO,
-} from "../dtos/teacherHomework.dto";
-import TeacherHomeworkService from "../Services/teacherHomeworkService";
+} from "../dtos/teacherHomework.dto.js";
+import TeacherHomeworkService from "../Services/teacherHomeworkService.js";
 
 class TeacherHomeworkController {
   constructor(

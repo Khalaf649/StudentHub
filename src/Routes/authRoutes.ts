@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { loginValidation } from "../Validation/LoginValidator";
-import StudentValidator from "../Validation/StudentValidator";
-import { validationMiddleware } from "../Middlewares/validationMiddleware";
-import { login, registerStudent } from "../Controllers/authController";
+import { loginValidation } from "../Validation/LoginValidator.js";
+import StudentValidator from "../Validation/StudentValidator.js";
+import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
+import { login, registerStudent } from "../Controllers/authController.js";
 
 const router = Router();
 // Middleware to authenticate and differentiate roles

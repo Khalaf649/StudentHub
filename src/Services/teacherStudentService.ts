@@ -1,7 +1,7 @@
-import { ITeacherStudentService } from "./interfaces/teacherStudnet.service.interface";
-import { StudentFilters, StudentDTO } from "../dtos/teacherStudent.dto";
-import { attendance_status } from "../../generated/prisma/enums";
-import prisma from "../lib/prisma";
+import { ITeacherStudentService } from "./interfaces/teacherStudnet.service.interface.js";
+import { StudentFilters, StudentDTO } from "../dtos/teacherStudent.dto.js";
+import { attendance_status } from "../generated/client/enums.js";
+import prisma from "../lib/prisma.js";
 
 class TeacherStudentService implements ITeacherStudentService {
   async getStudents(filters: StudentFilters): Promise<StudentDTO[]> {

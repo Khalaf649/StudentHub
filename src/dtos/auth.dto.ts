@@ -1,20 +1,23 @@
-import { Section } from "../../generated/prisma/enums";
-import Role from "../constants/roles";
+import { user_role, section } from "../generated/client/enums.js";
+import { Request } from "express";
 
 export interface RegisterStudentDTO {
   name: string;
   phone: string;
   email: string;
   password: string;
-  section: Section;
+  section: section;
   center_id: number;
 }
 export interface LoginDTO {
   email: string;
   password: string;
-  role: Role;
+  role: user_role;
 }
 export interface TokenDTO {
   id: number;
-  role: Role;
+  role: user_role;
+}
+export interface AuthRequest extends Request {
+  user?: TokenDTO;
 }

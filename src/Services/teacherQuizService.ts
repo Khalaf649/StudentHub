@@ -1,11 +1,11 @@
-import prisma from "../lib/prisma";
+import prisma from "../lib/prisma.js";
 import {
   CreateQuizDTO,
   AssignQuizDTO,
   QuizDTO,
   QuizFilters,
-} from "../dtos/teacherQuiz.dto";
-import { ITeacherQuizService } from "./interfaces/teacherQuiz.service.interface";
+} from "../dtos/teacherQuiz.dto.js";
+import { ITeacherQuizService } from "./interfaces/teacherQuiz.service.interface.js";
 
 class TeacherQuizService implements ITeacherQuizService {
   async createQuiz(data: CreateQuizDTO): Promise<void> {

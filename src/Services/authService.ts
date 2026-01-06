@@ -1,17 +1,16 @@
-import prisma from "../lib/prisma";
-import { IAuthService } from "./interfaces/auth.service.interface";
-import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../dtos/auth.dto";
+import prisma from "../lib/prisma.js";
+import { IAuthService } from "./interfaces/auth.service.interface.js";
+import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../dtos/auth.dto.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import tokenPayload from "../Interfaces/TokenPayload";
-import Role from "../constants/roles";
+import { user_role } from "../generated/client/enums.js";
 
 const SALT_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET as string;
 const JWT_EXPIRES_IN = "1h";
-const roleModelMap: Record<Role, any> = {
-  [Role.STUDENT]: prisma.students,
-  [Role.TEACHER]: prisma.teachers,
+const roleModelMap: Record<user_role, any> = {
+  [user_role.student]: prisma.students,
+  [user_role.teacher]: prisma.teachers,
 };
 
 class AuthService implements IAuthService {
@@ -34,7 +33,7 @@ class AuthService implements IAuthService {
   async login(data: LoginDTO): Promise<string> {
     const { email, password, role } = data;
 
-    const model = roleModelMap[role as Role];
+    const model = roleModelMap[role as user_role];
     if (!model) throw new Error("Invalid role");
     const user = await model.findUnique({
       where: { email },

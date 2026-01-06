@@ -1,6 +1,5 @@
 import { check } from "express-validator";
-import Section from "../constants/section";
-
+import { section } from "../generated/client/enums.js";
 export default [
   check("description")
     .isString()
@@ -20,9 +19,9 @@ export default [
     .withMessage("Max Score must be a positive integer"),
 
   check("section")
-    .isIn(Object.values(Section))
+    .isIn(Object.values(section))
     .withMessage(
-      `Section must be one of: ${Object.values(Section).join(", ")}`
+      `Section must be one of: ${Object.values(section).join(", ")}`
     ),
 
   check("teacherId")

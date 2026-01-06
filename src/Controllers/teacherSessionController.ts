@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import AuthRequest from "../Interfaces/AuthRequest";
-import { ITeacherSessionService } from "../Services/interfaces/teacherSession.service.interface";
+import { AuthRequest } from "../dtos/auth.dto.js";
+import { ITeacherSessionService } from "../Services/interfaces/teacherSession.service.interface.js";
 import {
   createSessionDTO,
   assignSessionDTO,
   SessionFilters,
   getSessionDTO,
-} from "../dtos/teacherSession.dto";
-import TeacherSessionService from "../Services/teacherSessionService";
+} from "../dtos/teacherSession.dto.js";
+import TeacherSessionService from "../Services/teacherSessionService.js";
 
 class TeacherSessionController {
   constructor(private readonly teacherSessionService: ITeacherSessionService) {}
