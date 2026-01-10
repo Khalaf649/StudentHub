@@ -6,8 +6,8 @@ import {
 } from "../Controllers/teacherHomeworkController.js";
 import authMiddleware from "../Middlewares/authMiddleware.js";
 import roleMiddleware from "../Middlewares/roleMiddleware.js";
-import homeworkValidator from "../Validation/HomeworkValidator.js";
-import StudentHomeworkValidator from "../Validation/StudentHomeworkValidator.js";
+import homeworkValidator from "../Validation/homeworkValidator.js";
+import studentHomeworkValidator from "../Validation/StudentHomeworkValidator.js";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
 
 const router = Router();
@@ -18,7 +18,7 @@ router.use(authMiddleware, roleMiddleware("teacher"));
 router.post("/", homeworkValidator, validationMiddleware, createHomework);
 router.post(
   "/assign",
-  StudentHomeworkValidator,
+  studentHomeworkValidator,
   validationMiddleware,
   assignHomework
 );

@@ -13,7 +13,7 @@ class TeacherCenterController {
     const requestBody: CreateCenterDTO = req.body;
     try {
       await this.teacherControllerService.createCenter(requestBody);
-      res.status(201).json("Center created successfully");
+      res.status(201).json({ message: "Center created successfully" });
     } catch (err) {
       next(err);
     }

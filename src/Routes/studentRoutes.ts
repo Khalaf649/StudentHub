@@ -11,7 +11,7 @@ import {
 } from "../Controllers/studentController.js";
 import authMiddleware from "../Middlewares/authMiddleware.js";
 import roleMiddleware from "../Middlewares/roleMiddleware.js";
-import parentValidator from "../Validation/ParentValidator.js";
+import parentValidator from "../Validation/parentValidator.js";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
 
 const router = Router();

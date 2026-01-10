@@ -9,7 +9,8 @@ import bodyParser from "body-parser";
 // Routers
 import TeacherRouter from "./Routes/teacherRoutes.js";
 import AuthRouter from "./Routes/authRoutes.js";
-// import StudentRouter from "./Routes/studentRoutes";
+import StudentRouter from "./Routes/studentRoutes.js";
+import errorHandler from "./Middlewares/errorHandler.js";
 
 const PORT = process.env.port || 3000;
 
@@ -21,13 +22,14 @@ async function startServer() {
   app.use(bodyParser.json());
 
   // REST routes
-  // app.use("/student", StudentRouter);
+  app.use("/student", StudentRouter);
   app.use("/teacher", TeacherRouter);
   app.use("/auth", AuthRouter);
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
+  app.use(errorHandler);
 }
 
 startServer();

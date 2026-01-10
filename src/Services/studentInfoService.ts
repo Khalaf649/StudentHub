@@ -1,5 +1,6 @@
 import { IStudentInfoService } from "./interfaces/studentInfo.service.interface.js";
 import { getStudentInfoDTO } from "../dtos/studentInfo.dto.js";
+import { AppError } from "../AppError.js";
 import prisma from "../lib/prisma.js";
 
 class StudentInfoService implements IStudentInfoService {
@@ -20,7 +21,7 @@ class StudentInfoService implements IStudentInfoService {
       },
     });
     if (!student) {
-      throw new Error("Student not found");
+      throw new AppError("Student not found", 404);
     }
     return student;
   }

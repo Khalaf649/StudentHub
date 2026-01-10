@@ -9,11 +9,10 @@ import centerValidator from "../Validation/centerValidator.js";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
 
 const router = Router();
-
+router.get("/", getCenters);
 // Apply authMiddleware and roleMiddleware("teacher") to all routes in this router
 router.use(authMiddleware, roleMiddleware("teacher"));
 
 router.post("/", centerValidator, validationMiddleware, createCenter);
-router.get("/", getCenters);
 
 export default router;

@@ -4,6 +4,7 @@ import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../dtos/auth.dto.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { user_role } from "../generated/client/enums.js";
+import { AppError } from "../AppError.js";
 
 const SALT_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET as string;
@@ -34,14 +35,15 @@ class AuthService implements IAuthService {
     const { email, password, role } = data;
 
     const model = roleModelMap[role as user_role];
-    if (!model) throw new Error("Invalid role");
+    if (!model) throw new AppError("Invalid role", 400);
     const user = await model.findUnique({
       where: { email },
     });
+    if (!user) throw new AppError("User not found", 404);
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      throw new Error("Invalid Credentials");
+      throw new AppError("Invalid Credentials", 401);
     }
 
     const tokenPayload: TokenDTO = { id: user.id, role: role };

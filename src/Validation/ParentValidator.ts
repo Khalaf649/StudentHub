@@ -1,5 +1,6 @@
 import { body } from "express-validator";
 import prisma from "../lib/prisma.js";
+import { parent_role } from "../generated/client/enums.js";
 
 export default [
   body("name")
@@ -21,6 +22,8 @@ export default [
   body("relationship")
     .notEmpty()
     .withMessage("Relationship is required")
-    .isIn(["father", "mother", "guardian"])
-    .withMessage("Relationship must be 'father', 'mother', or 'guardian'"),
+    .isIn(Object.values(parent_role))
+    .withMessage(
+      `Relationship must be one of: ${Object.values(parent_role).join(", ")}`
+    ),
 ];

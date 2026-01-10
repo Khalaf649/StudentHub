@@ -6,8 +6,8 @@ import {
 } from "../Controllers/teacherSessionController.js";
 import authMiddleware from "../Middlewares/authMiddleware.js";
 import roleMiddleware from "../Middlewares/roleMiddleware.js";
-import SessionValidator from "../Validation/SessionValidator.js";
-import validateStudentSession from "../Validation/StudentSessionValidator.js";
+import sessionValidator from "../Validation/sessionValidator.js";
+import studentSessionValidator from "../Validation/studentSessionValidator.js";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
 
 const router = Router();
@@ -15,10 +15,10 @@ const router = Router();
 // Apply authMiddleware and roleMiddleware("teacher") to all routes in this router
 router.use(authMiddleware, roleMiddleware("teacher"));
 
-router.post("/", SessionValidator, validationMiddleware, createSession);
+router.post("/", sessionValidator, validationMiddleware, createSession);
 router.post(
   "/assign",
-  validateStudentSession,
+  studentSessionValidator,
   validationMiddleware,
   assignSession
 );

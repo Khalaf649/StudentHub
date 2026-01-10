@@ -1,32 +1,43 @@
 import { body } from "express-validator";
 import prisma from "../lib/prisma.js";
 import { attendance_status } from "../generated/client/enums.js";
-const validateStudentSession = [
-  body("studentId").custom(async (value) => {
-    if (!value) throw new Error("studentId is required");
 
-    const student = await prisma.students.findUnique({
-      where: { id: Number(value) },
-    });
-    if (!student) throw new Error("studentId does not exist");
-  }),
+export default [
+  body("student_id")
+    .notEmpty()
+    .withMessage("Student ID is required")
+    .isInt({ gt: 0 })
+    .withMessage("Student ID must be a positive integer")
+    .bail()
+    .custom(async (value) => {
+      const student = await prisma.students.findUnique({
+        where: { id: Number(value) },
+      });
+      if (!student) {
+        return Promise.reject("Student ID does not exist");
+      }
+    }),
 
-  body("sessionId").custom(async (value) => {
-    if (!value) throw new Error("sessionId is required");
-
-    const session = await prisma.sessions.findUnique({
-      where: { id: Number(value) },
-    });
-    if (!session) throw new Error("sessionId does not exist");
-  }),
+  body("session_id")
+    .notEmpty()
+    .withMessage("Session ID is required")
+    .isInt({ gt: 0 })
+    .withMessage("Session ID must be a positive integer")
+    .bail()
+    .custom(async (value) => {
+      const session = await prisma.sessions.findUnique({
+        where: { id: Number(value) },
+      });
+      if (!session) {
+        return Promise.reject("Session ID does not exist");
+      }
+    }),
 
   body("status")
     .notEmpty()
-    .withMessage("status is required")
+    .withMessage("Status is required")
     .isIn(Object.values(attendance_status))
     .withMessage(
-      `status must be one of: ${Object.values(attendance_status).join(", ")}`
+      `Status must be one of: ${Object.values(attendance_status).join(", ")}`
     ),
 ];
-
-export default validateStudentSession;
