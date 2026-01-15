@@ -1,6 +1,5 @@
 import { body } from "express-validator";
 import prisma from "../lib/prisma.js";
-import { section } from "../generated/client/enums.js";
 
 export default [
   body("title")
@@ -17,7 +16,7 @@ export default [
     .isString()
     .withMessage("Description must be a string"),
 
-  body("center_id")
+  body("centerId")
     .notEmpty()
     .withMessage("Center ID is required")
     .isInt({ gt: 0 })
@@ -36,13 +35,15 @@ export default [
   body("section")
     .notEmpty()
     .withMessage("Section is required")
-    .withMessage("Section must be a string")
-    .isIn(Object.values(section))
-    .withMessage(
-      `Section must be one of: ${Object.values(section).join(", ")}`
-    ),
+    .isIn([
+      "first_sec",
+      "second_sec_scientific",
+      "second_sec_literary",
+      "third_sec",
+    ])
+    .withMessage("Invalid section"),
 
-  body("session_datetime")
+  body("sessionDatetime")
     .notEmpty()
     .withMessage("Session datetime is required")
     .isISO8601()

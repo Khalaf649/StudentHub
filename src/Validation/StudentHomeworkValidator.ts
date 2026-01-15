@@ -2,45 +2,39 @@ import { body } from "express-validator";
 import prisma from "../lib/prisma.js";
 
 export default [
-  body("student_id")
-    .notEmpty()
-    .withMessage("Student ID is required")
+  body("studentId")
     .isInt({ gt: 0 })
-    .withMessage("Student ID must be a positive integer")
+    .withMessage("studentId must be a positive integer")
     .bail()
     .custom(async (value) => {
       const student = await prisma.students.findUnique({
-        where: { id: Number(value) },
+        where: { id: value },
       });
       if (!student) {
-        return Promise.reject("Student ID does not exist");
+        return Promise.reject("studentId does not exist");
       }
     }),
 
-  body("homework_id")
-    .notEmpty()
-    .withMessage("Homework ID is required")
+  body("homeworkId")
     .isInt({ gt: 0 })
-    .withMessage("Homework ID must be a positive integer")
+    .withMessage("homeworkId must be a positive integer")
     .bail()
     .custom(async (value) => {
       const homework = await prisma.homeworks.findUnique({
-        where: { id: Number(value) },
+        where: { id: value },
       });
       if (!homework) {
-        return Promise.reject("Homework ID does not exist");
+        return Promise.reject("homeworkId does not exist");
       }
     }),
 
   body("grade")
-    .notEmpty()
-    .withMessage("Grade is required")
-    .isFloat({ min: 0 })
-    .withMessage("Grade must be a non-negative number"),
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("grade must be a non-negative integer"),
 
-  body("submission_date")
-    .notEmpty()
-    .withMessage("Submission date is required")
+  body("submissionDate")
+    .optional()
     .isISO8601()
-    .withMessage("Submission date must be a valid ISO 8601 date"),
+    .withMessage("submissionDate must be a valid ISO 8601 date"),
 ];

@@ -1,37 +1,29 @@
 import { check } from "express-validator";
 import prisma from "../lib/prisma.js";
-
 export default [
-  check("session_id")
-    .notEmpty()
-    .withMessage("Session ID is required")
-    .isInt({ gt: 0 })
-    .withMessage("Session ID must be a positive integer")
-    .bail()
-    .custom(async (value, { req }) => {
-      const session = await prisma.sessions.findUnique({
-        where: { id: Number(value) },
-      });
-      if (!session) {
-        throw new Error("Session ID does not exist");
-      }
-      return true;
-    }),
+  check("session_id").custom(async (value, { req }) => {
+    if (!value) {
+      throw new Error("Session ID is required");
+    }
+    const session = await prisma.sessions.findUnique({
+      where: { id: Number(value) },
+    });
+    if (!session) {
+      throw new Error("Session ID does not exist (Prisma)");
+    }
+    return true;
+  }),
 
-  check("title")
-    .notEmpty()
-    .withMessage("Title is required")
-    .isString()
-    .withMessage("Title must be a string"),
+  check("title").isString().notEmpty().withMessage("Title is required"),
 
   check("description")
-    .optional()
     .isString()
-    .withMessage("Description must be a string"),
+    .notEmpty()
+    .withMessage("Description is required"),
 
   check("full_mark")
-    .notEmpty()
-    .withMessage("Full mark is required")
     .isInt({ min: 1 })
-    .withMessage("Full mark must be a positive integer"),
+    .withMessage("Full mark must be a positive integer")
+    .notEmpty()
+    .withMessage("Full mark is required"),
 ];

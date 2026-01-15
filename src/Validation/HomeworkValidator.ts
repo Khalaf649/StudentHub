@@ -2,7 +2,7 @@ import { body } from "express-validator";
 import prisma from "../lib/prisma.js";
 
 export default [
-  body("session_id")
+  body("sessionId")
     .notEmpty()
     .withMessage("Session ID is required")
     .isInt({ gt: 0 })
@@ -26,7 +26,7 @@ export default [
     .isLength({ max: 255 })
     .withMessage("Title must be less than 255 characters"),
 
-  body("start_date")
+  body("startDate")
     .notEmpty()
     .withMessage("Start date is required")
     .isISO8601()
@@ -38,13 +38,13 @@ export default [
     .isString()
     .withMessage("Description must be a string"),
 
-  body("due_date")
+  body("dueDate")
     .notEmpty()
     .withMessage("Due date is required")
     .isISO8601()
     .withMessage("Invalid due date format (must be ISO8601)")
     .custom((value, { req }) => {
-      const start = new Date(req.body.start_date);
+      const start = new Date(req.body.startDate);
       const due = new Date(value);
       if (due <= start) {
         throw new Error("Due date must be after start date");
@@ -52,7 +52,7 @@ export default [
       return true;
     }),
 
-  body("full_mark")
+  body("fullMark")
     .notEmpty()
     .withMessage("Full mark is required")
     .isInt({ gt: 0 })

@@ -1,5 +1,4 @@
 import { body } from "express-validator";
-import prisma from "../lib/prisma.js";
 import { parent_role } from "../generated/client/enums.js";
 
 export default [
