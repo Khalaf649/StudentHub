@@ -6,8 +6,8 @@ import {
 } from "../Controllers/teacherSessionController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
-import SessionValidator from "../Validation/sessionValidator.ts";
-import validateStudentSession from "../Validation/studentSessionValidator.ts";
+import SessionValidator from "../validation/sessionValidator.ts";
+import validateStudentSession from "../validation/studentSessionValidator.ts";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();

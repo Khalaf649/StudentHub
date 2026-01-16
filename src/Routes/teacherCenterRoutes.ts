@@ -5,7 +5,7 @@ import {
 } from "../Controllers/teacherCenterController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
-import centerValidator from "../Validation/centerValidator.ts";
+import centerValidator from "../validation/centerValidator.ts";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();

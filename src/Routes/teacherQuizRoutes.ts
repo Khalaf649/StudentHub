@@ -6,8 +6,8 @@ import {
 } from "../Controllers/teacherQuizController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
-import QuizValidator from "../Validation/quizValidator.ts";
-import StudentQuizValidator from "../Validation/studentQuizValidator.ts";
+import QuizValidator from "../validation/quizValidator.ts";
+import StudentQuizValidator from "../validation/studentQuizValidator.ts";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();

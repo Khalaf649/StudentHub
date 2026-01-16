@@ -1,6 +1,6 @@
 import { Router } from "express";
-import loginValidation from "../Validation/loginValidator.ts";
-import StudentValidator from "../Validation/studentValidator.ts";
+import loginValidation from "../validation/loginValidator.ts";
+import StudentValidator from "../validation/studentValidator.ts";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 import { login, registerStudent } from "../Controllers/authController.ts";
 
