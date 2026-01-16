@@ -1,10 +1,10 @@
-import prisma from "../lib/prisma.js";
-import { IAuthService } from "./interfaces/auth.service.interface.js";
-import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../dtos/auth.dto.js";
+import prisma from "../lib/prisma.ts";
+import { IAuthService } from "./interfaces/auth.service.interface.ts";
+import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../dtos/auth.dto.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { user_role } from "../generated/client/enums.js";
-import { AppError } from "../AppError.js";
+import { user_role } from "../generated/client/enums.ts";
+import { AppError } from "../AppError.ts";
 
 const SALT_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET as string;

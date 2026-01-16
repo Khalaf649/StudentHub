@@ -1,7 +1,7 @@
 import {
   createStudentParentDTO,
   getStudentParentsDTO,
-} from "../../dtos/studentParent.dto.js";
+} from "../../dtos/studentParent.dto.ts";
 
 export interface IStudentParentService {
   createStudentParent(

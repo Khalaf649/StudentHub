@@ -1,10 +1,10 @@
 // services/studentParent.service.ts
-import { IStudentParentService } from "./interfaces/studentParent.service.interface.js";
-import prisma from "../lib/prisma.js";
+import { IStudentParentService } from "./interfaces/studentParent.service.interface.ts";
+import prisma from "../lib/prisma.ts";
 import {
   createStudentParentDTO,
   getStudentParentsDTO,
-} from "../dtos/studentParent.dto.js";
+} from "../dtos/studentParent.dto.ts";
 
 class StudentParentService implements IStudentParentService {
   async createStudentParent(

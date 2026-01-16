@@ -7,10 +7,10 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 // Routers
-import TeacherRouter from "./Routes/teacherRoutes.js";
-import AuthRouter from "./Routes/authRoutes.js";
-import StudentRouter from "./Routes/studentRoutes.js";
-import errorHandler from "./Middlewares/errorHandler.js";
+import TeacherRouter from "./Routes/teacherRoutes.ts";
+import AuthRouter from "./Routes/authRoutes.ts";
+import StudentRouter from "./Routes/studentRoutes.ts";
+import errorHandler from "./Middlewares/errorHandler.ts";
 
 const PORT = process.env.port || 3000;
 

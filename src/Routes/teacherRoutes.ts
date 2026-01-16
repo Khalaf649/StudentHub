@@ -1,9 +1,9 @@
 import { Router } from "express";
-import teacherCenterRoutes from "./teacherCenterRoutes.js";
-import teacherHomeworkRoutes from "./teacherHomeworkRoutes.js";
-import teacherQuizRoutes from "./teacherQuizRoutes.js";
-import teacherSessionRoutes from "./teacherSessionRoutes.js";
-import teacherStudentRoutes from "./teacherStudentRoutes.js";
+import teacherCenterRoutes from "./teacherCenterRoutes.ts";
+import teacherHomeworkRoutes from "./teacherHomeworkRoutes.ts";
+import teacherQuizRoutes from "./teacherQuizRoutes.ts";
+import teacherSessionRoutes from "./teacherSessionRoutes.ts";
+import teacherStudentRoutes from "./teacherStudentRoutes.ts";
 
 const router = Router();
 

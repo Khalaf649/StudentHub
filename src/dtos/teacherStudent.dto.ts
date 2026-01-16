@@ -1,4 +1,4 @@
-import { section, parent_role } from "../generated/client/enums.js";
+import { section, parent_role } from "../generated/client/enums.ts";
 export interface StudentFilters {
   id?: number;
   section?: section;

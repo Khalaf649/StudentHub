@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { parent_role } from "../generated/client/enums.js";
+import { parent_role } from "../generated/client/enums.ts";
 
 export default [
   body("name")

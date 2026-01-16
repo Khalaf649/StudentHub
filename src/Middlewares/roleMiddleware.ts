@@ -1,5 +1,5 @@
 import { Response, NextFunction } from "express";
-import { AuthRequest } from "../dtos/auth.dto.js";
+import { AuthRequest } from "../dtos/auth.dto.ts";
 export default function authorizeRole(role: string) {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
     if (req.user?.role === role && req.user?.id) {

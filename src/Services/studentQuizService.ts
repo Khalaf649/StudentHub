@@ -1,7 +1,7 @@
 // services/studentQuiz.service.ts
-import { IStudentQuizService } from "./interfaces/studentQuiz.service.interface.js";
-import { getStudentQuizDTO } from "../dtos/studentQuiz.dto.js";
-import prisma from "../lib/prisma.js";
+import { IStudentQuizService } from "./interfaces/studentQuiz.service.interface.ts";
+import { getStudentQuizDTO } from "../dtos/studentQuiz.dto.ts";
+import prisma from "../lib/prisma.ts";
 
 class StudentQuizService implements IStudentQuizService {
   async getStudentQuizzes(studentId: number): Promise<getStudentQuizDTO[]> {

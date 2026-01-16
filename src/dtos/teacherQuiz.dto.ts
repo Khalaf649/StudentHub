@@ -1,4 +1,4 @@
-import { section } from "../generated/client/enums.js";
+import { section } from "../generated/client/enums.ts";
 export interface CreateQuizDTO {
   session_id: number; // ID of the session the quiz is linked to
   title: string; // Title of the quiz

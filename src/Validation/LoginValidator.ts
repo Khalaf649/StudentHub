@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { user_role } from "../generated/client/enums.js";
+import { user_role } from "../generated/client/enums.ts";
 
 export default [
   body("email")

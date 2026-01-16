@@ -2,11 +2,11 @@ import { Router } from "express";
 import {
   createCenter,
   getCenters,
-} from "../Controllers/teacherCenterController.js";
-import authMiddleware from "../Middlewares/authMiddleware.js";
-import roleMiddleware from "../Middlewares/roleMiddleware.js";
-import centerValidator from "../Validation/centerValidator.js";
-import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
+} from "../Controllers/teacherCenterController.ts";
+import authMiddleware from "../Middlewares/authMiddleware.ts";
+import roleMiddleware from "../Middlewares/roleMiddleware.ts";
+import centerValidator from "../Validation/centerValidator.ts";
+import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();
 router.get("/", getCenters);

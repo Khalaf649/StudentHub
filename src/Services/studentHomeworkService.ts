@@ -1,6 +1,6 @@
-import { IStudentHomeworkService } from "./interfaces/studentHomework.service.interface.js";
-import prisma from "../lib/prisma.js";
-import { getStudentHomeworkDTO } from "../dtos/studnetHomework.dto.js";
+import { IStudentHomeworkService } from "./interfaces/studentHomework.service.interface.ts";
+import prisma from "../lib/prisma.ts";
+import { getStudentHomeworkDTO } from "../dtos/studnetHomework.dto.ts";
 class StudentHomeworkService implements IStudentHomeworkService {
   async getStudentHomework(
     studentId: number

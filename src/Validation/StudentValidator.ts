@@ -1,6 +1,6 @@
 import { check } from "express-validator";
-import prisma from "../lib/prisma.js";
-import { section } from "../generated/client/enums.js";
+import prisma from "../lib/prisma.ts";
+import { section } from "../generated/client/enums.ts";
 
 export default [
   check("name").isString().notEmpty().withMessage("Name is required"),

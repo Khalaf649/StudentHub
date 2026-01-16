@@ -1,6 +1,6 @@
 import { body } from "express-validator";
-import prisma from "../lib/prisma.js";
-import { attendance_status } from "../generated/client/enums.js";
+import prisma from "../lib/prisma.ts";
+import { attendance_status } from "../generated/client/enums.ts";
 
 export default [
   body("student_id")

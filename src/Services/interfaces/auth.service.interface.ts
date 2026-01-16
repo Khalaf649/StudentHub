@@ -1,4 +1,4 @@
-import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../../dtos/auth.dto.js";
+import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../../dtos/auth.dto.ts";
 
 export interface IAuthService {
   registerStudent(data: RegisterStudentDTO): Promise<void>;

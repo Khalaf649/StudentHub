@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-import { section } from "../generated/client/enums.js";
+import { section } from "../generated/client/enums.ts";
 export default [
   check("description")
     .isString()

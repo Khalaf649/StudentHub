@@ -1,4 +1,4 @@
-import { attendance_status, section } from "../generated/client/enums.js";
+import { attendance_status, section } from "../generated/client/enums.ts";
 export interface getStudentSessionsDTO {
   id: number;
   status: attendance_status;

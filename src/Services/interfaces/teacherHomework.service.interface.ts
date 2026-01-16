@@ -3,7 +3,7 @@ import {
   AssignHomeworkDTO,
   HomeworkFilters,
   HomeworkDTO,
-} from "../../dtos/teacherHomework.dto.js";
+} from "../../dtos/teacherHomework.dto.ts";
 
 export interface ITeacherHomeworkService {
   createHomework(data: CreateHomeworkDTO): Promise<void>;

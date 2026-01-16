@@ -1,4 +1,4 @@
-import { getStudentInfoDTO } from "../../dtos/studentInfo.dto.js";
+import { getStudentInfoDTO } from "../../dtos/studentInfo.dto.ts";
 
 export interface IStudentInfoService {
   getStudentInfo(studentId: number): Promise<getStudentInfoDTO>;

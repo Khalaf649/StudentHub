@@ -9,10 +9,10 @@ import {
   getStudentParents,
   getStudentInfo,
 } from "../Controllers/studentController.js";
-import authMiddleware from "../Middlewares/authMiddleware.js";
-import roleMiddleware from "../Middlewares/roleMiddleware.js";
-import parentValidator from "../Validation/parentValidator.js";
-import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
+import authMiddleware from "../Middlewares/authMiddleware.ts";
+import roleMiddleware from "../Middlewares/roleMiddleware.ts";
+import parentValidator from "../Validation/parentValidator.ts";
+import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();
 

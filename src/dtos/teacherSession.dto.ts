@@ -1,4 +1,4 @@
-import { section, attendance_status } from "../generated/client/enums.js";
+import { section, attendance_status } from "../generated/client/enums.ts";
 export interface createSessionDTO {
   title: string;
   description: string;

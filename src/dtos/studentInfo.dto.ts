@@ -1,4 +1,4 @@
-import { section } from "../generated/client/enums.js";
+import { section } from "../generated/client/enums.ts";
 export interface getStudentInfoDTO {
   id: number;
   name: string;

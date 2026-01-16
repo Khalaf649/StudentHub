@@ -1,6 +1,6 @@
-import { ITeacherCenterService } from "./interfaces/teacherCenter.service.interface.js";
-import { CreateCenterDTO, getCenterDTO } from "../dtos/teacherCenter.dto.js";
-import prisma from "../lib/prisma.js";
+import { ITeacherCenterService } from "./interfaces/teacherCenter.service.interface.ts";
+import { CreateCenterDTO, getCenterDTO } from "../dtos/teacherCenter.dto.ts";
+import prisma from "../lib/prisma.ts";
 
 class TeacherCenterService implements ITeacherCenterService {
   async createCenter(data: CreateCenterDTO): Promise<void> {

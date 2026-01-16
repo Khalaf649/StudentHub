@@ -1,6 +1,6 @@
-import prisma from "../lib/prisma.js";
-import { IStudentSessionService } from "./interfaces/studentSession.service.interface.js";
-import { getStudentSessionsDTO } from "../dtos/studentSession.dto.js";
+import prisma from "../lib/prisma.ts";
+import { IStudentSessionService } from "./interfaces/studentSession.service.interface.ts";
+import { getStudentSessionsDTO } from "../dtos/studentSession.dto.ts";
 
 class StudentSessionService implements IStudentSessionService {
   async getStudentSessions(

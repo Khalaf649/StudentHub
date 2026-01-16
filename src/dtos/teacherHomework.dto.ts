@@ -1,4 +1,4 @@
-import { section } from "../generated/client/enums.js";
+import { section } from "../generated/client/enums.ts";
 export interface CreateHomeworkDTO {
   session_id: number; // ID of the session the homework is linked to
   title: string; // Homework title

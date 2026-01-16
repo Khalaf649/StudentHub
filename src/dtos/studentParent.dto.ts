@@ -1,4 +1,4 @@
-import { parent_role } from "../generated/client/enums.js";
+import { parent_role } from "../generated/client/enums.ts";
 export interface createStudentParentDTO {
   name: string;
   phone: string;

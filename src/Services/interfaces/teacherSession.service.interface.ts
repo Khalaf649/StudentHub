@@ -3,7 +3,7 @@ import {
   getSessionDTO,
   SessionFilters,
   assignSessionDTO,
-} from "../../dtos/teacherSession.dto.js";
+} from "../../dtos/teacherSession.dto.ts";
 export interface ITeacherSessionService {
   createSession(data: createSessionDTO): Promise<void>;
   getSessions(filters?: SessionFilters): Promise<getSessionDTO[]>;

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { IAuthService } from "../Services/interfaces/auth.service.interface.js";
-import { RegisterStudentDTO, LoginDTO } from "../dtos/auth.dto.js";
-import AuthService from "../Services/authService.js";
+import { IAuthService } from "../Services/interfaces/auth.service.interface.ts";
+import { RegisterStudentDTO, LoginDTO } from "../dtos/auth.dto.ts";
+import AuthService from "../Services/authService.ts";
 
 class AuthController {
   constructor(private readonly authService: IAuthService) {}

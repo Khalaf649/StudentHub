@@ -1,11 +1,11 @@
-import prisma from "../lib/prisma.js";
-import { ITeacherSessionService } from "./interfaces/teacherSession.service.interface.js";
+import prisma from "../lib/prisma.ts";
+import { ITeacherSessionService } from "./interfaces/teacherSession.service.interface.ts";
 import {
   assignSessionDTO,
   createSessionDTO,
   getSessionDTO,
   SessionFilters,
-} from "../dtos/teacherSession.dto.js";
+} from "../dtos/teacherSession.dto.ts";
 
 class TeacherSessionService implements ITeacherSessionService {
   async createSession(data: createSessionDTO): Promise<void> {

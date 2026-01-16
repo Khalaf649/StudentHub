@@ -1,7 +1,7 @@
-import { IStudentInfoService } from "./interfaces/studentInfo.service.interface.js";
-import { getStudentInfoDTO } from "../dtos/studentInfo.dto.js";
-import { AppError } from "../AppError.js";
-import prisma from "../lib/prisma.js";
+import { IStudentInfoService } from "./interfaces/studentInfo.service.interface.ts";
+import { getStudentInfoDTO } from "../dtos/studentInfo.dto.ts";
+import { AppError } from "../AppError.ts";
+import prisma from "../lib/prisma.ts";
 
 class StudentInfoService implements IStudentInfoService {
   async getStudentInfo(studentId: number): Promise<getStudentInfoDTO> {

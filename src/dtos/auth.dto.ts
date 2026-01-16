@@ -1,4 +1,4 @@
-import { user_role, section } from "../generated/client/enums.js";
+import { user_role, section } from "../generated/client/enums.ts";
 import { Request } from "express";
 
 export interface RegisterStudentDTO {

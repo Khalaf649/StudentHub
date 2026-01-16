@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-import prisma from "../lib/prisma.js";
+import prisma from "../lib/prisma.ts";
 export default [
   check("session_id").custom(async (value, { req }) => {
     if (!value) {

@@ -3,12 +3,12 @@ import {
   createSession,
   assignSession,
   getSessions,
-} from "../Controllers/teacherSessionController.js";
-import authMiddleware from "../Middlewares/authMiddleware.js";
-import roleMiddleware from "../Middlewares/roleMiddleware.js";
-import SessionValidator from "../Validation/sessionValidator.js";
-import validateStudentSession from "../Validation/studentSessionValidator.js";
-import { validationMiddleware } from "../Middlewares/validationMiddleware.js";
+} from "../Controllers/teacherSessionController.ts";
+import authMiddleware from "../Middlewares/authMiddleware.ts";
+import roleMiddleware from "../Middlewares/roleMiddleware.ts";
+import SessionValidator from "../Validation/sessionValidator.ts";
+import validateStudentSession from "../Validation/studentSessionValidator.ts";
+import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();
 

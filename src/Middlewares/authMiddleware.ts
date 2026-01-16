@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { AuthRequest, TokenDTO } from "../dtos/auth.dto.js";
+import { AuthRequest, TokenDTO } from "../dtos/auth.dto.ts";
 const JWT_SECRET = process.env.JWT_SECRET as string;
 // Middleware to authenticate and differentiate roles
 export default (req: AuthRequest, res: Response, next: NextFunction): void => {
