@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 import prisma from "../lib/prisma.ts";
 
-export default [
+export const sessionValidator = [
   body("title")
     .notEmpty()
     .withMessage("Title is required")
@@ -48,6 +48,6 @@ export default [
     .withMessage("Session datetime is required")
     .isISO8601()
     .withMessage(
-      "Invalid date format, must be ISO8601 (e.g. 2025-08-27T15:00:00Z)"
+      "Invalid date format, must be ISO8601 (e.g. 2025-08-27T15:00:00Z)",
     ),
 ];

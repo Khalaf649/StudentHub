@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 import prisma from "../lib/prisma.ts";
 
-export default [
+export const homeworkValidator = [
   body("sessionId")
     .notEmpty()
     .withMessage("Session ID is required")

@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 import { parent_role } from "../generated/client/enums.ts";
 
-export default [
+export const parentValidator = [
   body("name")
     .trim()
     .notEmpty()
@@ -23,6 +23,6 @@ export default [
     .withMessage("Relationship is required")
     .isIn(Object.values(parent_role))
     .withMessage(
-      `Relationship must be one of: ${Object.values(parent_role).join(", ")}`
+      `Relationship must be one of: ${Object.values(parent_role).join(", ")}`,
     ),
 ];
