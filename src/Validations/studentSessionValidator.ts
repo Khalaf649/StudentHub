@@ -2,7 +2,7 @@ import { body } from "express-validator";
 import prisma from "../lib/prisma.ts";
 import { attendance_status } from "../generated/client/enums.ts";
 
-export default [
+export const studentSessionValidator = [
   body("student_id")
     .notEmpty()
     .withMessage("Student ID is required")
@@ -38,6 +38,6 @@ export default [
     .withMessage("Status is required")
     .isIn(Object.values(attendance_status))
     .withMessage(
-      `Status must be one of: ${Object.values(attendance_status).join(", ")}`
+      `Status must be one of: ${Object.values(attendance_status).join(", ")}`,
     ),
 ];

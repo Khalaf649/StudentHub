@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-export default [
+export const centerValidator = [
   body("name")
     .isString()
     .isLength({ min: 3 })

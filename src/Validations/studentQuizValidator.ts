@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 import prisma from "../lib/prisma.ts";
 
-export default [
+export const studentQuizValidator = [
   body("student_id")
     .notEmpty()
     .withMessage("Student ID is required")

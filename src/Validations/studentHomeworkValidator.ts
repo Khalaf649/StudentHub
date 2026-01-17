@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 import prisma from "../lib/prisma.ts";
 
-export default [
+export const studentHomeworkValidator = [
   body("studentId")
     .isInt({ gt: 0 })
     .withMessage("studentId must be a positive integer")

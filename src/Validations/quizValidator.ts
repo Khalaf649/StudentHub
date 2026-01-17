@@ -1,6 +1,6 @@
 import { check } from "express-validator";
 import prisma from "../lib/prisma.ts";
-export default [
+export const quizValidator = [
   check("session_id").custom(async (value, { req }) => {
     if (!value) {
       throw new Error("Session ID is required");
