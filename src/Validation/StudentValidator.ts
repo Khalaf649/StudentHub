@@ -2,7 +2,7 @@ import { check } from "express-validator";
 import prisma from "../lib/prisma.ts";
 import { section } from "../generated/client/enums.ts";
 
-export default [
+export const studentValidator = [
   check("name").isString().notEmpty().withMessage("Name is required"),
 
   check("phone")
@@ -42,7 +42,7 @@ export default [
   check("section")
     .isIn(Object.values(section))
     .withMessage(
-      `Section must be one of: ${Object.values(section).join(", ")}`
+      `Section must be one of: ${Object.values(section).join(", ")}`,
     ),
 
   check("center_id")

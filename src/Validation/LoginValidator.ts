@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 import { user_role } from "../generated/client/enums.ts";
 
-export default [
+export const loginValidator = [
   body("email")
     .isEmail()
     .withMessage("Email must be a valid email address")
