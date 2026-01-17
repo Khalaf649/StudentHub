@@ -11,7 +11,7 @@ import {
 } from "../Controllers/studentController.js";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
-import parentValidator from "../validation/parentValidator.ts";
+// import parentValidator from "../validation/parentValidator.ts";
 import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();
@@ -21,12 +21,7 @@ router.use(authMiddleware, roleMiddleware("student"));
 
 router.get("/sessions", getStudentSessions);
 router.get("/homeworks", getStudentHomeworks);
-router.post(
-  "/parents",
-  parentValidator,
-  validationMiddleware,
-  createStudentParent
-);
+router.post("/parents", validationMiddleware, createStudentParent);
 
 router.get("/quizzes", getStudentQuizzes);
 router.get("/parents", getStudentParents);
