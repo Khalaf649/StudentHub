@@ -8,12 +8,16 @@ export interface createSessionDTO {
 }
 export interface getSessionDTO {
   id: number;
+  title: string;
   description: string;
   section: section;
   session_datetime: Date;
   centers: {
     id: number;
     name: string;
+  };
+  _count: {
+    attendances: number;
   };
 }
 export interface SessionFilters {

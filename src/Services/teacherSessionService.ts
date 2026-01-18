@@ -6,6 +6,7 @@ import {
   getSessionDTO,
   SessionFilters,
 } from "../dtos/teacherSession.dto.ts";
+import { attendance_status } from "../generated/client/enums.ts";
 
 class TeacherSessionService implements ITeacherSessionService {
   async createSession(data: createSessionDTO): Promise<void> {
@@ -40,6 +41,15 @@ class TeacherSessionService implements ITeacherSessionService {
           select: {
             id: true,
             name: true,
+          },
+        },
+        _count: {
+          select: {
+            attendances: {
+              where: {
+                status: attendance_status.present,
+              },
+            },
           },
         },
       },
