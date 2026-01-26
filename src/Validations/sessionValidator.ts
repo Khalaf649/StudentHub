@@ -16,7 +16,7 @@ export const sessionValidator = [
     .isString()
     .withMessage("Description must be a string"),
 
-  body("centerId")
+  body("center_id")
     .notEmpty()
     .withMessage("Center ID is required")
     .isInt({ gt: 0 })
@@ -43,7 +43,7 @@ export const sessionValidator = [
     ])
     .withMessage("Invalid section"),
 
-  body("sessionDatetime")
+  body("session_datetime")
     .notEmpty()
     .withMessage("Session datetime is required")
     .isISO8601()
