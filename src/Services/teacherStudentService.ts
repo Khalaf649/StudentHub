@@ -2,14 +2,22 @@ import { ITeacherStudentService } from "./interfaces/teacherStudnet.service.inte
 import { StudentFilters, StudentDTO } from "../dtos/teacherStudent.dto.ts";
 import { attendance_status } from "../generated/client/enums.ts";
 import prisma from "../lib/prisma.ts";
+const ITEMS_PER_PAGE = parseInt(process.env.ITEMS_PER_PAGE || "10", 10);
 
 class TeacherStudentService implements ITeacherStudentService {
   async getStudents(filters: StudentFilters): Promise<StudentDTO[]> {
     const where: any = {};
     // Existing filters
-    where.id = filters.id || undefined;
     where.section = filters.section || undefined;
     where.center_id = filters.center_id || undefined;
+    where.name = filters.name || undefined;
+
+    if (filters.name) {
+      where.name = {
+        startsWith: filters.name,
+        mode: "insensitive",
+      };
+    }
 
     if (filters.session_id) {
       where.attendances = {
@@ -24,7 +32,6 @@ class TeacherStudentService implements ITeacherStudentService {
       where.homework_submissions = {
         some: {
           homework_id: filters.homework_id,
-          submission_date: { not: null },
         },
       };
     }
@@ -36,9 +43,14 @@ class TeacherStudentService implements ITeacherStudentService {
         },
       };
     }
-
+    const skip = (filters.page - 1) * ITEMS_PER_PAGE;
     const students: StudentDTO[] = await prisma.students.findMany({
       where,
+      skip,
+      take: ITEMS_PER_PAGE,
+      orderBy: {
+        name: "asc",
+      },
       select: {
         id: true,
         name: true,

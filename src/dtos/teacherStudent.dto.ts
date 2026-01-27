@@ -1,6 +1,7 @@
 import { section, parent_role } from "../generated/client/enums.ts";
 export interface StudentFilters {
-  id?: number;
+  name?: string;
+  page: number;
   section?: section;
   center_id?: number;
   session_id?: number;
