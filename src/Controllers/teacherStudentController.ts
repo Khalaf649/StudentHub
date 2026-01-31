@@ -8,7 +8,7 @@ class TeacherStudentController {
   constructor(private readonly teacherStudentService: ITeacherStudentService) {}
 
   async getStudents(req: AuthRequest, res: Response, next: NextFunction) {
-    const filters: StudentFilters = req.query;
+    const filters: any = req.query;
     try {
       const students: StudentDTO[] =
         await this.teacherStudentService.getStudents(filters);
@@ -21,11 +21,11 @@ class TeacherStudentController {
 
 const teacherStudentService = new TeacherStudentService();
 const teacherStudentController = new TeacherStudentController(
-  teacherStudentService
+  teacherStudentService,
 );
 
 export const getStudents = teacherStudentController.getStudents.bind(
-  teacherStudentController
+  teacherStudentController,
 );
 
 export default TeacherStudentController;

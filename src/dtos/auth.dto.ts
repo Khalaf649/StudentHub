@@ -9,6 +9,15 @@ export interface RegisterStudentDTO {
   section: section;
   center_id: number;
 }
+export interface LoginResponsetDTO {
+  token: string;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    role: user_role;
+  };
+}
 export interface LoginDTO {
   email: string;
   password: string;

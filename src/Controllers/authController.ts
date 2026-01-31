@@ -19,8 +19,8 @@ class AuthController {
   async login(req: Request, res: Response, next: NextFunction) {
     const requestBody: LoginDTO = req.body;
     try {
-      const token = await this.authService.login(requestBody);
-      res.status(200).json({ token });
+      const loginResponse = await this.authService.login(requestBody);
+      res.status(200).json(loginResponse);
     } catch (err) {
       next(err);
     }

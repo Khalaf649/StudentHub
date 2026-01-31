@@ -1,6 +1,11 @@
 import prisma from "../lib/prisma.ts";
 import { IAuthService } from "./interfaces/auth.service.interface.ts";
-import { RegisterStudentDTO, LoginDTO, TokenDTO } from "../dtos/auth.dto.ts";
+import {
+  RegisterStudentDTO,
+  LoginDTO,
+  TokenDTO,
+  LoginResponsetDTO,
+} from "../dtos/auth.dto.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { user_role } from "../generated/client/enums.ts";
@@ -31,14 +36,16 @@ class AuthService implements IAuthService {
     });
   }
 
-  async login(data: LoginDTO): Promise<string> {
+  async login(data: LoginDTO): Promise<LoginResponsetDTO> {
     const { email, password, role } = data;
 
     const model = roleModelMap[role as user_role];
     if (!model) throw new AppError("Invalid role", 400);
+
     const user = await model.findUnique({
       where: { email },
     });
+
     if (!user) throw new AppError("User not found", 404);
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -46,12 +53,23 @@ class AuthService implements IAuthService {
       throw new AppError("Invalid Credentials", 401);
     }
 
-    const tokenPayload: TokenDTO = { id: user.id, role: role };
+    const tokenPayload: TokenDTO = { id: user.id, role };
+
     const token = jwt.sign(tokenPayload, JWT_SECRET, {
       expiresIn: JWT_EXPIRES_IN,
     });
 
-    return token;
+    const loginResponse: LoginResponsetDTO = {
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role,
+      },
+    };
+
+    return loginResponse;
   }
 }
 
