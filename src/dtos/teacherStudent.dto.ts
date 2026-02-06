@@ -1,12 +1,40 @@
-import { section, parent_role } from "../generated/client/enums.ts";
+import {
+  section,
+  parent_role,
+  attendance_status,
+} from "../generated/client/enums.ts";
 export interface StudentFilters {
   name?: string;
-  page: number;
+  page?: number;
   section?: section;
   center_id?: number;
   session_id?: number;
   homework_id?: number;
   quiz_id?: number;
+}
+export interface StudentWhereInput {
+  section?: section;
+  center_id?: number;
+  name?: {
+    startsWith: string;
+    mode: "insensitive";
+  };
+  attendances?: {
+    some: {
+      session_id: number;
+      status: attendance_status;
+    };
+  };
+  homework_submissions?: {
+    some: {
+      homework_id: number;
+    };
+  };
+  student_quizzes?: {
+    some: {
+      quiz_id: number;
+    };
+  };
 }
 export interface StudentDTO {
   id: number;

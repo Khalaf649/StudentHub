@@ -9,7 +9,7 @@ import {
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { user_role } from "../generated/client/enums.ts";
-import { AppError } from "../AppError.ts";
+import { AppError } from "../errors/AppError.ts";
 
 const SALT_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET as string;

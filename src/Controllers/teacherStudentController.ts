@@ -8,8 +8,8 @@ class TeacherStudentController {
   constructor(private readonly teacherStudentService: ITeacherStudentService) {}
 
   async getStudents(req: AuthRequest, res: Response, next: NextFunction) {
-    const filters: any = req.query;
     try {
+      const filters: StudentFilters = req.query;
       const students: StudentDTO[] =
         await this.teacherStudentService.getStudents(filters);
       res.status(200).json(students);

@@ -1,6 +1,6 @@
 import { IStudentInfoService } from "./interfaces/studentInfo.service.interface.ts";
 import { getStudentInfoDTO } from "../dtos/studentInfo.dto.ts";
-import { AppError } from "../AppError.ts";
+import { AppError } from "../errors/AppError.ts";
 import prisma from "../lib/prisma.ts";
 
 class StudentInfoService implements IStudentInfoService {

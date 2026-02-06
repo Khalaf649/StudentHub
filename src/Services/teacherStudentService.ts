@@ -1,16 +1,19 @@
 import { ITeacherStudentService } from "./interfaces/teacherStudnet.service.interface.ts";
-import { StudentFilters, StudentDTO } from "../dtos/teacherStudent.dto.ts";
+import {
+  StudentFilters,
+  StudentDTO,
+  StudentWhereInput,
+} from "../dtos/teacherStudent.dto.ts";
 import { attendance_status } from "../generated/client/enums.ts";
 import prisma from "../lib/prisma.ts";
 const ITEMS_PER_PAGE = parseInt(process.env.ITEMS_PER_PAGE || "10", 10);
 
 class TeacherStudentService implements ITeacherStudentService {
   async getStudents(filters: StudentFilters): Promise<StudentDTO[]> {
-    const where: any = {};
+    const where: StudentWhereInput = {};
     // Existing filters
     where.section = filters.section || undefined;
-    where.center_id = filters.center_id || undefined;
-    where.name = filters.name || undefined;
+    where.center_id = Number(filters.center_id) || undefined;
 
     if (filters.name) {
       where.name = {
@@ -43,7 +46,9 @@ class TeacherStudentService implements ITeacherStudentService {
         },
       };
     }
-    const skip = (filters.page - 1) * ITEMS_PER_PAGE;
+    const skip =
+      (filters.page && filters.page > 0 ? filters.page - 1 : 0) *
+      ITEMS_PER_PAGE;
     const students: StudentDTO[] = await prisma.students.findMany({
       where,
       skip,
