@@ -8,6 +8,7 @@ import {
   getSessionDTO,
 } from "../dtos/teacherSession.dto.ts";
 import TeacherSessionService from "../Services/teacherSessionService.ts";
+import { AppError } from "../errors/AppError.ts";
 
 class TeacherSessionController {
   constructor(private readonly teacherSessionService: ITeacherSessionService) {}
@@ -46,6 +47,9 @@ class TeacherSessionController {
     const requestBody: createSessionDTO = req.body;
     const id: number = parseInt(req.params.id);
     try {
+      if (isNaN(id)) {
+        throw new AppError("Invalid session ID", 400);
+      }
       await this.teacherSessionService.updateSession(requestBody, id);
       res.status(200).json({ message: "Session updated successfully" });
     } catch (err) {
