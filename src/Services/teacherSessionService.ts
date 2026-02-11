@@ -67,6 +67,19 @@ class TeacherSessionService implements ITeacherSessionService {
       },
     });
   }
+  async updateSession(data: createSessionDTO, id: number): Promise<void> {
+    const { title, description, center_id, section, session_datetime } = data;
+    await prisma.sessions.update({
+      where: { id },
+      data: {
+        title,
+        description,
+        center_id,
+        section,
+        session_datetime,
+      },
+    });
+  }
 }
 
 export default TeacherSessionService;

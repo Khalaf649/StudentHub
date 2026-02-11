@@ -3,6 +3,7 @@ import {
   createSession,
   assignSession,
   getSessions,
+  updateSession,
 } from "../Controllers/teacherSessionController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
@@ -24,5 +25,6 @@ router.post(
   assignSession,
 );
 router.get("/", getSessions);
+router.put("/:id", sessionValidator, validationMiddleware, updateSession);
 
 export default router;

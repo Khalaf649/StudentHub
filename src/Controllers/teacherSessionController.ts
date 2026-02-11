@@ -42,21 +42,34 @@ class TeacherSessionController {
       next(err);
     }
   }
+  async updateSession(req: AuthRequest, res: Response, next: NextFunction) {
+    const requestBody: createSessionDTO = req.body;
+    const id: number = parseInt(req.params.id);
+    try {
+      await this.teacherSessionService.updateSession(requestBody, id);
+      res.status(200).json({ message: "Session updated successfully" });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 const teacherSessionService = new TeacherSessionService();
 const teacherSessionController = new TeacherSessionController(
-  teacherSessionService
+  teacherSessionService,
 );
 
 export const createSession = teacherSessionController.createSession.bind(
-  teacherSessionController
+  teacherSessionController,
 );
 export const assignSession = teacherSessionController.assignSession.bind(
-  teacherSessionController
+  teacherSessionController,
 );
 export const getSessions = teacherSessionController.getSessions.bind(
-  teacherSessionController
+  teacherSessionController,
+);
+export const updateSession = teacherSessionController.updateSession.bind(
+  teacherSessionController,
 );
 
 export default TeacherSessionController;
