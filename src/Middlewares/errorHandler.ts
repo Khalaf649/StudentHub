@@ -7,7 +7,7 @@ export default function errorHandler(
   req: Request,
   res: Response,
   next: NextFunction,
-) {
+): void {
   try {
     // map Prisma errors to AppError
     mapPrismaError(err);
@@ -16,12 +16,10 @@ export default function errorHandler(
   }
 
   if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
+    res.status(err.statusCode).json({
       message: err.message,
     });
   }
-
-  console.error(err);
 
   res.status(500).json({
     message: "Internal Server Error",

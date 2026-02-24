@@ -32,11 +32,11 @@ async function startServer() {
   // router/service/controller logic.  The spec itself is generated via
   // a separate script (see package.json).
   setupSwagger(app);
+  app.use(errorHandler);
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
-  app.use(errorHandler);
 }
 
 startServer();
