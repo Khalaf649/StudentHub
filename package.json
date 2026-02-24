@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "generate": "prisma generate",
+    "swagger:generate": "ts-node src/swagger/generate.ts",
     "start": "node dist/app.js",
     "dev": "nodemon --exec tsx src/app.ts"
   },
