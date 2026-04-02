@@ -4,6 +4,11 @@ import {
   assignQuiz,
   getQuizzes,
 } from "../Controllers/teacherQuizController.ts";
+import {
+  updateQuiz,
+  deleteQuiz,
+  gradeQuizAssignment,
+} from "../Controllers/teacherExtendedController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
 import { quizValidator } from "../Validations/quizValidator.ts";
@@ -18,5 +23,8 @@ router.use(authMiddleware, roleMiddleware("teacher"));
 router.post("/", quizValidator, validationMiddleware, createQuiz);
 router.post("/assign", studentQuizValidator, validationMiddleware, assignQuiz);
 router.get("/", getQuizzes);
+router.put("/:id", updateQuiz);
+router.delete("/:id", deleteQuiz);
+router.post("/:id/grade", gradeQuizAssignment);
 
 export default router;

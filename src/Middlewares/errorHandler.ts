@@ -19,6 +19,7 @@ export default function errorHandler(
     res.status(err.statusCode).json({
       message: err.message,
     });
+    return;
   }
 
   res.status(500).json({

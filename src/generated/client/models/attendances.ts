@@ -43,6 +43,8 @@ export type AttendancesMinAggregateOutputType = {
   student_id: number | null
   session_id: number | null
   status: $Enums.attendance_status | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AttendancesMaxAggregateOutputType = {
@@ -50,6 +52,8 @@ export type AttendancesMaxAggregateOutputType = {
   student_id: number | null
   session_id: number | null
   status: $Enums.attendance_status | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type AttendancesCountAggregateOutputType = {
@@ -57,6 +61,8 @@ export type AttendancesCountAggregateOutputType = {
   student_id: number
   session_id: number
   status: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -78,6 +84,8 @@ export type AttendancesMinAggregateInputType = {
   student_id?: true
   session_id?: true
   status?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AttendancesMaxAggregateInputType = {
@@ -85,6 +93,8 @@ export type AttendancesMaxAggregateInputType = {
   student_id?: true
   session_id?: true
   status?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type AttendancesCountAggregateInputType = {
@@ -92,6 +102,8 @@ export type AttendancesCountAggregateInputType = {
   student_id?: true
   session_id?: true
   status?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -186,6 +198,8 @@ export type AttendancesGroupByOutputType = {
   student_id: number
   session_id: number
   status: $Enums.attendance_status
+  createdAt: Date
+  updatedAt: Date
   _count: AttendancesCountAggregateOutputType | null
   _avg: AttendancesAvgAggregateOutputType | null
   _sum: AttendancesSumAggregateOutputType | null
@@ -216,6 +230,8 @@ export type attendancesWhereInput = {
   student_id?: Prisma.IntFilter<"attendances"> | number
   session_id?: Prisma.IntFilter<"attendances"> | number
   status?: Prisma.Enumattendance_statusFilter<"attendances"> | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFilter<"attendances"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"attendances"> | Date | string
   sessions?: Prisma.XOR<Prisma.SessionsScalarRelationFilter, Prisma.sessionsWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }
@@ -225,6 +241,8 @@ export type attendancesOrderByWithRelationInput = {
   student_id?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   sessions?: Prisma.sessionsOrderByWithRelationInput
   students?: Prisma.studentsOrderByWithRelationInput
 }
@@ -238,6 +256,8 @@ export type attendancesWhereUniqueInput = Prisma.AtLeast<{
   student_id?: Prisma.IntFilter<"attendances"> | number
   session_id?: Prisma.IntFilter<"attendances"> | number
   status?: Prisma.Enumattendance_statusFilter<"attendances"> | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFilter<"attendances"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"attendances"> | Date | string
   sessions?: Prisma.XOR<Prisma.SessionsScalarRelationFilter, Prisma.sessionsWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }, "id" | "student_id_session_id">
@@ -247,6 +267,8 @@ export type attendancesOrderByWithAggregationInput = {
   student_id?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.attendancesCountOrderByAggregateInput
   _avg?: Prisma.attendancesAvgOrderByAggregateInput
   _max?: Prisma.attendancesMaxOrderByAggregateInput
@@ -262,10 +284,14 @@ export type attendancesScalarWhereWithAggregatesInput = {
   student_id?: Prisma.IntWithAggregatesFilter<"attendances"> | number
   session_id?: Prisma.IntWithAggregatesFilter<"attendances"> | number
   status?: Prisma.Enumattendance_statusWithAggregatesFilter<"attendances"> | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"attendances"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"attendances"> | Date | string
 }
 
 export type attendancesCreateInput = {
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
   sessions: Prisma.sessionsCreateNestedOneWithoutAttendancesInput
   students: Prisma.studentsCreateNestedOneWithoutAttendancesInput
 }
@@ -275,10 +301,14 @@ export type attendancesUncheckedCreateInput = {
   student_id: number
   session_id: number
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type attendancesUpdateInput = {
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.sessionsUpdateOneRequiredWithoutAttendancesNestedInput
   students?: Prisma.studentsUpdateOneRequiredWithoutAttendancesNestedInput
 }
@@ -288,6 +318,8 @@ export type attendancesUncheckedUpdateInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   session_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type attendancesCreateManyInput = {
@@ -295,10 +327,14 @@ export type attendancesCreateManyInput = {
   student_id: number
   session_id: number
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type attendancesUpdateManyMutationInput = {
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type attendancesUncheckedUpdateManyInput = {
@@ -306,6 +342,8 @@ export type attendancesUncheckedUpdateManyInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   session_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type AttendancesListRelationFilter = {
@@ -328,6 +366,8 @@ export type attendancesCountOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type attendancesAvgOrderByAggregateInput = {
@@ -341,6 +381,8 @@ export type attendancesMaxOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type attendancesMinOrderByAggregateInput = {
@@ -348,6 +390,8 @@ export type attendancesMinOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type attendancesSumOrderByAggregateInput = {
@@ -446,6 +490,8 @@ export type Enumattendance_statusFieldUpdateOperationsInput = {
 
 export type attendancesCreateWithoutSessionsInput = {
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
   students: Prisma.studentsCreateNestedOneWithoutAttendancesInput
 }
 
@@ -453,6 +499,8 @@ export type attendancesUncheckedCreateWithoutSessionsInput = {
   id?: number
   student_id: number
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type attendancesCreateOrConnectWithoutSessionsInput = {
@@ -489,10 +537,14 @@ export type attendancesScalarWhereInput = {
   student_id?: Prisma.IntFilter<"attendances"> | number
   session_id?: Prisma.IntFilter<"attendances"> | number
   status?: Prisma.Enumattendance_statusFilter<"attendances"> | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFilter<"attendances"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"attendances"> | Date | string
 }
 
 export type attendancesCreateWithoutStudentsInput = {
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
   sessions: Prisma.sessionsCreateNestedOneWithoutAttendancesInput
 }
 
@@ -500,6 +552,8 @@ export type attendancesUncheckedCreateWithoutStudentsInput = {
   id?: number
   session_id: number
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type attendancesCreateOrConnectWithoutStudentsInput = {
@@ -532,10 +586,14 @@ export type attendancesCreateManySessionsInput = {
   id?: number
   student_id: number
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type attendancesUpdateWithoutSessionsInput = {
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.studentsUpdateOneRequiredWithoutAttendancesNestedInput
 }
 
@@ -543,22 +601,30 @@ export type attendancesUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type attendancesUncheckedUpdateManyWithoutSessionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type attendancesCreateManyStudentsInput = {
   id?: number
   session_id: number
   status?: $Enums.attendance_status
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type attendancesUpdateWithoutStudentsInput = {
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.sessionsUpdateOneRequiredWithoutAttendancesNestedInput
 }
 
@@ -566,12 +632,16 @@ export type attendancesUncheckedUpdateWithoutStudentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   session_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type attendancesUncheckedUpdateManyWithoutStudentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   session_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.Enumattendance_statusFieldUpdateOperationsInput | $Enums.attendance_status
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -581,6 +651,8 @@ export type attendancesSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   student_id?: boolean
   session_id?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attendances"]>
@@ -590,6 +662,8 @@ export type attendancesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   student_id?: boolean
   session_id?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attendances"]>
@@ -599,6 +673,8 @@ export type attendancesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   student_id?: boolean
   session_id?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attendances"]>
@@ -608,9 +684,11 @@ export type attendancesSelectScalar = {
   student_id?: boolean
   session_id?: boolean
   status?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type attendancesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "student_id" | "session_id" | "status", ExtArgs["result"]["attendances"]>
+export type attendancesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "student_id" | "session_id" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["attendances"]>
 export type attendancesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
@@ -635,6 +713,8 @@ export type $attendancesPayload<ExtArgs extends runtime.Types.Extensions.Interna
     student_id: number
     session_id: number
     status: $Enums.attendance_status
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["attendances"]>
   composites: {}
 }
@@ -1064,6 +1144,8 @@ export interface attendancesFieldRefs {
   readonly student_id: Prisma.FieldRef<"attendances", 'Int'>
   readonly session_id: Prisma.FieldRef<"attendances", 'Int'>
   readonly status: Prisma.FieldRef<"attendances", 'attendance_status'>
+  readonly createdAt: Prisma.FieldRef<"attendances", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"attendances", 'DateTime'>
 }
     
 

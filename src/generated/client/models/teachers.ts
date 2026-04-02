@@ -40,6 +40,12 @@ export type TeachersMinAggregateOutputType = {
   email: string | null
   phone: string | null
   password: string | null
+  emailVerified: boolean | null
+  passwordResetToken: string | null
+  passwordResetExpiry: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type TeachersMaxAggregateOutputType = {
@@ -48,6 +54,12 @@ export type TeachersMaxAggregateOutputType = {
   email: string | null
   phone: string | null
   password: string | null
+  emailVerified: boolean | null
+  passwordResetToken: string | null
+  passwordResetExpiry: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type TeachersCountAggregateOutputType = {
@@ -56,6 +68,12 @@ export type TeachersCountAggregateOutputType = {
   email: number
   phone: number
   password: number
+  emailVerified: number
+  passwordResetToken: number
+  passwordResetExpiry: number
+  createdAt: number
+  updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -74,6 +92,12 @@ export type TeachersMinAggregateInputType = {
   email?: true
   phone?: true
   password?: true
+  emailVerified?: true
+  passwordResetToken?: true
+  passwordResetExpiry?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type TeachersMaxAggregateInputType = {
@@ -82,6 +106,12 @@ export type TeachersMaxAggregateInputType = {
   email?: true
   phone?: true
   password?: true
+  emailVerified?: true
+  passwordResetToken?: true
+  passwordResetExpiry?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type TeachersCountAggregateInputType = {
@@ -90,6 +120,12 @@ export type TeachersCountAggregateInputType = {
   email?: true
   phone?: true
   password?: true
+  emailVerified?: true
+  passwordResetToken?: true
+  passwordResetExpiry?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -185,6 +221,12 @@ export type TeachersGroupByOutputType = {
   email: string
   phone: string
   password: string
+  emailVerified: boolean
+  passwordResetToken: string | null
+  passwordResetExpiry: Date | null
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
   _count: TeachersCountAggregateOutputType | null
   _avg: TeachersAvgAggregateOutputType | null
   _sum: TeachersSumAggregateOutputType | null
@@ -216,6 +258,12 @@ export type teachersWhereInput = {
   email?: Prisma.StringFilter<"teachers"> | string
   phone?: Prisma.StringFilter<"teachers"> | string
   password?: Prisma.StringFilter<"teachers"> | string
+  emailVerified?: Prisma.BoolFilter<"teachers"> | boolean
+  passwordResetToken?: Prisma.StringNullableFilter<"teachers"> | string | null
+  passwordResetExpiry?: Prisma.DateTimeNullableFilter<"teachers"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"teachers"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"teachers"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"teachers"> | Date | string | null
 }
 
 export type teachersOrderByWithRelationInput = {
@@ -224,6 +272,12 @@ export type teachersOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type teachersWhereUniqueInput = Prisma.AtLeast<{
@@ -235,6 +289,12 @@ export type teachersWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.teachersWhereInput | Prisma.teachersWhereInput[]
   name?: Prisma.StringFilter<"teachers"> | string
   password?: Prisma.StringFilter<"teachers"> | string
+  emailVerified?: Prisma.BoolFilter<"teachers"> | boolean
+  passwordResetToken?: Prisma.StringNullableFilter<"teachers"> | string | null
+  passwordResetExpiry?: Prisma.DateTimeNullableFilter<"teachers"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"teachers"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"teachers"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"teachers"> | Date | string | null
 }, "id" | "email" | "phone">
 
 export type teachersOrderByWithAggregationInput = {
@@ -243,6 +303,12 @@ export type teachersOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.teachersCountOrderByAggregateInput
   _avg?: Prisma.teachersAvgOrderByAggregateInput
   _max?: Prisma.teachersMaxOrderByAggregateInput
@@ -259,6 +325,12 @@ export type teachersScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"teachers"> | string
   phone?: Prisma.StringWithAggregatesFilter<"teachers"> | string
   password?: Prisma.StringWithAggregatesFilter<"teachers"> | string
+  emailVerified?: Prisma.BoolWithAggregatesFilter<"teachers"> | boolean
+  passwordResetToken?: Prisma.StringNullableWithAggregatesFilter<"teachers"> | string | null
+  passwordResetExpiry?: Prisma.DateTimeNullableWithAggregatesFilter<"teachers"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"teachers"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"teachers"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"teachers"> | Date | string | null
 }
 
 export type teachersCreateInput = {
@@ -266,6 +338,12 @@ export type teachersCreateInput = {
   email: string
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type teachersUncheckedCreateInput = {
@@ -274,6 +352,12 @@ export type teachersUncheckedCreateInput = {
   email: string
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type teachersUpdateInput = {
@@ -281,6 +365,12 @@ export type teachersUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type teachersUncheckedUpdateInput = {
@@ -289,6 +379,12 @@ export type teachersUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type teachersCreateManyInput = {
@@ -297,6 +393,12 @@ export type teachersCreateManyInput = {
   email: string
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type teachersUpdateManyMutationInput = {
@@ -304,6 +406,12 @@ export type teachersUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type teachersUncheckedUpdateManyInput = {
@@ -312,6 +420,12 @@ export type teachersUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type teachersCountOrderByAggregateInput = {
@@ -320,6 +434,12 @@ export type teachersCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type teachersAvgOrderByAggregateInput = {
@@ -332,6 +452,12 @@ export type teachersMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type teachersMinOrderByAggregateInput = {
@@ -340,6 +466,12 @@ export type teachersMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type teachersSumOrderByAggregateInput = {
@@ -354,6 +486,12 @@ export type teachersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   email?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["teachers"]>
 
 export type teachersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -362,6 +500,12 @@ export type teachersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   email?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["teachers"]>
 
 export type teachersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -370,6 +514,12 @@ export type teachersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   email?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["teachers"]>
 
 export type teachersSelectScalar = {
@@ -378,9 +528,15 @@ export type teachersSelectScalar = {
   email?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type teachersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "password", ExtArgs["result"]["teachers"]>
+export type teachersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "password" | "emailVerified" | "passwordResetToken" | "passwordResetExpiry" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["teachers"]>
 
 export type $teachersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "teachers"
@@ -391,6 +547,12 @@ export type $teachersPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     email: string
     phone: string
     password: string
+    emailVerified: boolean
+    passwordResetToken: string | null
+    passwordResetExpiry: Date | null
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["teachers"]>
   composites: {}
 }
@@ -819,6 +981,12 @@ export interface teachersFieldRefs {
   readonly email: Prisma.FieldRef<"teachers", 'String'>
   readonly phone: Prisma.FieldRef<"teachers", 'String'>
   readonly password: Prisma.FieldRef<"teachers", 'String'>
+  readonly emailVerified: Prisma.FieldRef<"teachers", 'Boolean'>
+  readonly passwordResetToken: Prisma.FieldRef<"teachers", 'String'>
+  readonly passwordResetExpiry: Prisma.FieldRef<"teachers", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"teachers", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"teachers", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"teachers", 'DateTime'>
 }
     
 

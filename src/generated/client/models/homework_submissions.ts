@@ -46,6 +46,10 @@ export type Homework_submissionsMinAggregateOutputType = {
   homework_id: number | null
   grade: number | null
   submission_date: Date | null
+  gradeUpdatedAt: Date | null
+  gradeUpdatedByName: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type Homework_submissionsMaxAggregateOutputType = {
@@ -54,6 +58,10 @@ export type Homework_submissionsMaxAggregateOutputType = {
   homework_id: number | null
   grade: number | null
   submission_date: Date | null
+  gradeUpdatedAt: Date | null
+  gradeUpdatedByName: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type Homework_submissionsCountAggregateOutputType = {
@@ -62,6 +70,10 @@ export type Homework_submissionsCountAggregateOutputType = {
   homework_id: number
   grade: number
   submission_date: number
+  gradeUpdatedAt: number
+  gradeUpdatedByName: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -86,6 +98,10 @@ export type Homework_submissionsMinAggregateInputType = {
   homework_id?: true
   grade?: true
   submission_date?: true
+  gradeUpdatedAt?: true
+  gradeUpdatedByName?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type Homework_submissionsMaxAggregateInputType = {
@@ -94,6 +110,10 @@ export type Homework_submissionsMaxAggregateInputType = {
   homework_id?: true
   grade?: true
   submission_date?: true
+  gradeUpdatedAt?: true
+  gradeUpdatedByName?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type Homework_submissionsCountAggregateInputType = {
@@ -102,6 +122,10 @@ export type Homework_submissionsCountAggregateInputType = {
   homework_id?: true
   grade?: true
   submission_date?: true
+  gradeUpdatedAt?: true
+  gradeUpdatedByName?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -197,6 +221,10 @@ export type Homework_submissionsGroupByOutputType = {
   homework_id: number
   grade: number
   submission_date: Date
+  gradeUpdatedAt: Date | null
+  gradeUpdatedByName: string | null
+  createdAt: Date
+  updatedAt: Date
   _count: Homework_submissionsCountAggregateOutputType | null
   _avg: Homework_submissionsAvgAggregateOutputType | null
   _sum: Homework_submissionsSumAggregateOutputType | null
@@ -228,6 +256,10 @@ export type homework_submissionsWhereInput = {
   homework_id?: Prisma.IntFilter<"homework_submissions"> | number
   grade?: Prisma.IntFilter<"homework_submissions"> | number
   submission_date?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
+  gradeUpdatedAt?: Prisma.DateTimeNullableFilter<"homework_submissions"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableFilter<"homework_submissions"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
   homeworks?: Prisma.XOR<Prisma.HomeworksScalarRelationFilter, Prisma.homeworksWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }
@@ -238,6 +270,10 @@ export type homework_submissionsOrderByWithRelationInput = {
   homework_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
   submission_date?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   homeworks?: Prisma.homeworksOrderByWithRelationInput
   students?: Prisma.studentsOrderByWithRelationInput
 }
@@ -252,6 +288,10 @@ export type homework_submissionsWhereUniqueInput = Prisma.AtLeast<{
   homework_id?: Prisma.IntFilter<"homework_submissions"> | number
   grade?: Prisma.IntFilter<"homework_submissions"> | number
   submission_date?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
+  gradeUpdatedAt?: Prisma.DateTimeNullableFilter<"homework_submissions"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableFilter<"homework_submissions"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
   homeworks?: Prisma.XOR<Prisma.HomeworksScalarRelationFilter, Prisma.homeworksWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }, "id" | "student_id_homework_id">
@@ -262,6 +302,10 @@ export type homework_submissionsOrderByWithAggregationInput = {
   homework_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
   submission_date?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.homework_submissionsCountOrderByAggregateInput
   _avg?: Prisma.homework_submissionsAvgOrderByAggregateInput
   _max?: Prisma.homework_submissionsMaxOrderByAggregateInput
@@ -278,11 +322,19 @@ export type homework_submissionsScalarWhereWithAggregatesInput = {
   homework_id?: Prisma.IntWithAggregatesFilter<"homework_submissions"> | number
   grade?: Prisma.IntWithAggregatesFilter<"homework_submissions"> | number
   submission_date?: Prisma.DateTimeWithAggregatesFilter<"homework_submissions"> | Date | string
+  gradeUpdatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"homework_submissions"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableWithAggregatesFilter<"homework_submissions"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"homework_submissions"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"homework_submissions"> | Date | string
 }
 
 export type homework_submissionsCreateInput = {
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   homeworks: Prisma.homeworksCreateNestedOneWithoutHomework_submissionsInput
   students: Prisma.studentsCreateNestedOneWithoutHomework_submissionsInput
 }
@@ -293,11 +345,19 @@ export type homework_submissionsUncheckedCreateInput = {
   homework_id: number
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type homework_submissionsUpdateInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   homeworks?: Prisma.homeworksUpdateOneRequiredWithoutHomework_submissionsNestedInput
   students?: Prisma.studentsUpdateOneRequiredWithoutHomework_submissionsNestedInput
 }
@@ -308,6 +368,10 @@ export type homework_submissionsUncheckedUpdateInput = {
   homework_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type homework_submissionsCreateManyInput = {
@@ -316,11 +380,19 @@ export type homework_submissionsCreateManyInput = {
   homework_id: number
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type homework_submissionsUpdateManyMutationInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type homework_submissionsUncheckedUpdateManyInput = {
@@ -329,6 +401,10 @@ export type homework_submissionsUncheckedUpdateManyInput = {
   homework_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Homework_submissionsListRelationFilter = {
@@ -352,6 +428,10 @@ export type homework_submissionsCountOrderByAggregateInput = {
   homework_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
   submission_date?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type homework_submissionsAvgOrderByAggregateInput = {
@@ -367,6 +447,10 @@ export type homework_submissionsMaxOrderByAggregateInput = {
   homework_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
   submission_date?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type homework_submissionsMinOrderByAggregateInput = {
@@ -375,6 +459,10 @@ export type homework_submissionsMinOrderByAggregateInput = {
   homework_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
   submission_date?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type homework_submissionsSumOrderByAggregateInput = {
@@ -471,6 +559,10 @@ export type homework_submissionsUncheckedUpdateManyWithoutStudentsNestedInput = 
 export type homework_submissionsCreateWithoutHomeworksInput = {
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   students: Prisma.studentsCreateNestedOneWithoutHomework_submissionsInput
 }
 
@@ -479,6 +571,10 @@ export type homework_submissionsUncheckedCreateWithoutHomeworksInput = {
   student_id: number
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type homework_submissionsCreateOrConnectWithoutHomeworksInput = {
@@ -516,11 +612,19 @@ export type homework_submissionsScalarWhereInput = {
   homework_id?: Prisma.IntFilter<"homework_submissions"> | number
   grade?: Prisma.IntFilter<"homework_submissions"> | number
   submission_date?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
+  gradeUpdatedAt?: Prisma.DateTimeNullableFilter<"homework_submissions"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableFilter<"homework_submissions"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"homework_submissions"> | Date | string
 }
 
 export type homework_submissionsCreateWithoutStudentsInput = {
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   homeworks: Prisma.homeworksCreateNestedOneWithoutHomework_submissionsInput
 }
 
@@ -529,6 +633,10 @@ export type homework_submissionsUncheckedCreateWithoutStudentsInput = {
   homework_id: number
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type homework_submissionsCreateOrConnectWithoutStudentsInput = {
@@ -562,11 +670,19 @@ export type homework_submissionsCreateManyHomeworksInput = {
   student_id: number
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type homework_submissionsUpdateWithoutHomeworksInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.studentsUpdateOneRequiredWithoutHomework_submissionsNestedInput
 }
 
@@ -575,6 +691,10 @@ export type homework_submissionsUncheckedUpdateWithoutHomeworksInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type homework_submissionsUncheckedUpdateManyWithoutHomeworksInput = {
@@ -582,6 +702,10 @@ export type homework_submissionsUncheckedUpdateManyWithoutHomeworksInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type homework_submissionsCreateManyStudentsInput = {
@@ -589,11 +713,19 @@ export type homework_submissionsCreateManyStudentsInput = {
   homework_id: number
   grade: number
   submission_date: Date | string
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type homework_submissionsUpdateWithoutStudentsInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   homeworks?: Prisma.homeworksUpdateOneRequiredWithoutHomework_submissionsNestedInput
 }
 
@@ -602,6 +734,10 @@ export type homework_submissionsUncheckedUpdateWithoutStudentsInput = {
   homework_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type homework_submissionsUncheckedUpdateManyWithoutStudentsInput = {
@@ -609,6 +745,10 @@ export type homework_submissionsUncheckedUpdateManyWithoutStudentsInput = {
   homework_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
   submission_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -619,6 +759,10 @@ export type homework_submissionsSelect<ExtArgs extends runtime.Types.Extensions.
   homework_id?: boolean
   grade?: boolean
   submission_date?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   homeworks?: boolean | Prisma.homeworksDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["homework_submissions"]>
@@ -629,6 +773,10 @@ export type homework_submissionsSelectCreateManyAndReturn<ExtArgs extends runtim
   homework_id?: boolean
   grade?: boolean
   submission_date?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   homeworks?: boolean | Prisma.homeworksDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["homework_submissions"]>
@@ -639,6 +787,10 @@ export type homework_submissionsSelectUpdateManyAndReturn<ExtArgs extends runtim
   homework_id?: boolean
   grade?: boolean
   submission_date?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   homeworks?: boolean | Prisma.homeworksDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["homework_submissions"]>
@@ -649,9 +801,13 @@ export type homework_submissionsSelectScalar = {
   homework_id?: boolean
   grade?: boolean
   submission_date?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type homework_submissionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "student_id" | "homework_id" | "grade" | "submission_date", ExtArgs["result"]["homework_submissions"]>
+export type homework_submissionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "student_id" | "homework_id" | "grade" | "submission_date" | "gradeUpdatedAt" | "gradeUpdatedByName" | "createdAt" | "updatedAt", ExtArgs["result"]["homework_submissions"]>
 export type homework_submissionsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   homeworks?: boolean | Prisma.homeworksDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
@@ -677,6 +833,10 @@ export type $homework_submissionsPayload<ExtArgs extends runtime.Types.Extension
     homework_id: number
     grade: number
     submission_date: Date
+    gradeUpdatedAt: Date | null
+    gradeUpdatedByName: string | null
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["homework_submissions"]>
   composites: {}
 }
@@ -1107,6 +1267,10 @@ export interface homework_submissionsFieldRefs {
   readonly homework_id: Prisma.FieldRef<"homework_submissions", 'Int'>
   readonly grade: Prisma.FieldRef<"homework_submissions", 'Int'>
   readonly submission_date: Prisma.FieldRef<"homework_submissions", 'DateTime'>
+  readonly gradeUpdatedAt: Prisma.FieldRef<"homework_submissions", 'DateTime'>
+  readonly gradeUpdatedByName: Prisma.FieldRef<"homework_submissions", 'String'>
+  readonly createdAt: Prisma.FieldRef<"homework_submissions", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"homework_submissions", 'DateTime'>
 }
     
 

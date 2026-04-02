@@ -45,6 +45,10 @@ export type QuizAssignmentsMinAggregateOutputType = {
   student_id: number | null
   quiz_id: number | null
   grade: number | null
+  gradeUpdatedAt: Date | null
+  gradeUpdatedByName: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type QuizAssignmentsMaxAggregateOutputType = {
@@ -52,6 +56,10 @@ export type QuizAssignmentsMaxAggregateOutputType = {
   student_id: number | null
   quiz_id: number | null
   grade: number | null
+  gradeUpdatedAt: Date | null
+  gradeUpdatedByName: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type QuizAssignmentsCountAggregateOutputType = {
@@ -59,6 +67,10 @@ export type QuizAssignmentsCountAggregateOutputType = {
   student_id: number
   quiz_id: number
   grade: number
+  gradeUpdatedAt: number
+  gradeUpdatedByName: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -82,6 +94,10 @@ export type QuizAssignmentsMinAggregateInputType = {
   student_id?: true
   quiz_id?: true
   grade?: true
+  gradeUpdatedAt?: true
+  gradeUpdatedByName?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type QuizAssignmentsMaxAggregateInputType = {
@@ -89,6 +105,10 @@ export type QuizAssignmentsMaxAggregateInputType = {
   student_id?: true
   quiz_id?: true
   grade?: true
+  gradeUpdatedAt?: true
+  gradeUpdatedByName?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type QuizAssignmentsCountAggregateInputType = {
@@ -96,6 +116,10 @@ export type QuizAssignmentsCountAggregateInputType = {
   student_id?: true
   quiz_id?: true
   grade?: true
+  gradeUpdatedAt?: true
+  gradeUpdatedByName?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -190,6 +214,10 @@ export type QuizAssignmentsGroupByOutputType = {
   student_id: number
   quiz_id: number
   grade: number
+  gradeUpdatedAt: Date | null
+  gradeUpdatedByName: string | null
+  createdAt: Date
+  updatedAt: Date
   _count: QuizAssignmentsCountAggregateOutputType | null
   _avg: QuizAssignmentsAvgAggregateOutputType | null
   _sum: QuizAssignmentsSumAggregateOutputType | null
@@ -220,6 +248,10 @@ export type quizAssignmentsWhereInput = {
   student_id?: Prisma.IntFilter<"quizAssignments"> | number
   quiz_id?: Prisma.IntFilter<"quizAssignments"> | number
   grade?: Prisma.IntFilter<"quizAssignments"> | number
+  gradeUpdatedAt?: Prisma.DateTimeNullableFilter<"quizAssignments"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableFilter<"quizAssignments"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"quizAssignments"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"quizAssignments"> | Date | string
   quizzes?: Prisma.XOR<Prisma.QuizzesScalarRelationFilter, Prisma.quizzesWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }
@@ -229,6 +261,10 @@ export type quizAssignmentsOrderByWithRelationInput = {
   student_id?: Prisma.SortOrder
   quiz_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   quizzes?: Prisma.quizzesOrderByWithRelationInput
   students?: Prisma.studentsOrderByWithRelationInput
 }
@@ -242,6 +278,10 @@ export type quizAssignmentsWhereUniqueInput = Prisma.AtLeast<{
   student_id?: Prisma.IntFilter<"quizAssignments"> | number
   quiz_id?: Prisma.IntFilter<"quizAssignments"> | number
   grade?: Prisma.IntFilter<"quizAssignments"> | number
+  gradeUpdatedAt?: Prisma.DateTimeNullableFilter<"quizAssignments"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableFilter<"quizAssignments"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"quizAssignments"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"quizAssignments"> | Date | string
   quizzes?: Prisma.XOR<Prisma.QuizzesScalarRelationFilter, Prisma.quizzesWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }, "student_quiz_id" | "student_id_quiz_id">
@@ -251,6 +291,10 @@ export type quizAssignmentsOrderByWithAggregationInput = {
   student_id?: Prisma.SortOrder
   quiz_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.quizAssignmentsCountOrderByAggregateInput
   _avg?: Prisma.quizAssignmentsAvgOrderByAggregateInput
   _max?: Prisma.quizAssignmentsMaxOrderByAggregateInput
@@ -266,10 +310,18 @@ export type quizAssignmentsScalarWhereWithAggregatesInput = {
   student_id?: Prisma.IntWithAggregatesFilter<"quizAssignments"> | number
   quiz_id?: Prisma.IntWithAggregatesFilter<"quizAssignments"> | number
   grade?: Prisma.IntWithAggregatesFilter<"quizAssignments"> | number
+  gradeUpdatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"quizAssignments"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableWithAggregatesFilter<"quizAssignments"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"quizAssignments"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"quizAssignments"> | Date | string
 }
 
 export type quizAssignmentsCreateInput = {
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   quizzes: Prisma.quizzesCreateNestedOneWithoutQuizAssignmentsInput
   students: Prisma.studentsCreateNestedOneWithoutQuizAssignmentsInput
 }
@@ -279,10 +331,18 @@ export type quizAssignmentsUncheckedCreateInput = {
   student_id: number
   quiz_id: number
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type quizAssignmentsUpdateInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quizzes?: Prisma.quizzesUpdateOneRequiredWithoutQuizAssignmentsNestedInput
   students?: Prisma.studentsUpdateOneRequiredWithoutQuizAssignmentsNestedInput
 }
@@ -292,6 +352,10 @@ export type quizAssignmentsUncheckedUpdateInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type quizAssignmentsCreateManyInput = {
@@ -299,10 +363,18 @@ export type quizAssignmentsCreateManyInput = {
   student_id: number
   quiz_id: number
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type quizAssignmentsUpdateManyMutationInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type quizAssignmentsUncheckedUpdateManyInput = {
@@ -310,6 +382,10 @@ export type quizAssignmentsUncheckedUpdateManyInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type QuizAssignmentsListRelationFilter = {
@@ -332,6 +408,10 @@ export type quizAssignmentsCountOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   quiz_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type quizAssignmentsAvgOrderByAggregateInput = {
@@ -346,6 +426,10 @@ export type quizAssignmentsMaxOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   quiz_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type quizAssignmentsMinOrderByAggregateInput = {
@@ -353,6 +437,10 @@ export type quizAssignmentsMinOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   quiz_id?: Prisma.SortOrder
   grade?: Prisma.SortOrder
+  gradeUpdatedAt?: Prisma.SortOrder
+  gradeUpdatedByName?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type quizAssignmentsSumOrderByAggregateInput = {
@@ -448,6 +536,10 @@ export type quizAssignmentsUncheckedUpdateManyWithoutStudentsNestedInput = {
 
 export type quizAssignmentsCreateWithoutQuizzesInput = {
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   students: Prisma.studentsCreateNestedOneWithoutQuizAssignmentsInput
 }
 
@@ -455,6 +547,10 @@ export type quizAssignmentsUncheckedCreateWithoutQuizzesInput = {
   student_quiz_id?: number
   student_id: number
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type quizAssignmentsCreateOrConnectWithoutQuizzesInput = {
@@ -491,10 +587,18 @@ export type quizAssignmentsScalarWhereInput = {
   student_id?: Prisma.IntFilter<"quizAssignments"> | number
   quiz_id?: Prisma.IntFilter<"quizAssignments"> | number
   grade?: Prisma.IntFilter<"quizAssignments"> | number
+  gradeUpdatedAt?: Prisma.DateTimeNullableFilter<"quizAssignments"> | Date | string | null
+  gradeUpdatedByName?: Prisma.StringNullableFilter<"quizAssignments"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"quizAssignments"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"quizAssignments"> | Date | string
 }
 
 export type quizAssignmentsCreateWithoutStudentsInput = {
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   quizzes: Prisma.quizzesCreateNestedOneWithoutQuizAssignmentsInput
 }
 
@@ -502,6 +606,10 @@ export type quizAssignmentsUncheckedCreateWithoutStudentsInput = {
   student_quiz_id?: number
   quiz_id: number
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type quizAssignmentsCreateOrConnectWithoutStudentsInput = {
@@ -534,10 +642,18 @@ export type quizAssignmentsCreateManyQuizzesInput = {
   student_quiz_id?: number
   student_id: number
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type quizAssignmentsUpdateWithoutQuizzesInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.studentsUpdateOneRequiredWithoutQuizAssignmentsNestedInput
 }
 
@@ -545,22 +661,38 @@ export type quizAssignmentsUncheckedUpdateWithoutQuizzesInput = {
   student_quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type quizAssignmentsUncheckedUpdateManyWithoutQuizzesInput = {
   student_quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type quizAssignmentsCreateManyStudentsInput = {
   student_quiz_id?: number
   quiz_id: number
   grade: number
+  gradeUpdatedAt?: Date | string | null
+  gradeUpdatedByName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type quizAssignmentsUpdateWithoutStudentsInput = {
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   quizzes?: Prisma.quizzesUpdateOneRequiredWithoutQuizAssignmentsNestedInput
 }
 
@@ -568,12 +700,20 @@ export type quizAssignmentsUncheckedUpdateWithoutStudentsInput = {
   student_quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type quizAssignmentsUncheckedUpdateManyWithoutStudentsInput = {
   student_quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   quiz_id?: Prisma.IntFieldUpdateOperationsInput | number
   grade?: Prisma.IntFieldUpdateOperationsInput | number
+  gradeUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gradeUpdatedByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -583,6 +723,10 @@ export type quizAssignmentsSelect<ExtArgs extends runtime.Types.Extensions.Inter
   student_id?: boolean
   quiz_id?: boolean
   grade?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   quizzes?: boolean | Prisma.quizzesDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quizAssignments"]>
@@ -592,6 +736,10 @@ export type quizAssignmentsSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   student_id?: boolean
   quiz_id?: boolean
   grade?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   quizzes?: boolean | Prisma.quizzesDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quizAssignments"]>
@@ -601,6 +749,10 @@ export type quizAssignmentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   student_id?: boolean
   quiz_id?: boolean
   grade?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   quizzes?: boolean | Prisma.quizzesDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quizAssignments"]>
@@ -610,9 +762,13 @@ export type quizAssignmentsSelectScalar = {
   student_id?: boolean
   quiz_id?: boolean
   grade?: boolean
+  gradeUpdatedAt?: boolean
+  gradeUpdatedByName?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type quizAssignmentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"student_quiz_id" | "student_id" | "quiz_id" | "grade", ExtArgs["result"]["quizAssignments"]>
+export type quizAssignmentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"student_quiz_id" | "student_id" | "quiz_id" | "grade" | "gradeUpdatedAt" | "gradeUpdatedByName" | "createdAt" | "updatedAt", ExtArgs["result"]["quizAssignments"]>
 export type quizAssignmentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   quizzes?: boolean | Prisma.quizzesDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
@@ -637,6 +793,10 @@ export type $quizAssignmentsPayload<ExtArgs extends runtime.Types.Extensions.Int
     student_id: number
     quiz_id: number
     grade: number
+    gradeUpdatedAt: Date | null
+    gradeUpdatedByName: string | null
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["quizAssignments"]>
   composites: {}
 }
@@ -1066,6 +1226,10 @@ export interface quizAssignmentsFieldRefs {
   readonly student_id: Prisma.FieldRef<"quizAssignments", 'Int'>
   readonly quiz_id: Prisma.FieldRef<"quizAssignments", 'Int'>
   readonly grade: Prisma.FieldRef<"quizAssignments", 'Int'>
+  readonly gradeUpdatedAt: Prisma.FieldRef<"quizAssignments", 'DateTime'>
+  readonly gradeUpdatedByName: Prisma.FieldRef<"quizAssignments", 'String'>
+  readonly createdAt: Prisma.FieldRef<"quizAssignments", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"quizAssignments", 'DateTime'>
 }
     
 

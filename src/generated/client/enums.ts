@@ -38,7 +38,8 @@ export type section = (typeof section)[keyof typeof section]
 
 export const user_role = {
   student: 'student',
-  teacher: 'teacher'
+  teacher: 'teacher',
+  admin: 'admin'
 } as const
 
 export type user_role = (typeof user_role)[keyof typeof user_role]

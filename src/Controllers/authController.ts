@@ -16,6 +16,16 @@ class AuthController {
     }
   }
 
+  async registerTeacher(req: Request, res: Response, next: NextFunction) {
+    const requestBody: any = req.body;
+    try {
+      await (this.authService as any).registerTeacher(requestBody);
+      res.status(201).json({ message: "Teacher registered successfully" });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async login(req: Request, res: Response, next: NextFunction) {
     const requestBody: LoginDTO = req.body;
     try {
@@ -30,6 +40,8 @@ const authService = new AuthService();
 const authController = new AuthController(authService);
 export const registerStudent =
   authController.registerStudent.bind(authController);
+export const registerTeacher =
+  authController.registerTeacher.bind(authController);
 export const login = authController.login.bind(authController);
 
 export default AuthController;

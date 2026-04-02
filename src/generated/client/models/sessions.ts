@@ -43,6 +43,9 @@ export type SessionsMinAggregateOutputType = {
   center_id: number | null
   section: $Enums.section | null
   session_datetime: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type SessionsMaxAggregateOutputType = {
@@ -52,6 +55,9 @@ export type SessionsMaxAggregateOutputType = {
   center_id: number | null
   section: $Enums.section | null
   session_datetime: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type SessionsCountAggregateOutputType = {
@@ -61,6 +67,9 @@ export type SessionsCountAggregateOutputType = {
   center_id: number
   section: number
   session_datetime: number
+  createdAt: number
+  updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -82,6 +91,9 @@ export type SessionsMinAggregateInputType = {
   center_id?: true
   section?: true
   session_datetime?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type SessionsMaxAggregateInputType = {
@@ -91,6 +103,9 @@ export type SessionsMaxAggregateInputType = {
   center_id?: true
   section?: true
   session_datetime?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type SessionsCountAggregateInputType = {
@@ -100,6 +115,9 @@ export type SessionsCountAggregateInputType = {
   center_id?: true
   section?: true
   session_datetime?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -196,6 +214,9 @@ export type SessionsGroupByOutputType = {
   center_id: number
   section: $Enums.section
   session_datetime: Date
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
   _count: SessionsCountAggregateOutputType | null
   _avg: SessionsAvgAggregateOutputType | null
   _sum: SessionsSumAggregateOutputType | null
@@ -228,6 +249,9 @@ export type sessionsWhereInput = {
   center_id?: Prisma.IntFilter<"sessions"> | number
   section?: Prisma.EnumsectionFilter<"sessions"> | $Enums.section
   session_datetime?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"sessions"> | Date | string | null
   attendances?: Prisma.AttendancesListRelationFilter
   homeworks?: Prisma.HomeworksListRelationFilter
   quizzes?: Prisma.QuizzesListRelationFilter
@@ -241,6 +265,9 @@ export type sessionsOrderByWithRelationInput = {
   center_id?: Prisma.SortOrder
   section?: Prisma.SortOrder
   session_datetime?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   attendances?: Prisma.attendancesOrderByRelationAggregateInput
   homeworks?: Prisma.homeworksOrderByRelationAggregateInput
   quizzes?: Prisma.quizzesOrderByRelationAggregateInput
@@ -257,6 +284,9 @@ export type sessionsWhereUniqueInput = Prisma.AtLeast<{
   center_id?: Prisma.IntFilter<"sessions"> | number
   section?: Prisma.EnumsectionFilter<"sessions"> | $Enums.section
   session_datetime?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"sessions"> | Date | string | null
   attendances?: Prisma.AttendancesListRelationFilter
   homeworks?: Prisma.HomeworksListRelationFilter
   quizzes?: Prisma.QuizzesListRelationFilter
@@ -270,6 +300,9 @@ export type sessionsOrderByWithAggregationInput = {
   center_id?: Prisma.SortOrder
   section?: Prisma.SortOrder
   session_datetime?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.sessionsCountOrderByAggregateInput
   _avg?: Prisma.sessionsAvgOrderByAggregateInput
   _max?: Prisma.sessionsMaxOrderByAggregateInput
@@ -287,6 +320,9 @@ export type sessionsScalarWhereWithAggregatesInput = {
   center_id?: Prisma.IntWithAggregatesFilter<"sessions"> | number
   section?: Prisma.EnumsectionWithAggregatesFilter<"sessions"> | $Enums.section
   session_datetime?: Prisma.DateTimeWithAggregatesFilter<"sessions"> | Date | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"sessions"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"sessions"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"sessions"> | Date | string | null
 }
 
 export type sessionsCreateInput = {
@@ -294,6 +330,9 @@ export type sessionsCreateInput = {
   description: string
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutSessionsInput
   homeworks?: Prisma.homeworksCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesCreateNestedManyWithoutSessionsInput
@@ -307,6 +346,9 @@ export type sessionsUncheckedCreateInput = {
   center_id: number
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutSessionsInput
   homeworks?: Prisma.homeworksUncheckedCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesUncheckedCreateNestedManyWithoutSessionsInput
@@ -317,6 +359,9 @@ export type sessionsUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutSessionsNestedInput
   homeworks?: Prisma.homeworksUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUpdateManyWithoutSessionsNestedInput
@@ -330,6 +375,9 @@ export type sessionsUncheckedUpdateInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutSessionsNestedInput
   homeworks?: Prisma.homeworksUncheckedUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUncheckedUpdateManyWithoutSessionsNestedInput
@@ -342,6 +390,9 @@ export type sessionsCreateManyInput = {
   center_id: number
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type sessionsUpdateManyMutationInput = {
@@ -349,6 +400,9 @@ export type sessionsUpdateManyMutationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type sessionsUncheckedUpdateManyInput = {
@@ -358,6 +412,9 @@ export type sessionsUncheckedUpdateManyInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type SessionsListRelationFilter = {
@@ -382,6 +439,9 @@ export type sessionsCountOrderByAggregateInput = {
   center_id?: Prisma.SortOrder
   section?: Prisma.SortOrder
   session_datetime?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type sessionsAvgOrderByAggregateInput = {
@@ -396,6 +456,9 @@ export type sessionsMaxOrderByAggregateInput = {
   center_id?: Prisma.SortOrder
   section?: Prisma.SortOrder
   session_datetime?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type sessionsMinOrderByAggregateInput = {
@@ -405,6 +468,9 @@ export type sessionsMinOrderByAggregateInput = {
   center_id?: Prisma.SortOrder
   section?: Prisma.SortOrder
   session_datetime?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type sessionsSumOrderByAggregateInput = {
@@ -505,6 +571,9 @@ export type sessionsCreateWithoutCentersInput = {
   description: string
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutSessionsInput
   homeworks?: Prisma.homeworksCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesCreateNestedManyWithoutSessionsInput
@@ -516,6 +585,9 @@ export type sessionsUncheckedCreateWithoutCentersInput = {
   description: string
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutSessionsInput
   homeworks?: Prisma.homeworksUncheckedCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesUncheckedCreateNestedManyWithoutSessionsInput
@@ -557,6 +629,9 @@ export type sessionsScalarWhereInput = {
   center_id?: Prisma.IntFilter<"sessions"> | number
   section?: Prisma.EnumsectionFilter<"sessions"> | $Enums.section
   session_datetime?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"sessions"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"sessions"> | Date | string | null
 }
 
 export type sessionsCreateWithoutHomeworksInput = {
@@ -564,6 +639,9 @@ export type sessionsCreateWithoutHomeworksInput = {
   description: string
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesCreateNestedManyWithoutSessionsInput
   centers: Prisma.centersCreateNestedOneWithoutSessionsInput
@@ -576,6 +654,9 @@ export type sessionsUncheckedCreateWithoutHomeworksInput = {
   center_id: number
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesUncheckedCreateNestedManyWithoutSessionsInput
 }
@@ -601,6 +682,9 @@ export type sessionsUpdateWithoutHomeworksInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUpdateManyWithoutSessionsNestedInput
   centers?: Prisma.centersUpdateOneRequiredWithoutSessionsNestedInput
@@ -613,6 +697,9 @@ export type sessionsUncheckedUpdateWithoutHomeworksInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUncheckedUpdateManyWithoutSessionsNestedInput
 }
@@ -622,6 +709,9 @@ export type sessionsCreateWithoutQuizzesInput = {
   description: string
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutSessionsInput
   homeworks?: Prisma.homeworksCreateNestedManyWithoutSessionsInput
   centers: Prisma.centersCreateNestedOneWithoutSessionsInput
@@ -634,6 +724,9 @@ export type sessionsUncheckedCreateWithoutQuizzesInput = {
   center_id: number
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutSessionsInput
   homeworks?: Prisma.homeworksUncheckedCreateNestedManyWithoutSessionsInput
 }
@@ -659,6 +752,9 @@ export type sessionsUpdateWithoutQuizzesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutSessionsNestedInput
   homeworks?: Prisma.homeworksUpdateManyWithoutSessionsNestedInput
   centers?: Prisma.centersUpdateOneRequiredWithoutSessionsNestedInput
@@ -671,6 +767,9 @@ export type sessionsUncheckedUpdateWithoutQuizzesInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutSessionsNestedInput
   homeworks?: Prisma.homeworksUncheckedUpdateManyWithoutSessionsNestedInput
 }
@@ -680,6 +779,9 @@ export type sessionsCreateWithoutAttendancesInput = {
   description: string
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homeworks?: Prisma.homeworksCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesCreateNestedManyWithoutSessionsInput
   centers: Prisma.centersCreateNestedOneWithoutSessionsInput
@@ -692,6 +794,9 @@ export type sessionsUncheckedCreateWithoutAttendancesInput = {
   center_id: number
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homeworks?: Prisma.homeworksUncheckedCreateNestedManyWithoutSessionsInput
   quizzes?: Prisma.quizzesUncheckedCreateNestedManyWithoutSessionsInput
 }
@@ -717,6 +822,9 @@ export type sessionsUpdateWithoutAttendancesInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homeworks?: Prisma.homeworksUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUpdateManyWithoutSessionsNestedInput
   centers?: Prisma.centersUpdateOneRequiredWithoutSessionsNestedInput
@@ -729,6 +837,9 @@ export type sessionsUncheckedUpdateWithoutAttendancesInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homeworks?: Prisma.homeworksUncheckedUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUncheckedUpdateManyWithoutSessionsNestedInput
 }
@@ -739,6 +850,9 @@ export type sessionsCreateManyCentersInput = {
   description: string
   section: $Enums.section
   session_datetime: Date | string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type sessionsUpdateWithoutCentersInput = {
@@ -746,6 +860,9 @@ export type sessionsUpdateWithoutCentersInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutSessionsNestedInput
   homeworks?: Prisma.homeworksUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUpdateManyWithoutSessionsNestedInput
@@ -757,6 +874,9 @@ export type sessionsUncheckedUpdateWithoutCentersInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutSessionsNestedInput
   homeworks?: Prisma.homeworksUncheckedUpdateManyWithoutSessionsNestedInput
   quizzes?: Prisma.quizzesUncheckedUpdateManyWithoutSessionsNestedInput
@@ -768,6 +888,9 @@ export type sessionsUncheckedUpdateManyWithoutCentersInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   session_datetime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -826,6 +949,9 @@ export type sessionsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   center_id?: boolean
   section?: boolean
   session_datetime?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   attendances?: boolean | Prisma.sessions$attendancesArgs<ExtArgs>
   homeworks?: boolean | Prisma.sessions$homeworksArgs<ExtArgs>
   quizzes?: boolean | Prisma.sessions$quizzesArgs<ExtArgs>
@@ -840,6 +966,9 @@ export type sessionsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   center_id?: boolean
   section?: boolean
   session_datetime?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   centers?: boolean | Prisma.centersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sessions"]>
 
@@ -850,6 +979,9 @@ export type sessionsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   center_id?: boolean
   section?: boolean
   session_datetime?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   centers?: boolean | Prisma.centersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sessions"]>
 
@@ -860,9 +992,12 @@ export type sessionsSelectScalar = {
   center_id?: boolean
   section?: boolean
   session_datetime?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type sessionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "center_id" | "section" | "session_datetime", ExtArgs["result"]["sessions"]>
+export type sessionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "center_id" | "section" | "session_datetime" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["sessions"]>
 export type sessionsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attendances?: boolean | Prisma.sessions$attendancesArgs<ExtArgs>
   homeworks?: boolean | Prisma.sessions$homeworksArgs<ExtArgs>
@@ -892,6 +1027,9 @@ export type $sessionsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     center_id: number
     section: $Enums.section
     session_datetime: Date
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["sessions"]>
   composites: {}
 }
@@ -1325,6 +1463,9 @@ export interface sessionsFieldRefs {
   readonly center_id: Prisma.FieldRef<"sessions", 'Int'>
   readonly section: Prisma.FieldRef<"sessions", 'section'>
   readonly session_datetime: Prisma.FieldRef<"sessions", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"sessions", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"sessions", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"sessions", 'DateTime'>
 }
     
 

@@ -9,4 +9,5 @@ export interface ITeacherSessionService {
   getSessions(filters?: SessionFilters): Promise<getSessionDTO[]>;
   assignSession(data: assignSessionDTO): Promise<void>;
   updateSession(data: createSessionDTO, id: number): Promise<void>;
+  deleteSession(id: number): Promise<void>;
 }

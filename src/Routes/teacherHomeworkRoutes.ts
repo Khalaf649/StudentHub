@@ -4,6 +4,11 @@ import {
   assignHomework,
   getHomeworks,
 } from "../Controllers/teacherHomeworkController.ts";
+import {
+  updateHomework,
+  deleteHomework,
+  gradeHomeworkSubmission,
+} from "../Controllers/teacherExtendedController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
 import { homeworkValidator } from "../Validations/homeworkValidator.ts";
@@ -25,5 +30,8 @@ router.post(
   assignHomework,
 );
 router.get("/", getHomeworks);
+router.put("/:id", updateHomework);
+router.delete("/:id", deleteHomework);
+router.post("/:id/grade", gradeHomeworkSubmission);
 
 export default router;

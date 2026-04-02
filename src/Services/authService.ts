@@ -17,6 +17,7 @@ const JWT_EXPIRES_IN = "1h";
 const roleModelMap: Record<user_role, any> = {
   [user_role.student]: prisma.students,
   [user_role.teacher]: prisma.teachers,
+  [user_role.admin]: prisma.teachers, // Admin uses teacher model for now
 };
 
 class AuthService implements IAuthService {
@@ -32,6 +33,20 @@ class AuthService implements IAuthService {
         password: hashedPassword,
         section,
         center_id,
+      },
+    });
+  }
+
+  async registerTeacher(data: any): Promise<void> {
+    const { name, phone, email, password } = data;
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    await prisma.teachers.create({
+      data: {
+        name,
+        phone,
+        email,
+        password: hashedPassword,
       },
     });
   }

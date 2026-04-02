@@ -44,6 +44,12 @@ export type StudentsMinAggregateOutputType = {
   center_id: number | null
   phone: string | null
   password: string | null
+  emailVerified: boolean | null
+  passwordResetToken: string | null
+  passwordResetExpiry: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type StudentsMaxAggregateOutputType = {
@@ -54,6 +60,12 @@ export type StudentsMaxAggregateOutputType = {
   center_id: number | null
   phone: string | null
   password: string | null
+  emailVerified: boolean | null
+  passwordResetToken: string | null
+  passwordResetExpiry: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type StudentsCountAggregateOutputType = {
@@ -64,6 +76,12 @@ export type StudentsCountAggregateOutputType = {
   center_id: number
   phone: number
   password: number
+  emailVerified: number
+  passwordResetToken: number
+  passwordResetExpiry: number
+  createdAt: number
+  updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -86,6 +104,12 @@ export type StudentsMinAggregateInputType = {
   center_id?: true
   phone?: true
   password?: true
+  emailVerified?: true
+  passwordResetToken?: true
+  passwordResetExpiry?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type StudentsMaxAggregateInputType = {
@@ -96,6 +120,12 @@ export type StudentsMaxAggregateInputType = {
   center_id?: true
   phone?: true
   password?: true
+  emailVerified?: true
+  passwordResetToken?: true
+  passwordResetExpiry?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type StudentsCountAggregateInputType = {
@@ -106,6 +136,12 @@ export type StudentsCountAggregateInputType = {
   center_id?: true
   phone?: true
   password?: true
+  emailVerified?: true
+  passwordResetToken?: true
+  passwordResetExpiry?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -203,6 +239,12 @@ export type StudentsGroupByOutputType = {
   center_id: number
   phone: string
   password: string
+  emailVerified: boolean
+  passwordResetToken: string | null
+  passwordResetExpiry: Date | null
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
   _count: StudentsCountAggregateOutputType | null
   _avg: StudentsAvgAggregateOutputType | null
   _sum: StudentsSumAggregateOutputType | null
@@ -236,6 +278,12 @@ export type studentsWhereInput = {
   center_id?: Prisma.IntFilter<"students"> | number
   phone?: Prisma.StringFilter<"students"> | string
   password?: Prisma.StringFilter<"students"> | string
+  emailVerified?: Prisma.BoolFilter<"students"> | boolean
+  passwordResetToken?: Prisma.StringNullableFilter<"students"> | string | null
+  passwordResetExpiry?: Prisma.DateTimeNullableFilter<"students"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"students"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"students"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"students"> | Date | string | null
   attendances?: Prisma.AttendancesListRelationFilter
   homework_submissions?: Prisma.Homework_submissionsListRelationFilter
   quizAssignments?: Prisma.QuizAssignmentsListRelationFilter
@@ -251,6 +299,12 @@ export type studentsOrderByWithRelationInput = {
   center_id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   attendances?: Prisma.attendancesOrderByRelationAggregateInput
   homework_submissions?: Prisma.homework_submissionsOrderByRelationAggregateInput
   quizAssignments?: Prisma.quizAssignmentsOrderByRelationAggregateInput
@@ -269,6 +323,12 @@ export type studentsWhereUniqueInput = Prisma.AtLeast<{
   section?: Prisma.EnumsectionFilter<"students"> | $Enums.section
   center_id?: Prisma.IntFilter<"students"> | number
   password?: Prisma.StringFilter<"students"> | string
+  emailVerified?: Prisma.BoolFilter<"students"> | boolean
+  passwordResetToken?: Prisma.StringNullableFilter<"students"> | string | null
+  passwordResetExpiry?: Prisma.DateTimeNullableFilter<"students"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"students"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"students"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"students"> | Date | string | null
   attendances?: Prisma.AttendancesListRelationFilter
   homework_submissions?: Prisma.Homework_submissionsListRelationFilter
   quizAssignments?: Prisma.QuizAssignmentsListRelationFilter
@@ -284,6 +344,12 @@ export type studentsOrderByWithAggregationInput = {
   center_id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.studentsCountOrderByAggregateInput
   _avg?: Prisma.studentsAvgOrderByAggregateInput
   _max?: Prisma.studentsMaxOrderByAggregateInput
@@ -302,6 +368,12 @@ export type studentsScalarWhereWithAggregatesInput = {
   center_id?: Prisma.IntWithAggregatesFilter<"students"> | number
   phone?: Prisma.StringWithAggregatesFilter<"students"> | string
   password?: Prisma.StringWithAggregatesFilter<"students"> | string
+  emailVerified?: Prisma.BoolWithAggregatesFilter<"students"> | boolean
+  passwordResetToken?: Prisma.StringNullableWithAggregatesFilter<"students"> | string | null
+  passwordResetExpiry?: Prisma.DateTimeNullableWithAggregatesFilter<"students"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"students"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"students"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"students"> | Date | string | null
 }
 
 export type studentsCreateInput = {
@@ -310,6 +382,12 @@ export type studentsCreateInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsCreateNestedManyWithoutStudentsInput
@@ -325,6 +403,12 @@ export type studentsUncheckedCreateInput = {
   center_id: number
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsUncheckedCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedCreateNestedManyWithoutStudentsInput
@@ -337,6 +421,12 @@ export type studentsUpdateInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUpdateManyWithoutStudentsNestedInput
@@ -352,6 +442,12 @@ export type studentsUncheckedUpdateInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUncheckedUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedUpdateManyWithoutStudentsNestedInput
@@ -366,6 +462,12 @@ export type studentsCreateManyInput = {
   center_id: number
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type studentsUpdateManyMutationInput = {
@@ -374,6 +476,12 @@ export type studentsUpdateManyMutationInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type studentsUncheckedUpdateManyInput = {
@@ -384,6 +492,12 @@ export type studentsUncheckedUpdateManyInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StudentsListRelationFilter = {
@@ -409,6 +523,12 @@ export type studentsCountOrderByAggregateInput = {
   center_id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type studentsAvgOrderByAggregateInput = {
@@ -424,6 +544,12 @@ export type studentsMaxOrderByAggregateInput = {
   center_id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type studentsMinOrderByAggregateInput = {
@@ -434,6 +560,12 @@ export type studentsMinOrderByAggregateInput = {
   center_id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
+  passwordResetToken?: Prisma.SortOrder
+  passwordResetExpiry?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type studentsSumOrderByAggregateInput = {
@@ -497,6 +629,10 @@ export type studentsUpdateOneRequiredWithoutStudent_parentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.studentsUpdateToOneWithWhereWithoutStudent_parentsInput, Prisma.studentsUpdateWithoutStudent_parentsInput>, Prisma.studentsUncheckedUpdateWithoutStudent_parentsInput>
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type studentsCreateNestedOneWithoutAttendancesInput = {
   create?: Prisma.XOR<Prisma.studentsCreateWithoutAttendancesInput, Prisma.studentsUncheckedCreateWithoutAttendancesInput>
   connectOrCreate?: Prisma.studentsCreateOrConnectWithoutAttendancesInput
@@ -545,6 +681,12 @@ export type studentsCreateWithoutCentersInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsCreateNestedManyWithoutStudentsInput
@@ -558,6 +700,12 @@ export type studentsUncheckedCreateWithoutCentersInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsUncheckedCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedCreateNestedManyWithoutStudentsInput
@@ -601,6 +749,12 @@ export type studentsScalarWhereInput = {
   center_id?: Prisma.IntFilter<"students"> | number
   phone?: Prisma.StringFilter<"students"> | string
   password?: Prisma.StringFilter<"students"> | string
+  emailVerified?: Prisma.BoolFilter<"students"> | boolean
+  passwordResetToken?: Prisma.StringNullableFilter<"students"> | string | null
+  passwordResetExpiry?: Prisma.DateTimeNullableFilter<"students"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"students"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"students"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"students"> | Date | string | null
 }
 
 export type studentsCreateWithoutStudent_parentsInput = {
@@ -609,6 +763,12 @@ export type studentsCreateWithoutStudent_parentsInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsCreateNestedManyWithoutStudentsInput
@@ -623,6 +783,12 @@ export type studentsUncheckedCreateWithoutStudent_parentsInput = {
   center_id: number
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsUncheckedCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedCreateNestedManyWithoutStudentsInput
@@ -650,6 +816,12 @@ export type studentsUpdateWithoutStudent_parentsInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUpdateManyWithoutStudentsNestedInput
@@ -664,6 +836,12 @@ export type studentsUncheckedUpdateWithoutStudent_parentsInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUncheckedUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedUpdateManyWithoutStudentsNestedInput
@@ -675,6 +853,12 @@ export type studentsCreateWithoutAttendancesInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homework_submissions?: Prisma.homework_submissionsCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsCreateNestedManyWithoutStudentsInput
   student_parents?: Prisma.student_parentsCreateNestedManyWithoutStudentsInput
@@ -689,6 +873,12 @@ export type studentsUncheckedCreateWithoutAttendancesInput = {
   center_id: number
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homework_submissions?: Prisma.homework_submissionsUncheckedCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedCreateNestedManyWithoutStudentsInput
   student_parents?: Prisma.student_parentsUncheckedCreateNestedManyWithoutStudentsInput
@@ -716,6 +906,12 @@ export type studentsUpdateWithoutAttendancesInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homework_submissions?: Prisma.homework_submissionsUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUpdateManyWithoutStudentsNestedInput
   student_parents?: Prisma.student_parentsUpdateManyWithoutStudentsNestedInput
@@ -730,6 +926,12 @@ export type studentsUncheckedUpdateWithoutAttendancesInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homework_submissions?: Prisma.homework_submissionsUncheckedUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedUpdateManyWithoutStudentsNestedInput
   student_parents?: Prisma.student_parentsUncheckedUpdateManyWithoutStudentsNestedInput
@@ -741,6 +943,12 @@ export type studentsCreateWithoutQuizAssignmentsInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsCreateNestedManyWithoutStudentsInput
   student_parents?: Prisma.student_parentsCreateNestedManyWithoutStudentsInput
@@ -755,6 +963,12 @@ export type studentsUncheckedCreateWithoutQuizAssignmentsInput = {
   center_id: number
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutStudentsInput
   homework_submissions?: Prisma.homework_submissionsUncheckedCreateNestedManyWithoutStudentsInput
   student_parents?: Prisma.student_parentsUncheckedCreateNestedManyWithoutStudentsInput
@@ -782,6 +996,12 @@ export type studentsUpdateWithoutQuizAssignmentsInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUpdateManyWithoutStudentsNestedInput
   student_parents?: Prisma.student_parentsUpdateManyWithoutStudentsNestedInput
@@ -796,6 +1016,12 @@ export type studentsUncheckedUpdateWithoutQuizAssignmentsInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUncheckedUpdateManyWithoutStudentsNestedInput
   student_parents?: Prisma.student_parentsUncheckedUpdateManyWithoutStudentsNestedInput
@@ -807,6 +1033,12 @@ export type studentsCreateWithoutHomework_submissionsInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsCreateNestedManyWithoutStudentsInput
   student_parents?: Prisma.student_parentsCreateNestedManyWithoutStudentsInput
@@ -821,6 +1053,12 @@ export type studentsUncheckedCreateWithoutHomework_submissionsInput = {
   center_id: number
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   attendances?: Prisma.attendancesUncheckedCreateNestedManyWithoutStudentsInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedCreateNestedManyWithoutStudentsInput
   student_parents?: Prisma.student_parentsUncheckedCreateNestedManyWithoutStudentsInput
@@ -848,6 +1086,12 @@ export type studentsUpdateWithoutHomework_submissionsInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUpdateManyWithoutStudentsNestedInput
   student_parents?: Prisma.student_parentsUpdateManyWithoutStudentsNestedInput
@@ -862,6 +1106,12 @@ export type studentsUncheckedUpdateWithoutHomework_submissionsInput = {
   center_id?: Prisma.IntFieldUpdateOperationsInput | number
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedUpdateManyWithoutStudentsNestedInput
   student_parents?: Prisma.student_parentsUncheckedUpdateManyWithoutStudentsNestedInput
@@ -874,6 +1124,12 @@ export type studentsCreateManyCentersInput = {
   section: $Enums.section
   phone: string
   password: string
+  emailVerified?: boolean
+  passwordResetToken?: string | null
+  passwordResetExpiry?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type studentsUpdateWithoutCentersInput = {
@@ -882,6 +1138,12 @@ export type studentsUpdateWithoutCentersInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUpdateManyWithoutStudentsNestedInput
@@ -895,6 +1157,12 @@ export type studentsUncheckedUpdateWithoutCentersInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attendances?: Prisma.attendancesUncheckedUpdateManyWithoutStudentsNestedInput
   homework_submissions?: Prisma.homework_submissionsUncheckedUpdateManyWithoutStudentsNestedInput
   quizAssignments?: Prisma.quizAssignmentsUncheckedUpdateManyWithoutStudentsNestedInput
@@ -908,6 +1176,12 @@ export type studentsUncheckedUpdateManyWithoutCentersInput = {
   section?: Prisma.EnumsectionFieldUpdateOperationsInput | $Enums.section
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  passwordResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  passwordResetExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -976,6 +1250,12 @@ export type studentsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   center_id?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   attendances?: boolean | Prisma.students$attendancesArgs<ExtArgs>
   homework_submissions?: boolean | Prisma.students$homework_submissionsArgs<ExtArgs>
   quizAssignments?: boolean | Prisma.students$quizAssignmentsArgs<ExtArgs>
@@ -992,6 +1272,12 @@ export type studentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   center_id?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   centers?: boolean | Prisma.centersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["students"]>
 
@@ -1003,6 +1289,12 @@ export type studentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   center_id?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   centers?: boolean | Prisma.centersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["students"]>
 
@@ -1014,9 +1306,15 @@ export type studentsSelectScalar = {
   center_id?: boolean
   phone?: boolean
   password?: boolean
+  emailVerified?: boolean
+  passwordResetToken?: boolean
+  passwordResetExpiry?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type studentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "section" | "center_id" | "phone" | "password", ExtArgs["result"]["students"]>
+export type studentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "section" | "center_id" | "phone" | "password" | "emailVerified" | "passwordResetToken" | "passwordResetExpiry" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["students"]>
 export type studentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attendances?: boolean | Prisma.students$attendancesArgs<ExtArgs>
   homework_submissions?: boolean | Prisma.students$homework_submissionsArgs<ExtArgs>
@@ -1049,6 +1347,12 @@ export type $studentsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     center_id: number
     phone: string
     password: string
+    emailVerified: boolean
+    passwordResetToken: string | null
+    passwordResetExpiry: Date | null
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["students"]>
   composites: {}
 }
@@ -1484,6 +1788,12 @@ export interface studentsFieldRefs {
   readonly center_id: Prisma.FieldRef<"students", 'Int'>
   readonly phone: Prisma.FieldRef<"students", 'String'>
   readonly password: Prisma.FieldRef<"students", 'String'>
+  readonly emailVerified: Prisma.FieldRef<"students", 'Boolean'>
+  readonly passwordResetToken: Prisma.FieldRef<"students", 'String'>
+  readonly passwordResetExpiry: Prisma.FieldRef<"students", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"students", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"students", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"students", 'DateTime'>
 }
     
 

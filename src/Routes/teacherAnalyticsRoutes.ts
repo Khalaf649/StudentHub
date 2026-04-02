@@ -1,19 +1,17 @@
 import { Router } from "express";
 import {
-  createCenter,
-  getCenters,
-} from "../Controllers/teacherCenterController.ts";
+  getStudentPerformance,
+  getAttendanceAnalytics,
+} from "../Controllers/teacherExtendedController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
-import { centerValidator } from "../Validations/centerValidator.ts";
-
-import { validationMiddleware } from "../Middlewares/validationMiddleware.ts";
 
 const router = Router();
+
 // Apply authMiddleware and roleMiddleware("teacher") to all routes in this router
 router.use(authMiddleware, roleMiddleware("teacher"));
-router.get("/", getCenters);
 
-router.post("/", centerValidator, validationMiddleware, createCenter);
+router.get("/student/:studentId/performance", getStudentPerformance);
+router.get("/session/:sessionId/attendance", getAttendanceAnalytics);
 
 export default router;

@@ -8,12 +8,15 @@ datasource db {
 }
 
 model centers {
-  id       Int        @id @default(autoincrement())
-  name     String     @db.VarChar(255)
-  location String     @db.VarChar(255)
-  phone    String     @unique @db.VarChar(255)
-  sessions sessions[]
-  students students[]
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(255)
+  location  String     @db.VarChar(255)
+  phone     String     @unique @db.VarChar(255)
+  sessions  sessions[]
+  students  students[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  deletedAt DateTime?
 }
 
 model homeworks {
@@ -26,13 +29,20 @@ model homeworks {
   full_mark            Int
   homework_submissions homework_submissions[]
   sessions             sessions               @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  deletedAt            DateTime?
 }
 
 model parents {
   id              Int               @id @default(autoincrement())
   name            String            @db.VarChar(100)
   phone           String            @db.VarChar(20)
+  email           String?           @db.VarChar(255)
   student_parents student_parents[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  deletedAt       DateTime?
 }
 
 model quizzes {
@@ -43,6 +53,9 @@ model quizzes {
   full_mark       Int
   quizAssignments quizAssignments[]
   sessions        sessions          @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_session")
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  deletedAt       DateTime?
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -57,15 +70,20 @@ model sessions {
   homeworks        homeworks[]
   quizzes          quizzes[]
   centers          centers       @relation(fields: [center_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  deletedAt        DateTime?
 }
 
 model student_parents {
-  id         Int         @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   student_id Int
   parent_id  Int
-  role       parent_role
-  parents    parents     @relation(fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent")
-  students   students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+  role      parent_role
+  parents   parents     @relation(fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent")
+  students  students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 
   @@unique([student_id, parent_id, role], map: "unique_student_parent")
 }
@@ -79,52 +97,74 @@ model students {
   center_id            Int
   phone                String                 @unique @db.VarChar(255)
   password             String                 @db.VarChar(255)
+  emailVerified        Boolean                @default(false)
+  passwordResetToken   String?
+  passwordResetExpiry  DateTime?
   attendances          attendances[]
   homework_submissions homework_submissions[]
   quizAssignments      quizAssignments[]
   student_parents      student_parents[]
   centers              centers                @relation(fields: [center_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  deletedAt            DateTime?
 }
 
 model teachers {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(255)
-  email    String @unique @db.VarChar(255)
-  phone    String @unique @db.VarChar(255)
-  password String @db.VarChar(255)
+  id                  Int       @id @default(autoincrement())
+  name                String    @db.VarChar(255)
+  email               String    @unique @db.VarChar(255)
+  phone               String    @unique @db.VarChar(255)
+  password            String    @db.VarChar(255)
+  emailVerified       Boolean   @default(false)
+  passwordResetToken  String?
+  passwordResetExpiry DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
 }
 
 model attendances {
-  id         Int               @id(map: "student_sessions_pkey") @default(autoincrement())
+  id        Int               @id(map: "student_sessions_pkey") @default(autoincrement())
   student_id Int
   session_id Int
-  status     attendance_status @default(absent)
-  sessions   sessions          @relation(fields: [session_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session")
-  students   students          @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+  status    attendance_status @default(absent)
+  sessions  sessions          @relation(fields: [session_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_session")
+  students  students          @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
 
   @@unique([student_id, session_id], map: "unique_student_session")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model quizAssignments {
-  student_quiz_id Int      @id(map: "student_quizzes_pkey") @default(autoincrement())
-  student_id      Int
-  quiz_id         Int
-  grade           Int
-  quizzes         quizzes  @relation(fields: [quiz_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_quiz")
-  students        students @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_student")
+  student_quiz_id    Int       @id(map: "student_quizzes_pkey") @default(autoincrement())
+  student_id         Int
+  quiz_id            Int
+  grade              Int
+  gradeUpdatedAt     DateTime?
+  gradeUpdatedByName String?   @db.VarChar(255)
+  quizzes            quizzes   @relation(fields: [quiz_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_quiz")
+  students           students  @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_student")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 
   @@unique([student_id, quiz_id], map: "uq_student_quiz")
 }
 
 model homework_submissions {
-  id              Int       @id(map: "student_homework_pkey") @default(autoincrement())
-  student_id      Int
-  homework_id     Int
-  grade           Int
-  submission_date DateTime  @db.Timestamp(6)
-  homeworks       homeworks @relation(fields: [homework_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_homework_homework_id_fkey")
-  students        students  @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_homework_student_id_fkey")
+  id                 Int       @id(map: "student_homework_pkey") @default(autoincrement())
+  student_id         Int
+  homework_id        Int
+  grade              Int
+  submission_date    DateTime  @db.Timestamp(6)
+  gradeUpdatedAt     DateTime?
+  gradeUpdatedByName String?   @db.VarChar(255)
+  homeworks          homeworks @relation(fields: [homework_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_homework_homework_id_fkey")
+  students           students  @relation(fields: [student_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "student_homework_student_id_fkey")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 
   @@unique([student_id, homework_id], map: "uq_student_homework")
 }
@@ -150,4 +190,5 @@ enum section {
 enum user_role {
   student
   teacher
+  admin
 }

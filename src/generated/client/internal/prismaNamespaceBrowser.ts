@@ -84,7 +84,10 @@ export const CentersScalarFieldEnum = {
   id: 'id',
   name: 'name',
   location: 'location',
-  phone: 'phone'
+  phone: 'phone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type CentersScalarFieldEnum = (typeof CentersScalarFieldEnum)[keyof typeof CentersScalarFieldEnum]
@@ -97,7 +100,10 @@ export const HomeworksScalarFieldEnum = {
   start_date: 'start_date',
   description: 'description',
   due_date: 'due_date',
-  full_mark: 'full_mark'
+  full_mark: 'full_mark',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type HomeworksScalarFieldEnum = (typeof HomeworksScalarFieldEnum)[keyof typeof HomeworksScalarFieldEnum]
@@ -106,7 +112,11 @@ export type HomeworksScalarFieldEnum = (typeof HomeworksScalarFieldEnum)[keyof t
 export const ParentsScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  phone: 'phone'
+  phone: 'phone',
+  email: 'email',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type ParentsScalarFieldEnum = (typeof ParentsScalarFieldEnum)[keyof typeof ParentsScalarFieldEnum]
@@ -117,7 +127,10 @@ export const QuizzesScalarFieldEnum = {
   title: 'title',
   description: 'description',
   session_id: 'session_id',
-  full_mark: 'full_mark'
+  full_mark: 'full_mark',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type QuizzesScalarFieldEnum = (typeof QuizzesScalarFieldEnum)[keyof typeof QuizzesScalarFieldEnum]
@@ -129,7 +142,10 @@ export const SessionsScalarFieldEnum = {
   description: 'description',
   center_id: 'center_id',
   section: 'section',
-  session_datetime: 'session_datetime'
+  session_datetime: 'session_datetime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type SessionsScalarFieldEnum = (typeof SessionsScalarFieldEnum)[keyof typeof SessionsScalarFieldEnum]
@@ -139,7 +155,9 @@ export const Student_parentsScalarFieldEnum = {
   id: 'id',
   student_id: 'student_id',
   parent_id: 'parent_id',
-  role: 'role'
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type Student_parentsScalarFieldEnum = (typeof Student_parentsScalarFieldEnum)[keyof typeof Student_parentsScalarFieldEnum]
@@ -152,7 +170,13 @@ export const StudentsScalarFieldEnum = {
   section: 'section',
   center_id: 'center_id',
   phone: 'phone',
-  password: 'password'
+  password: 'password',
+  emailVerified: 'emailVerified',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetExpiry: 'passwordResetExpiry',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type StudentsScalarFieldEnum = (typeof StudentsScalarFieldEnum)[keyof typeof StudentsScalarFieldEnum]
@@ -163,7 +187,13 @@ export const TeachersScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
-  password: 'password'
+  password: 'password',
+  emailVerified: 'emailVerified',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetExpiry: 'passwordResetExpiry',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type TeachersScalarFieldEnum = (typeof TeachersScalarFieldEnum)[keyof typeof TeachersScalarFieldEnum]
@@ -173,7 +203,9 @@ export const AttendancesScalarFieldEnum = {
   id: 'id',
   student_id: 'student_id',
   session_id: 'session_id',
-  status: 'status'
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type AttendancesScalarFieldEnum = (typeof AttendancesScalarFieldEnum)[keyof typeof AttendancesScalarFieldEnum]
@@ -183,7 +215,11 @@ export const QuizAssignmentsScalarFieldEnum = {
   student_quiz_id: 'student_quiz_id',
   student_id: 'student_id',
   quiz_id: 'quiz_id',
-  grade: 'grade'
+  grade: 'grade',
+  gradeUpdatedAt: 'gradeUpdatedAt',
+  gradeUpdatedByName: 'gradeUpdatedByName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type QuizAssignmentsScalarFieldEnum = (typeof QuizAssignmentsScalarFieldEnum)[keyof typeof QuizAssignmentsScalarFieldEnum]
@@ -194,7 +230,11 @@ export const Homework_submissionsScalarFieldEnum = {
   student_id: 'student_id',
   homework_id: 'homework_id',
   grade: 'grade',
-  submission_date: 'submission_date'
+  submission_date: 'submission_date',
+  gradeUpdatedAt: 'gradeUpdatedAt',
+  gradeUpdatedByName: 'gradeUpdatedByName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type Homework_submissionsScalarFieldEnum = (typeof Homework_submissionsScalarFieldEnum)[keyof typeof Homework_submissionsScalarFieldEnum]

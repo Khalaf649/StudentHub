@@ -43,6 +43,8 @@ export type Student_parentsMinAggregateOutputType = {
   student_id: number | null
   parent_id: number | null
   role: $Enums.parent_role | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type Student_parentsMaxAggregateOutputType = {
@@ -50,6 +52,8 @@ export type Student_parentsMaxAggregateOutputType = {
   student_id: number | null
   parent_id: number | null
   role: $Enums.parent_role | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type Student_parentsCountAggregateOutputType = {
@@ -57,6 +61,8 @@ export type Student_parentsCountAggregateOutputType = {
   student_id: number
   parent_id: number
   role: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -78,6 +84,8 @@ export type Student_parentsMinAggregateInputType = {
   student_id?: true
   parent_id?: true
   role?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type Student_parentsMaxAggregateInputType = {
@@ -85,6 +93,8 @@ export type Student_parentsMaxAggregateInputType = {
   student_id?: true
   parent_id?: true
   role?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type Student_parentsCountAggregateInputType = {
@@ -92,6 +102,8 @@ export type Student_parentsCountAggregateInputType = {
   student_id?: true
   parent_id?: true
   role?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -186,6 +198,8 @@ export type Student_parentsGroupByOutputType = {
   student_id: number
   parent_id: number
   role: $Enums.parent_role
+  createdAt: Date
+  updatedAt: Date
   _count: Student_parentsCountAggregateOutputType | null
   _avg: Student_parentsAvgAggregateOutputType | null
   _sum: Student_parentsSumAggregateOutputType | null
@@ -216,6 +230,8 @@ export type student_parentsWhereInput = {
   student_id?: Prisma.IntFilter<"student_parents"> | number
   parent_id?: Prisma.IntFilter<"student_parents"> | number
   role?: Prisma.Enumparent_roleFilter<"student_parents"> | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFilter<"student_parents"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"student_parents"> | Date | string
   parents?: Prisma.XOR<Prisma.ParentsScalarRelationFilter, Prisma.parentsWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }
@@ -225,6 +241,8 @@ export type student_parentsOrderByWithRelationInput = {
   student_id?: Prisma.SortOrder
   parent_id?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   parents?: Prisma.parentsOrderByWithRelationInput
   students?: Prisma.studentsOrderByWithRelationInput
 }
@@ -238,6 +256,8 @@ export type student_parentsWhereUniqueInput = Prisma.AtLeast<{
   student_id?: Prisma.IntFilter<"student_parents"> | number
   parent_id?: Prisma.IntFilter<"student_parents"> | number
   role?: Prisma.Enumparent_roleFilter<"student_parents"> | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFilter<"student_parents"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"student_parents"> | Date | string
   parents?: Prisma.XOR<Prisma.ParentsScalarRelationFilter, Prisma.parentsWhereInput>
   students?: Prisma.XOR<Prisma.StudentsScalarRelationFilter, Prisma.studentsWhereInput>
 }, "id" | "student_id_parent_id_role">
@@ -247,6 +267,8 @@ export type student_parentsOrderByWithAggregationInput = {
   student_id?: Prisma.SortOrder
   parent_id?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.student_parentsCountOrderByAggregateInput
   _avg?: Prisma.student_parentsAvgOrderByAggregateInput
   _max?: Prisma.student_parentsMaxOrderByAggregateInput
@@ -262,10 +284,14 @@ export type student_parentsScalarWhereWithAggregatesInput = {
   student_id?: Prisma.IntWithAggregatesFilter<"student_parents"> | number
   parent_id?: Prisma.IntWithAggregatesFilter<"student_parents"> | number
   role?: Prisma.Enumparent_roleWithAggregatesFilter<"student_parents"> | $Enums.parent_role
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"student_parents"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"student_parents"> | Date | string
 }
 
 export type student_parentsCreateInput = {
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
   parents: Prisma.parentsCreateNestedOneWithoutStudent_parentsInput
   students: Prisma.studentsCreateNestedOneWithoutStudent_parentsInput
 }
@@ -275,10 +301,14 @@ export type student_parentsUncheckedCreateInput = {
   student_id: number
   parent_id: number
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type student_parentsUpdateInput = {
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parents?: Prisma.parentsUpdateOneRequiredWithoutStudent_parentsNestedInput
   students?: Prisma.studentsUpdateOneRequiredWithoutStudent_parentsNestedInput
 }
@@ -288,6 +318,8 @@ export type student_parentsUncheckedUpdateInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   parent_id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type student_parentsCreateManyInput = {
@@ -295,10 +327,14 @@ export type student_parentsCreateManyInput = {
   student_id: number
   parent_id: number
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type student_parentsUpdateManyMutationInput = {
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type student_parentsUncheckedUpdateManyInput = {
@@ -306,6 +342,8 @@ export type student_parentsUncheckedUpdateManyInput = {
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   parent_id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Student_parentsListRelationFilter = {
@@ -329,6 +367,8 @@ export type student_parentsCountOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   parent_id?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type student_parentsAvgOrderByAggregateInput = {
@@ -342,6 +382,8 @@ export type student_parentsMaxOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   parent_id?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type student_parentsMinOrderByAggregateInput = {
@@ -349,6 +391,8 @@ export type student_parentsMinOrderByAggregateInput = {
   student_id?: Prisma.SortOrder
   parent_id?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type student_parentsSumOrderByAggregateInput = {
@@ -447,6 +491,8 @@ export type student_parentsUncheckedUpdateManyWithoutStudentsNestedInput = {
 
 export type student_parentsCreateWithoutParentsInput = {
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
   students: Prisma.studentsCreateNestedOneWithoutStudent_parentsInput
 }
 
@@ -454,6 +500,8 @@ export type student_parentsUncheckedCreateWithoutParentsInput = {
   id?: number
   student_id: number
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type student_parentsCreateOrConnectWithoutParentsInput = {
@@ -490,10 +538,14 @@ export type student_parentsScalarWhereInput = {
   student_id?: Prisma.IntFilter<"student_parents"> | number
   parent_id?: Prisma.IntFilter<"student_parents"> | number
   role?: Prisma.Enumparent_roleFilter<"student_parents"> | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFilter<"student_parents"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"student_parents"> | Date | string
 }
 
 export type student_parentsCreateWithoutStudentsInput = {
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
   parents: Prisma.parentsCreateNestedOneWithoutStudent_parentsInput
 }
 
@@ -501,6 +553,8 @@ export type student_parentsUncheckedCreateWithoutStudentsInput = {
   id?: number
   parent_id: number
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type student_parentsCreateOrConnectWithoutStudentsInput = {
@@ -533,10 +587,14 @@ export type student_parentsCreateManyParentsInput = {
   id?: number
   student_id: number
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type student_parentsUpdateWithoutParentsInput = {
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   students?: Prisma.studentsUpdateOneRequiredWithoutStudent_parentsNestedInput
 }
 
@@ -544,22 +602,30 @@ export type student_parentsUncheckedUpdateWithoutParentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type student_parentsUncheckedUpdateManyWithoutParentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   student_id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type student_parentsCreateManyStudentsInput = {
   id?: number
   parent_id: number
   role: $Enums.parent_role
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type student_parentsUpdateWithoutStudentsInput = {
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parents?: Prisma.parentsUpdateOneRequiredWithoutStudent_parentsNestedInput
 }
 
@@ -567,12 +633,16 @@ export type student_parentsUncheckedUpdateWithoutStudentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   parent_id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type student_parentsUncheckedUpdateManyWithoutStudentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   parent_id?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.Enumparent_roleFieldUpdateOperationsInput | $Enums.parent_role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -582,6 +652,8 @@ export type student_parentsSelect<ExtArgs extends runtime.Types.Extensions.Inter
   student_id?: boolean
   parent_id?: boolean
   role?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   parents?: boolean | Prisma.parentsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student_parents"]>
@@ -591,6 +663,8 @@ export type student_parentsSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   student_id?: boolean
   parent_id?: boolean
   role?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   parents?: boolean | Prisma.parentsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student_parents"]>
@@ -600,6 +674,8 @@ export type student_parentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   student_id?: boolean
   parent_id?: boolean
   role?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   parents?: boolean | Prisma.parentsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student_parents"]>
@@ -609,9 +685,11 @@ export type student_parentsSelectScalar = {
   student_id?: boolean
   parent_id?: boolean
   role?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type student_parentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "student_id" | "parent_id" | "role", ExtArgs["result"]["student_parents"]>
+export type student_parentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "student_id" | "parent_id" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["student_parents"]>
 export type student_parentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   parents?: boolean | Prisma.parentsDefaultArgs<ExtArgs>
   students?: boolean | Prisma.studentsDefaultArgs<ExtArgs>
@@ -636,6 +714,8 @@ export type $student_parentsPayload<ExtArgs extends runtime.Types.Extensions.Int
     student_id: number
     parent_id: number
     role: $Enums.parent_role
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["student_parents"]>
   composites: {}
 }
@@ -1065,6 +1145,8 @@ export interface student_parentsFieldRefs {
   readonly student_id: Prisma.FieldRef<"student_parents", 'Int'>
   readonly parent_id: Prisma.FieldRef<"student_parents", 'Int'>
   readonly role: Prisma.FieldRef<"student_parents", 'parent_role'>
+  readonly createdAt: Prisma.FieldRef<"student_parents", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"student_parents", 'DateTime'>
 }
     
 

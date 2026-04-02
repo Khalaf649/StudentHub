@@ -6,6 +6,7 @@ export default function authorizeRole(role: string) {
       next();
     } else {
       res.status(403).json({ message: "Forbidden" });
+      return;
     }
   };
 }

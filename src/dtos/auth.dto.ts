@@ -26,6 +26,7 @@ export interface LoginDTO {
 export interface TokenDTO {
   id: number;
   role: user_role;
+  name?: string;
 }
 export interface AuthRequest extends Request {
   user?: TokenDTO;

@@ -46,6 +46,9 @@ export type HomeworksMinAggregateOutputType = {
   description: string | null
   due_date: Date | null
   full_mark: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type HomeworksMaxAggregateOutputType = {
@@ -56,6 +59,9 @@ export type HomeworksMaxAggregateOutputType = {
   description: string | null
   due_date: Date | null
   full_mark: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type HomeworksCountAggregateOutputType = {
@@ -66,6 +72,9 @@ export type HomeworksCountAggregateOutputType = {
   description: number
   due_date: number
   full_mark: number
+  createdAt: number
+  updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -90,6 +99,9 @@ export type HomeworksMinAggregateInputType = {
   description?: true
   due_date?: true
   full_mark?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type HomeworksMaxAggregateInputType = {
@@ -100,6 +112,9 @@ export type HomeworksMaxAggregateInputType = {
   description?: true
   due_date?: true
   full_mark?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type HomeworksCountAggregateInputType = {
@@ -110,6 +125,9 @@ export type HomeworksCountAggregateInputType = {
   description?: true
   due_date?: true
   full_mark?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -207,6 +225,9 @@ export type HomeworksGroupByOutputType = {
   description: string
   due_date: Date
   full_mark: number
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
   _count: HomeworksCountAggregateOutputType | null
   _avg: HomeworksAvgAggregateOutputType | null
   _sum: HomeworksSumAggregateOutputType | null
@@ -240,6 +261,9 @@ export type homeworksWhereInput = {
   description?: Prisma.StringFilter<"homeworks"> | string
   due_date?: Prisma.DateTimeFilter<"homeworks"> | Date | string
   full_mark?: Prisma.IntFilter<"homeworks"> | number
+  createdAt?: Prisma.DateTimeFilter<"homeworks"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"homeworks"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"homeworks"> | Date | string | null
   homework_submissions?: Prisma.Homework_submissionsListRelationFilter
   sessions?: Prisma.XOR<Prisma.SessionsScalarRelationFilter, Prisma.sessionsWhereInput>
 }
@@ -252,6 +276,9 @@ export type homeworksOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   homework_submissions?: Prisma.homework_submissionsOrderByRelationAggregateInput
   sessions?: Prisma.sessionsOrderByWithRelationInput
 }
@@ -267,6 +294,9 @@ export type homeworksWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"homeworks"> | string
   due_date?: Prisma.DateTimeFilter<"homeworks"> | Date | string
   full_mark?: Prisma.IntFilter<"homeworks"> | number
+  createdAt?: Prisma.DateTimeFilter<"homeworks"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"homeworks"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"homeworks"> | Date | string | null
   homework_submissions?: Prisma.Homework_submissionsListRelationFilter
   sessions?: Prisma.XOR<Prisma.SessionsScalarRelationFilter, Prisma.sessionsWhereInput>
 }, "id">
@@ -279,6 +309,9 @@ export type homeworksOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.homeworksCountOrderByAggregateInput
   _avg?: Prisma.homeworksAvgOrderByAggregateInput
   _max?: Prisma.homeworksMaxOrderByAggregateInput
@@ -297,6 +330,9 @@ export type homeworksScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"homeworks"> | string
   due_date?: Prisma.DateTimeWithAggregatesFilter<"homeworks"> | Date | string
   full_mark?: Prisma.IntWithAggregatesFilter<"homeworks"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"homeworks"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"homeworks"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"homeworks"> | Date | string | null
 }
 
 export type homeworksCreateInput = {
@@ -305,6 +341,9 @@ export type homeworksCreateInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homework_submissions?: Prisma.homework_submissionsCreateNestedManyWithoutHomeworksInput
   sessions: Prisma.sessionsCreateNestedOneWithoutHomeworksInput
 }
@@ -317,6 +356,9 @@ export type homeworksUncheckedCreateInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homework_submissions?: Prisma.homework_submissionsUncheckedCreateNestedManyWithoutHomeworksInput
 }
 
@@ -326,6 +368,9 @@ export type homeworksUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homework_submissions?: Prisma.homework_submissionsUpdateManyWithoutHomeworksNestedInput
   sessions?: Prisma.sessionsUpdateOneRequiredWithoutHomeworksNestedInput
 }
@@ -338,6 +383,9 @@ export type homeworksUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homework_submissions?: Prisma.homework_submissionsUncheckedUpdateManyWithoutHomeworksNestedInput
 }
 
@@ -349,6 +397,9 @@ export type homeworksCreateManyInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type homeworksUpdateManyMutationInput = {
@@ -357,6 +408,9 @@ export type homeworksUpdateManyMutationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type homeworksUncheckedUpdateManyInput = {
@@ -367,6 +421,9 @@ export type homeworksUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type homeworksCountOrderByAggregateInput = {
@@ -377,6 +434,9 @@ export type homeworksCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type homeworksAvgOrderByAggregateInput = {
@@ -393,6 +453,9 @@ export type homeworksMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type homeworksMinOrderByAggregateInput = {
@@ -403,6 +466,9 @@ export type homeworksMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type homeworksSumOrderByAggregateInput = {
@@ -424,10 +490,6 @@ export type homeworksOrderByRelationAggregateInput = {
 export type HomeworksScalarRelationFilter = {
   is?: Prisma.homeworksWhereInput
   isNot?: Prisma.homeworksWhereInput
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 export type homeworksCreateNestedManyWithoutSessionsInput = {
@@ -492,6 +554,9 @@ export type homeworksCreateWithoutSessionsInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homework_submissions?: Prisma.homework_submissionsCreateNestedManyWithoutHomeworksInput
 }
 
@@ -502,6 +567,9 @@ export type homeworksUncheckedCreateWithoutSessionsInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   homework_submissions?: Prisma.homework_submissionsUncheckedCreateNestedManyWithoutHomeworksInput
 }
 
@@ -542,6 +610,9 @@ export type homeworksScalarWhereInput = {
   description?: Prisma.StringFilter<"homeworks"> | string
   due_date?: Prisma.DateTimeFilter<"homeworks"> | Date | string
   full_mark?: Prisma.IntFilter<"homeworks"> | number
+  createdAt?: Prisma.DateTimeFilter<"homeworks"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"homeworks"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"homeworks"> | Date | string | null
 }
 
 export type homeworksCreateWithoutHomework_submissionsInput = {
@@ -550,6 +621,9 @@ export type homeworksCreateWithoutHomework_submissionsInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   sessions: Prisma.sessionsCreateNestedOneWithoutHomeworksInput
 }
 
@@ -561,6 +635,9 @@ export type homeworksUncheckedCreateWithoutHomework_submissionsInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type homeworksCreateOrConnectWithoutHomework_submissionsInput = {
@@ -585,6 +662,9 @@ export type homeworksUpdateWithoutHomework_submissionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.sessionsUpdateOneRequiredWithoutHomeworksNestedInput
 }
 
@@ -596,6 +676,9 @@ export type homeworksUncheckedUpdateWithoutHomework_submissionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type homeworksCreateManySessionsInput = {
@@ -605,6 +688,9 @@ export type homeworksCreateManySessionsInput = {
   description: string
   due_date: Date | string
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type homeworksUpdateWithoutSessionsInput = {
@@ -613,6 +699,9 @@ export type homeworksUpdateWithoutSessionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homework_submissions?: Prisma.homework_submissionsUpdateManyWithoutHomeworksNestedInput
 }
 
@@ -623,6 +712,9 @@ export type homeworksUncheckedUpdateWithoutSessionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   homework_submissions?: Prisma.homework_submissionsUncheckedUpdateManyWithoutHomeworksNestedInput
 }
 
@@ -633,6 +725,9 @@ export type homeworksUncheckedUpdateManyWithoutSessionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -674,6 +769,9 @@ export type homeworksSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   description?: boolean
   due_date?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   homework_submissions?: boolean | Prisma.homeworks$homework_submissionsArgs<ExtArgs>
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.HomeworksCountOutputTypeDefaultArgs<ExtArgs>
@@ -687,6 +785,9 @@ export type homeworksSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   due_date?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["homeworks"]>
 
@@ -698,6 +799,9 @@ export type homeworksSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   due_date?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["homeworks"]>
 
@@ -709,9 +813,12 @@ export type homeworksSelectScalar = {
   description?: boolean
   due_date?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type homeworksOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "session_id" | "title" | "start_date" | "description" | "due_date" | "full_mark", ExtArgs["result"]["homeworks"]>
+export type homeworksOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "session_id" | "title" | "start_date" | "description" | "due_date" | "full_mark" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["homeworks"]>
 export type homeworksInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   homework_submissions?: boolean | Prisma.homeworks$homework_submissionsArgs<ExtArgs>
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
@@ -738,6 +845,9 @@ export type $homeworksPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     description: string
     due_date: Date
     full_mark: number
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["homeworks"]>
   composites: {}
 }
@@ -1170,6 +1280,9 @@ export interface homeworksFieldRefs {
   readonly description: Prisma.FieldRef<"homeworks", 'String'>
   readonly due_date: Prisma.FieldRef<"homeworks", 'DateTime'>
   readonly full_mark: Prisma.FieldRef<"homeworks", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"homeworks", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"homeworks", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"homeworks", 'DateTime'>
 }
     
 

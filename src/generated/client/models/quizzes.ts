@@ -44,6 +44,9 @@ export type QuizzesMinAggregateOutputType = {
   description: string | null
   session_id: number | null
   full_mark: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type QuizzesMaxAggregateOutputType = {
@@ -52,6 +55,9 @@ export type QuizzesMaxAggregateOutputType = {
   description: string | null
   session_id: number | null
   full_mark: number | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type QuizzesCountAggregateOutputType = {
@@ -60,6 +66,9 @@ export type QuizzesCountAggregateOutputType = {
   description: number
   session_id: number
   full_mark: number
+  createdAt: number
+  updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -82,6 +91,9 @@ export type QuizzesMinAggregateInputType = {
   description?: true
   session_id?: true
   full_mark?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type QuizzesMaxAggregateInputType = {
@@ -90,6 +102,9 @@ export type QuizzesMaxAggregateInputType = {
   description?: true
   session_id?: true
   full_mark?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type QuizzesCountAggregateInputType = {
@@ -98,6 +113,9 @@ export type QuizzesCountAggregateInputType = {
   description?: true
   session_id?: true
   full_mark?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -193,6 +211,9 @@ export type QuizzesGroupByOutputType = {
   description: string | null
   session_id: number
   full_mark: number
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
   _count: QuizzesCountAggregateOutputType | null
   _avg: QuizzesAvgAggregateOutputType | null
   _sum: QuizzesSumAggregateOutputType | null
@@ -224,6 +245,9 @@ export type quizzesWhereInput = {
   description?: Prisma.StringNullableFilter<"quizzes"> | string | null
   session_id?: Prisma.IntFilter<"quizzes"> | number
   full_mark?: Prisma.IntFilter<"quizzes"> | number
+  createdAt?: Prisma.DateTimeFilter<"quizzes"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"quizzes"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"quizzes"> | Date | string | null
   quizAssignments?: Prisma.QuizAssignmentsListRelationFilter
   sessions?: Prisma.XOR<Prisma.SessionsScalarRelationFilter, Prisma.sessionsWhereInput>
 }
@@ -234,6 +258,9 @@ export type quizzesOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   session_id?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   quizAssignments?: Prisma.quizAssignmentsOrderByRelationAggregateInput
   sessions?: Prisma.sessionsOrderByWithRelationInput
 }
@@ -247,6 +274,9 @@ export type quizzesWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"quizzes"> | string | null
   session_id?: Prisma.IntFilter<"quizzes"> | number
   full_mark?: Prisma.IntFilter<"quizzes"> | number
+  createdAt?: Prisma.DateTimeFilter<"quizzes"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"quizzes"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"quizzes"> | Date | string | null
   quizAssignments?: Prisma.QuizAssignmentsListRelationFilter
   sessions?: Prisma.XOR<Prisma.SessionsScalarRelationFilter, Prisma.sessionsWhereInput>
 }, "id">
@@ -257,6 +287,9 @@ export type quizzesOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   session_id?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.quizzesCountOrderByAggregateInput
   _avg?: Prisma.quizzesAvgOrderByAggregateInput
   _max?: Prisma.quizzesMaxOrderByAggregateInput
@@ -273,12 +306,18 @@ export type quizzesScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"quizzes"> | string | null
   session_id?: Prisma.IntWithAggregatesFilter<"quizzes"> | number
   full_mark?: Prisma.IntWithAggregatesFilter<"quizzes"> | number
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"quizzes"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"quizzes"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"quizzes"> | Date | string | null
 }
 
 export type quizzesCreateInput = {
   title: string
   description?: string | null
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   quizAssignments?: Prisma.quizAssignmentsCreateNestedManyWithoutQuizzesInput
   sessions: Prisma.sessionsCreateNestedOneWithoutQuizzesInput
 }
@@ -289,6 +328,9 @@ export type quizzesUncheckedCreateInput = {
   description?: string | null
   session_id: number
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   quizAssignments?: Prisma.quizAssignmentsUncheckedCreateNestedManyWithoutQuizzesInput
 }
 
@@ -296,6 +338,9 @@ export type quizzesUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quizAssignments?: Prisma.quizAssignmentsUpdateManyWithoutQuizzesNestedInput
   sessions?: Prisma.sessionsUpdateOneRequiredWithoutQuizzesNestedInput
 }
@@ -306,6 +351,9 @@ export type quizzesUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   session_id?: Prisma.IntFieldUpdateOperationsInput | number
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quizAssignments?: Prisma.quizAssignmentsUncheckedUpdateManyWithoutQuizzesNestedInput
 }
 
@@ -315,12 +363,18 @@ export type quizzesCreateManyInput = {
   description?: string | null
   session_id: number
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type quizzesUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type quizzesUncheckedUpdateManyInput = {
@@ -329,6 +383,9 @@ export type quizzesUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   session_id?: Prisma.IntFieldUpdateOperationsInput | number
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type quizzesCountOrderByAggregateInput = {
@@ -337,6 +394,9 @@ export type quizzesCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type quizzesAvgOrderByAggregateInput = {
@@ -351,6 +411,9 @@ export type quizzesMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type quizzesMinOrderByAggregateInput = {
@@ -359,6 +422,9 @@ export type quizzesMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   session_id?: Prisma.SortOrder
   full_mark?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type quizzesSumOrderByAggregateInput = {
@@ -380,10 +446,6 @@ export type quizzesOrderByRelationAggregateInput = {
 export type QuizzesScalarRelationFilter = {
   is?: Prisma.quizzesWhereInput
   isNot?: Prisma.quizzesWhereInput
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type quizzesCreateNestedManyWithoutSessionsInput = {
@@ -446,6 +508,9 @@ export type quizzesCreateWithoutSessionsInput = {
   title: string
   description?: string | null
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   quizAssignments?: Prisma.quizAssignmentsCreateNestedManyWithoutQuizzesInput
 }
 
@@ -454,6 +519,9 @@ export type quizzesUncheckedCreateWithoutSessionsInput = {
   title: string
   description?: string | null
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   quizAssignments?: Prisma.quizAssignmentsUncheckedCreateNestedManyWithoutQuizzesInput
 }
 
@@ -492,12 +560,18 @@ export type quizzesScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"quizzes"> | string | null
   session_id?: Prisma.IntFilter<"quizzes"> | number
   full_mark?: Prisma.IntFilter<"quizzes"> | number
+  createdAt?: Prisma.DateTimeFilter<"quizzes"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"quizzes"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"quizzes"> | Date | string | null
 }
 
 export type quizzesCreateWithoutQuizAssignmentsInput = {
   title: string
   description?: string | null
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   sessions: Prisma.sessionsCreateNestedOneWithoutQuizzesInput
 }
 
@@ -507,6 +581,9 @@ export type quizzesUncheckedCreateWithoutQuizAssignmentsInput = {
   description?: string | null
   session_id: number
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type quizzesCreateOrConnectWithoutQuizAssignmentsInput = {
@@ -529,6 +606,9 @@ export type quizzesUpdateWithoutQuizAssignmentsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.sessionsUpdateOneRequiredWithoutQuizzesNestedInput
 }
 
@@ -538,6 +618,9 @@ export type quizzesUncheckedUpdateWithoutQuizAssignmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   session_id?: Prisma.IntFieldUpdateOperationsInput | number
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type quizzesCreateManySessionsInput = {
@@ -545,12 +628,18 @@ export type quizzesCreateManySessionsInput = {
   title: string
   description?: string | null
   full_mark: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type quizzesUpdateWithoutSessionsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quizAssignments?: Prisma.quizAssignmentsUpdateManyWithoutQuizzesNestedInput
 }
 
@@ -559,6 +648,9 @@ export type quizzesUncheckedUpdateWithoutSessionsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   quizAssignments?: Prisma.quizAssignmentsUncheckedUpdateManyWithoutQuizzesNestedInput
 }
 
@@ -567,6 +659,9 @@ export type quizzesUncheckedUpdateManyWithoutSessionsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   full_mark?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -606,6 +701,9 @@ export type quizzesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   description?: boolean
   session_id?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   quizAssignments?: boolean | Prisma.quizzes$quizAssignmentsArgs<ExtArgs>
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.QuizzesCountOutputTypeDefaultArgs<ExtArgs>
@@ -617,6 +715,9 @@ export type quizzesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   session_id?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quizzes"]>
 
@@ -626,6 +727,9 @@ export type quizzesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   description?: boolean
   session_id?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["quizzes"]>
 
@@ -635,9 +739,12 @@ export type quizzesSelectScalar = {
   description?: boolean
   session_id?: boolean
   full_mark?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type quizzesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "session_id" | "full_mark", ExtArgs["result"]["quizzes"]>
+export type quizzesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "session_id" | "full_mark" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["quizzes"]>
 export type quizzesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   quizAssignments?: boolean | Prisma.quizzes$quizAssignmentsArgs<ExtArgs>
   sessions?: boolean | Prisma.sessionsDefaultArgs<ExtArgs>
@@ -662,6 +769,9 @@ export type $quizzesPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     description: string | null
     session_id: number
     full_mark: number
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["quizzes"]>
   composites: {}
 }
@@ -1092,6 +1202,9 @@ export interface quizzesFieldRefs {
   readonly description: Prisma.FieldRef<"quizzes", 'String'>
   readonly session_id: Prisma.FieldRef<"quizzes", 'Int'>
   readonly full_mark: Prisma.FieldRef<"quizzes", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"quizzes", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"quizzes", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"quizzes", 'DateTime'>
 }
     
 

@@ -56,6 +56,19 @@ class TeacherSessionController {
       next(err);
     }
   }
+
+  async deleteSession(req: AuthRequest, res: Response, next: NextFunction) {
+    const id: number = parseInt(req.params.id);
+    try {
+      if (isNaN(id)) {
+        throw new AppError("Invalid session ID", 400);
+      }
+      await this.teacherSessionService.deleteSession(id);
+      res.status(200).json({ message: "Session deleted successfully" });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 const teacherSessionService = new TeacherSessionService();
@@ -73,6 +86,9 @@ export const getSessions = teacherSessionController.getSessions.bind(
   teacherSessionController,
 );
 export const updateSession = teacherSessionController.updateSession.bind(
+  teacherSessionController,
+);
+export const deleteSession = teacherSessionController.deleteSession.bind(
   teacherSessionController,
 );
 

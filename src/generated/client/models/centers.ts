@@ -39,6 +39,9 @@ export type CentersMinAggregateOutputType = {
   name: string | null
   location: string | null
   phone: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type CentersMaxAggregateOutputType = {
@@ -46,6 +49,9 @@ export type CentersMaxAggregateOutputType = {
   name: string | null
   location: string | null
   phone: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type CentersCountAggregateOutputType = {
@@ -53,6 +59,9 @@ export type CentersCountAggregateOutputType = {
   name: number
   location: number
   phone: number
+  createdAt: number
+  updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -70,6 +79,9 @@ export type CentersMinAggregateInputType = {
   name?: true
   location?: true
   phone?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type CentersMaxAggregateInputType = {
@@ -77,6 +89,9 @@ export type CentersMaxAggregateInputType = {
   name?: true
   location?: true
   phone?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
 }
 
 export type CentersCountAggregateInputType = {
@@ -84,6 +99,9 @@ export type CentersCountAggregateInputType = {
   name?: true
   location?: true
   phone?: true
+  createdAt?: true
+  updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -178,6 +196,9 @@ export type CentersGroupByOutputType = {
   name: string
   location: string
   phone: string
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
   _count: CentersCountAggregateOutputType | null
   _avg: CentersAvgAggregateOutputType | null
   _sum: CentersSumAggregateOutputType | null
@@ -208,6 +229,9 @@ export type centersWhereInput = {
   name?: Prisma.StringFilter<"centers"> | string
   location?: Prisma.StringFilter<"centers"> | string
   phone?: Prisma.StringFilter<"centers"> | string
+  createdAt?: Prisma.DateTimeFilter<"centers"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"centers"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"centers"> | Date | string | null
   sessions?: Prisma.SessionsListRelationFilter
   students?: Prisma.StudentsListRelationFilter
 }
@@ -217,6 +241,9 @@ export type centersOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   sessions?: Prisma.sessionsOrderByRelationAggregateInput
   students?: Prisma.studentsOrderByRelationAggregateInput
 }
@@ -229,6 +256,9 @@ export type centersWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.centersWhereInput | Prisma.centersWhereInput[]
   name?: Prisma.StringFilter<"centers"> | string
   location?: Prisma.StringFilter<"centers"> | string
+  createdAt?: Prisma.DateTimeFilter<"centers"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"centers"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"centers"> | Date | string | null
   sessions?: Prisma.SessionsListRelationFilter
   students?: Prisma.StudentsListRelationFilter
 }, "id" | "phone">
@@ -238,6 +268,9 @@ export type centersOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.centersCountOrderByAggregateInput
   _avg?: Prisma.centersAvgOrderByAggregateInput
   _max?: Prisma.centersMaxOrderByAggregateInput
@@ -253,12 +286,18 @@ export type centersScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"centers"> | string
   location?: Prisma.StringWithAggregatesFilter<"centers"> | string
   phone?: Prisma.StringWithAggregatesFilter<"centers"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"centers"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"centers"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"centers"> | Date | string | null
 }
 
 export type centersCreateInput = {
   name: string
   location: string
   phone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   sessions?: Prisma.sessionsCreateNestedManyWithoutCentersInput
   students?: Prisma.studentsCreateNestedManyWithoutCentersInput
 }
@@ -268,6 +307,9 @@ export type centersUncheckedCreateInput = {
   name: string
   location: string
   phone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutCentersInput
   students?: Prisma.studentsUncheckedCreateNestedManyWithoutCentersInput
 }
@@ -276,6 +318,9 @@ export type centersUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.sessionsUpdateManyWithoutCentersNestedInput
   students?: Prisma.studentsUpdateManyWithoutCentersNestedInput
 }
@@ -285,6 +330,9 @@ export type centersUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.sessionsUncheckedUpdateManyWithoutCentersNestedInput
   students?: Prisma.studentsUncheckedUpdateManyWithoutCentersNestedInput
 }
@@ -294,12 +342,18 @@ export type centersCreateManyInput = {
   name: string
   location: string
   phone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type centersUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type centersUncheckedUpdateManyInput = {
@@ -307,6 +361,9 @@ export type centersUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type centersCountOrderByAggregateInput = {
@@ -314,6 +371,9 @@ export type centersCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type centersAvgOrderByAggregateInput = {
@@ -325,6 +385,9 @@ export type centersMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type centersMinOrderByAggregateInput = {
@@ -332,6 +395,9 @@ export type centersMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   location?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type centersSumOrderByAggregateInput = {
@@ -345,6 +411,14 @@ export type CentersScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -387,6 +461,9 @@ export type centersCreateWithoutSessionsInput = {
   name: string
   location: string
   phone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   students?: Prisma.studentsCreateNestedManyWithoutCentersInput
 }
 
@@ -395,6 +472,9 @@ export type centersUncheckedCreateWithoutSessionsInput = {
   name: string
   location: string
   phone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   students?: Prisma.studentsUncheckedCreateNestedManyWithoutCentersInput
 }
 
@@ -418,6 +498,9 @@ export type centersUpdateWithoutSessionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   students?: Prisma.studentsUpdateManyWithoutCentersNestedInput
 }
 
@@ -426,6 +509,9 @@ export type centersUncheckedUpdateWithoutSessionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   students?: Prisma.studentsUncheckedUpdateManyWithoutCentersNestedInput
 }
 
@@ -433,6 +519,9 @@ export type centersCreateWithoutStudentsInput = {
   name: string
   location: string
   phone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   sessions?: Prisma.sessionsCreateNestedManyWithoutCentersInput
 }
 
@@ -441,6 +530,9 @@ export type centersUncheckedCreateWithoutStudentsInput = {
   name: string
   location: string
   phone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
   sessions?: Prisma.sessionsUncheckedCreateNestedManyWithoutCentersInput
 }
 
@@ -464,6 +556,9 @@ export type centersUpdateWithoutStudentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.sessionsUpdateManyWithoutCentersNestedInput
 }
 
@@ -472,6 +567,9 @@ export type centersUncheckedUpdateWithoutStudentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sessions?: Prisma.sessionsUncheckedUpdateManyWithoutCentersNestedInput
 }
 
@@ -520,6 +618,9 @@ export type centersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   location?: boolean
   phone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
   sessions?: boolean | Prisma.centers$sessionsArgs<ExtArgs>
   students?: boolean | Prisma.centers$studentsArgs<ExtArgs>
   _count?: boolean | Prisma.CentersCountOutputTypeDefaultArgs<ExtArgs>
@@ -530,6 +631,9 @@ export type centersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   location?: boolean
   phone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["centers"]>
 
 export type centersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -537,6 +641,9 @@ export type centersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   location?: boolean
   phone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["centers"]>
 
 export type centersSelectScalar = {
@@ -544,9 +651,12 @@ export type centersSelectScalar = {
   name?: boolean
   location?: boolean
   phone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type centersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "phone", ExtArgs["result"]["centers"]>
+export type centersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "location" | "phone" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["centers"]>
 export type centersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.centers$sessionsArgs<ExtArgs>
   students?: boolean | Prisma.centers$studentsArgs<ExtArgs>
@@ -566,6 +676,9 @@ export type $centersPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     name: string
     location: string
     phone: string
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["centers"]>
   composites: {}
 }
@@ -995,6 +1108,9 @@ export interface centersFieldRefs {
   readonly name: Prisma.FieldRef<"centers", 'String'>
   readonly location: Prisma.FieldRef<"centers", 'String'>
   readonly phone: Prisma.FieldRef<"centers", 'String'>
+  readonly createdAt: Prisma.FieldRef<"centers", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"centers", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"centers", 'DateTime'>
 }
     
 

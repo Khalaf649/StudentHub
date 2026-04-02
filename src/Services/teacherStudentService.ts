@@ -10,7 +10,7 @@ const ITEMS_PER_PAGE = parseInt(process.env.ITEMS_PER_PAGE || "10", 10);
 
 class TeacherStudentService implements ITeacherStudentService {
   async getStudents(filters: StudentFilters): Promise<StudentDTO[]> {
-    const where: StudentWhereInput = {};
+    const where: any = {};
     // Existing filters
     where.section = filters.section || undefined;
     where.center_id = Number(filters.center_id) || undefined;
@@ -40,11 +40,11 @@ class TeacherStudentService implements ITeacherStudentService {
     }
 
     if (filters.quiz_id) {
-      where.student_quizzes = {
+      where.quizAssignments = {
         some: {
           quiz_id: filters.quiz_id,
         },
-      };
+      } as any;
     }
     const skip =
       (filters.page && filters.page > 0 ? filters.page - 1 : 0) *

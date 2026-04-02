@@ -80,6 +80,15 @@ class TeacherSessionService implements ITeacherSessionService {
       },
     });
   }
+
+  async deleteSession(id: number): Promise<void> {
+    await prisma.sessions.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
+  }
 }
 
 export default TeacherSessionService;

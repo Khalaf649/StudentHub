@@ -57,6 +57,27 @@ class TeacherQuizService implements ITeacherQuizService {
 
     return quizzes;
   }
+
+  async updateQuiz(id: number, data: CreateQuizDTO): Promise<void> {
+    const { title, description, full_mark } = data;
+    await prisma.quizzes.update({
+      where: { id },
+      data: {
+        ...(title && { title }),
+        ...(description && { description }),
+        ...(full_mark && { full_mark }),
+      },
+    });
+  }
+
+  async deleteQuiz(id: number): Promise<void> {
+    await prisma.quizzes.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
+  }
 }
 
 export default TeacherQuizService;
