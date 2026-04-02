@@ -18,7 +18,7 @@ import { ResponseHandler } from "../utils/responseWrapper.ts";
 
 class TeacherHomeworkController {
   constructor(
-    private readonly teacherHomeworkService: ITeacherHomeworkService
+    private readonly teacherHomeworkService: ITeacherHomeworkService,
   ) {}
 
   async createHomework(req: AuthRequest, res: Response, next: NextFunction) {
@@ -156,23 +156,23 @@ class TeacherHomeworkController {
 
 const teacherHomeworkService = new TeacherHomeworkService();
 const teacherHomeworkController = new TeacherHomeworkController(
-  teacherHomeworkService
+  teacherHomeworkService,
 );
 
 export const createHomework = teacherHomeworkController.createHomework.bind(
-  teacherHomeworkController
+  teacherHomeworkController,
 );
 export const assignHomework = teacherHomeworkController.assignHomework.bind(
-  teacherHomeworkController
+  teacherHomeworkController,
 );
 export const getHomeworks = teacherHomeworkController.getHomeworks.bind(
-  teacherHomeworkController
+  teacherHomeworkController,
 );
 export const updateHomework = teacherHomeworkController.updateHomework.bind(
-  teacherHomeworkController
+  teacherHomeworkController,
 );
 export const deleteHomework = teacherHomeworkController.deleteHomework.bind(
-  teacherHomeworkController
+  teacherHomeworkController,
 );
 export const gradeHomeworkSubmission =
   teacherHomeworkController.gradeHomeworkSubmission.bind(

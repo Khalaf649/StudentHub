@@ -42,9 +42,8 @@ class TeacherQuizController {
   async getQuizzes(req: AuthRequest, res: Response, next: NextFunction) {
     const filters: QuizFilters = req.query;
     try {
-      const quizzes: QuizDTO[] = await this.teacherQuizService.getQuizzes(
-        filters
-      );
+      const quizzes: QuizDTO[] =
+        await this.teacherQuizService.getQuizzes(filters);
       res.status(200).json(quizzes);
     } catch (err) {
       next(err);
@@ -153,23 +152,22 @@ class TeacherQuizController {
 
 export default TeacherQuizController;
 export const teacherQuizController = new TeacherQuizController(
-  new TeacherQuizService()
+  new TeacherQuizService(),
 );
 export const createQuiz = teacherQuizController.createQuiz.bind(
-  teacherQuizController
+  teacherQuizController,
 );
 export const assignQuiz = teacherQuizController.assignQuiz.bind(
-  teacherQuizController
+  teacherQuizController,
 );
 export const getQuizzes = teacherQuizController.getQuizzes.bind(
-  teacherQuizController
+  teacherQuizController,
 );
 export const updateQuiz = teacherQuizController.updateQuiz.bind(
-  teacherQuizController
+  teacherQuizController,
 );
 export const deleteQuiz = teacherQuizController.deleteQuiz.bind(
-  teacherQuizController
+  teacherQuizController,
 );
-export const gradeQuizAssignment = teacherQuizController.gradeQuizAssignment.bind(
-  teacherQuizController
-);
+export const gradeQuizAssignment =
+  teacherQuizController.gradeQuizAssignment.bind(teacherQuizController);
