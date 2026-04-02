@@ -9,7 +9,6 @@ import bodyParser from "body-parser";
 import TeacherRouter from "./Routes/teacherRoutes.ts";
 import AuthRouter from "./Routes/authRoutes.ts";
 import StudentRouter from "./Routes/studentRoutes.ts";
-import StudentProfileRouter from "./Routes/studentProfileRoutes.ts";
 import ParentRouter from "./Routes/parentRoutes.ts";
 import AdminRouter from "./Routes/adminRoutes.ts";
 import TeacherAnalyticsRouter from "./Routes/teacherAnalyticsRoutes.ts";
@@ -29,7 +28,6 @@ async function startServer() {
 
   // REST routes
   app.use("/student", StudentRouter);
-  app.use("/student/profile", StudentProfileRouter);
   app.use("/teacher", TeacherRouter);
   app.use("/teacher/analytics", TeacherAnalyticsRouter);
   app.use("/parent", ParentRouter);

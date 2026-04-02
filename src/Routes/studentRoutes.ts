@@ -4,11 +4,18 @@ import {
   getStudentHomeworks,
   createStudentParent,
   getStudentQuizzes,
-  //getStudentTrials,
-  //getStudentCenter,
   getStudentParents,
   getStudentInfo,
-} from "../Controllers/studentController.js";
+} from "../Controllers/studentController.ts";
+import {
+  updateProfile,
+  changePassword,
+  getGrades,
+  getAttendance,
+  getHomeworkDetail,
+  getQuizDetail,
+  deleteAccount,
+} from "../Controllers/studentProfileController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
 import { parentValidator } from "../Validations/parentValidator.ts";
@@ -19,17 +26,30 @@ const router = Router();
 // Apply auth and role middleware to all routes below
 router.use(authMiddleware, roleMiddleware("student"));
 
+// Basic student info routes
+router.get("/info", getStudentInfo);
+router.put("/profile", updateProfile);
+router.post("/change-password", changePassword);
+router.delete("/account", deleteAccount);
+
+// Academic routes
 router.get("/sessions", getStudentSessions);
 router.get("/homeworks", getStudentHomeworks);
+router.get("/homeworks/:id", getHomeworkDetail);
+router.get("/quizzes", getStudentQuizzes);
+router.get("/quizzes/:id", getQuizDetail);
+
+// Parent linkage routes
 router.post(
   "/parents",
   parentValidator,
   validationMiddleware,
   createStudentParent,
 );
-
-router.get("/quizzes", getStudentQuizzes);
 router.get("/parents", getStudentParents);
-router.get("/info", getStudentInfo);
+
+// Grades and attendance
+router.get("/grades", getGrades);
+router.get("/attendance", getAttendance);
 
 export default router;

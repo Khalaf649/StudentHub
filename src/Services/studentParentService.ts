@@ -12,7 +12,7 @@ const SALT_ROUNDS = 10;
 class StudentParentService implements IStudentParentService {
   async createStudentParent(
     studentId: number,
-    data: createStudentParentDTO
+    data: createStudentParentDTO,
   ): Promise<void> {
     const { name, phone, relationship, email, password } = data as any;
 
