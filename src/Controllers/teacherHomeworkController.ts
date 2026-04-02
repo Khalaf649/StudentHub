@@ -12,8 +12,6 @@ import {
   GradeHomeworkSubmissionDTO,
 } from "../dtos/teacherExtended.dto.ts";
 import TeacherHomeworkService from "../Services/teacherHomeworkService.ts";
-import prisma from "../lib/prisma.ts";
-import { AppError } from "../errors/AppError.ts";
 import { ResponseHandler } from "../utils/responseWrapper.ts";
 
 class TeacherHomeworkController {
@@ -57,24 +55,7 @@ class TeacherHomeworkController {
       const homeworkId = Number(req.params.id);
       const data: UpdateHomeworkDTO = req.body;
 
-      const homework = await prisma.homeworks.findUnique({
-        where: { id: homeworkId },
-      });
-
-      if (!homework) {
-        throw new AppError("Homework not found", 404);
-      }
-
-      await prisma.homeworks.update({
-        where: { id: homeworkId },
-        data: {
-          ...(data.title && { title: data.title }),
-          ...(data.description && { description: data.description }),
-          ...(data.start_date && { start_date: data.start_date }),
-          ...(data.due_date && { due_date: data.due_date }),
-          ...(data.full_mark && { full_mark: data.full_mark }),
-        },
-      });
+      await this.teacherHomeworkService.updateHomework(homeworkId, data);
 
       res
         .status(200)
@@ -88,19 +69,7 @@ class TeacherHomeworkController {
     try {
       const homeworkId = Number(req.params.id);
 
-      const homework = await prisma.homeworks.findUnique({
-        where: { id: homeworkId },
-      });
-
-      if (!homework) {
-        throw new AppError("Homework not found", 404);
-      }
-
-      // Soft delete
-      await prisma.homeworks.update({
-        where: { id: homeworkId },
-        data: { deletedAt: new Date() },
-      });
+      await this.teacherHomeworkService.deleteHomework(homeworkId);
 
       res
         .status(200)
@@ -118,32 +87,10 @@ class TeacherHomeworkController {
     try {
       const data: GradeHomeworkSubmissionDTO = req.body;
 
-      const submission = await prisma.homework_submissions.findUnique({
-        where: {
-          student_id_homework_id: {
-            student_id: data.student_id,
-            homework_id: data.homework_id,
-          },
-        },
-      });
-
-      if (!submission) {
-        throw new AppError("Homework submission not found", 404);
-      }
-
-      await prisma.homework_submissions.update({
-        where: {
-          student_id_homework_id: {
-            student_id: data.student_id,
-            homework_id: data.homework_id,
-          },
-        },
-        data: {
-          grade: data.grade,
-          gradeUpdatedAt: new Date(),
-          gradeUpdatedByName: req.user?.name,
-        },
-      });
+      await this.teacherHomeworkService.gradeHomeworkSubmission(
+        data,
+        req.user?.name,
+      );
 
       res
         .status(200)

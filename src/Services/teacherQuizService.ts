@@ -5,7 +5,12 @@ import {
   QuizDTO,
   QuizFilters,
 } from "../dtos/teacherQuiz.dto.ts";
+import {
+  UpdateQuizDTO,
+  GradeQuizAssignmentDTO,
+} from "../dtos/teacherExtended.dto.ts";
 import { ITeacherQuizService } from "./interfaces/teacherQuiz.service.interface.ts";
+import { AppError } from "../errors/AppError.ts";
 
 class TeacherQuizService implements ITeacherQuizService {
   async createQuiz(data: CreateQuizDTO): Promise<void> {
@@ -19,6 +24,7 @@ class TeacherQuizService implements ITeacherQuizService {
       },
     });
   }
+
   async assignQuiz(data: AssignQuizDTO): Promise<void> {
     const { student_id, quiz_id, grade } = data;
     await prisma.quizAssignments.create({
@@ -29,6 +35,7 @@ class TeacherQuizService implements ITeacherQuizService {
       },
     });
   }
+
   async getQuizzes(filters: QuizFilters): Promise<QuizDTO[]> {
     const where: any = {};
 
@@ -58,7 +65,7 @@ class TeacherQuizService implements ITeacherQuizService {
     return quizzes;
   }
 
-  async updateQuiz(id: number, data: CreateQuizDTO): Promise<void> {
+  async updateQuiz(id: number, data: UpdateQuizDTO): Promise<void> {
     const { title, description, full_mark } = data;
     await prisma.quizzes.update({
       where: { id },
@@ -75,6 +82,38 @@ class TeacherQuizService implements ITeacherQuizService {
       where: { id },
       data: {
         deletedAt: new Date(),
+      },
+    });
+  }
+
+  async gradeQuizAssignment(
+    data: GradeQuizAssignmentDTO,
+    graderName?: string,
+  ): Promise<void> {
+    const assignment = await prisma.quizAssignments.findUnique({
+      where: {
+        student_id_quiz_id: {
+          student_id: data.student_id,
+          quiz_id: data.quiz_id,
+        },
+      },
+    });
+
+    if (!assignment) {
+      throw new AppError("Quiz assignment not found", 404);
+    }
+
+    await prisma.quizAssignments.update({
+      where: {
+        student_id_quiz_id: {
+          student_id: data.student_id,
+          quiz_id: data.quiz_id,
+        },
+      },
+      data: {
+        grade: data.grade,
+        gradeUpdatedAt: new Date(),
+        gradeUpdatedByName: graderName,
       },
     });
   }

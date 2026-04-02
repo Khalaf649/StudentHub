@@ -9,7 +9,7 @@
  *   schemas:
  *     UserRole:
  *       type: string
- *       enum: [student, teacher]
+ *       enum: [student, teacher, admin, parent]
  *     Section:
  *       type: string
  *       enum: [first_sec, second_sec_scientific, second_sec_literary, third_sec]
@@ -19,6 +19,9 @@
  *     AttendanceStatus:
  *       type: string
  *       enum: [present, absent]
+ *     LinkageStatus:
+ *       type: string
+ *       enum: [active, pending, inactive]
  *     LoginDto:
  *       type: object
  *       properties:
@@ -45,6 +48,47 @@
  *         center_id:
  *           type: integer
  *       required: [name,phone,email,password,section,center_id]
+ *     RegisterTeacherDto:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *         phone:
+ *           type: string
+ *       required: [name,email,password,phone]
+ *     RegisterAdminDto:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *         phone:
+ *           type: string
+ *       required: [name,email,password,phone]
+ *     RegisterParentDto:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *         phone:
+ *           type: string
+ *         relationship:
+ *           $ref: '#/components/schemas/ParentRole'
+ *       required: [name,email,password,phone,relationship]
  *     LoginResponseDto:
  *       type: object
  *       properties:
@@ -63,6 +107,33 @@
  *             role:
  *               $ref: '#/components/schemas/UserRole'
  *       required: [token,user]
+ *     UpdateProfileDto:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         phone:
+ *           type: string
+ *     ChangePasswordDto:
+ *       type: object
+ *       properties:
+ *         oldPassword:
+ *           type: string
+ *         newPassword:
+ *           type: string
+ *       required: [oldPassword,newPassword]
+ *     GradeHomeworkDto:
+ *       type: object
+ *       properties:
+ *         grade:
+ *           type: number
+ *       required: [grade]
+ *     GradeQuizDto:
+ *       type: object
+ *       properties:
+ *         grade:
+ *           type: number
+ *       required: [grade]
  *     TokenDto:
  *       type: object
  *       properties:
@@ -202,6 +273,23 @@
  *             id:
  *               type: integer
  *           required: [id]
+ *     UpdateCenterDto:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         location:
+ *           type: string
+ *         phone:
+ *           type: string
+ *     GetCenterNameOnlyDto:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         name:
+ *           type: string
+ *       required: [id,name]
  *     CreateHomeworkDto:
  *       type: object
  *       properties:
@@ -511,7 +599,7 @@
 
 /**
  * @openapi
- * /auth/register:
+ * /auth/register/student:
  *   post:
  *     tags: [Auth]
  *     summary: Register a new student account
@@ -524,6 +612,48 @@
  *     responses:
  *       '201':
  *         description: student registered successfully
+ *
+ * /auth/register/teacher:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Register a new teacher account
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RegisterTeacherDto'
+ *     responses:
+ *       '201':
+ *         description: teacher registered successfully
+ *
+ * /auth/register/admin:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Register a new admin account
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RegisterAdminDto'
+ *     responses:
+ *       '201':
+ *         description: admin registered successfully
+ *
+ * /auth/register/parent:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Register a new parent account
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/RegisterParentDto'
+ *     responses:
+ *       '201':
+ *         description: parent registered successfully
  */
 
 /**
@@ -630,7 +760,7 @@
  * /teacher/center:
  *   get:
  *     tags: [Teacher Center]
- *     summary: List all centers
+ *     summary: List all centers with all fields
  *     security: [{ bearerAuth: [] }]
  *     responses:
  *       '200':
@@ -654,6 +784,53 @@
  *     responses:
  *       '201':
  *         description: center created
+ * /teacher/center/student-view:
+ *   get:
+ *     tags: [Teacher Center]
+ *     summary: List all centers with name only (for student registration)
+ *     security: [{ bearerAuth: [] }]
+ *     responses:
+ *       '200':
+ *         description: array of centers with name only
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/GetCenterNameOnlyDto'
+ * /teacher/center/{id}:
+ *   put:
+ *     tags: [Teacher Center]
+ *     summary: Update a center
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateCenterDto'
+ *     responses:
+ *       '200':
+ *         description: center updated successfully
+ *   delete:
+ *     tags: [Teacher Center]
+ *     summary: Delete a center
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: center deleted successfully
  */
 
 /**
@@ -712,6 +889,59 @@
  *     responses:
  *       '200':
  *         description: homework assigned
+ * /teacher/homework/{id}:
+ *   put:
+ *     tags: [Teacher Homework]
+ *     summary: Update a homework entry
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateHomeworkDto'
+ *     responses:
+ *       '200':
+ *         description: homework updated
+ *   delete:
+ *     tags: [Teacher Homework]
+ *     summary: Delete a homework entry
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: homework deleted
+ * /teacher/homework/{id}/grade:
+ *   put:
+ *     tags: [Teacher Homework]
+ *     summary: Grade a homework submission
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/GradeHomeworkDto'
+ *     responses:
+ *       '200':
+ *         description: homework graded
  */
 
 /**
@@ -770,6 +1000,59 @@
  *     responses:
  *       '200':
  *         description: quiz assigned
+ * /teacher/quiz/{id}:
+ *   put:
+ *     tags: [Teacher Quiz]
+ *     summary: Update a quiz
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateQuizDto'
+ *     responses:
+ *       '200':
+ *         description: quiz updated
+ *   delete:
+ *     tags: [Teacher Quiz]
+ *     summary: Delete a quiz
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       '200':
+ *         description: quiz deleted
+ * /teacher/quiz/{id}/grade:
+ *   put:
+ *     tags: [Teacher Quiz]
+ *     summary: Grade a quiz assignment
+ *     security: [{ bearerAuth: [] }]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/GradeQuizDto'
+ *     responses:
+ *       '200':
+ *         description: quiz graded
  */
 
 /**

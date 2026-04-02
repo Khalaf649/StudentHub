@@ -6,6 +6,11 @@ import {
   HomeworkFilters,
   HomeworkDTO,
 } from "../dtos/teacherHomework.dto.ts";
+import {
+  UpdateHomeworkDTO,
+  GradeHomeworkSubmissionDTO,
+} from "../dtos/teacherExtended.dto.ts";
+import { AppError } from "../errors/AppError.ts";
 
 class TeacherHomeworkService implements ITeacherHomeworkService {
   async createHomework(data: CreateHomeworkDTO): Promise<void> {
@@ -23,6 +28,7 @@ class TeacherHomeworkService implements ITeacherHomeworkService {
       },
     });
   }
+
   async assignHomework(data: AssignHomeworkDTO): Promise<void> {
     const { student_id, homework_id, grade, submission_date } = data;
 
@@ -35,6 +41,7 @@ class TeacherHomeworkService implements ITeacherHomeworkService {
       },
     });
   }
+
   async getHomeworks(filters: HomeworkFilters): Promise<HomeworkDTO[]> {
     const where: any = {};
 
@@ -64,6 +71,78 @@ class TeacherHomeworkService implements ITeacherHomeworkService {
     });
 
     return homeworks;
+  }
+
+  async updateHomework(
+    homeworkId: number,
+    data: UpdateHomeworkDTO,
+  ): Promise<void> {
+    const homework = await prisma.homeworks.findUnique({
+      where: { id: homeworkId },
+    });
+
+    if (!homework) {
+      throw new AppError("Homework not found", 404);
+    }
+
+    await prisma.homeworks.update({
+      where: { id: homeworkId },
+      data: {
+        ...(data.title && { title: data.title }),
+        ...(data.description && { description: data.description }),
+        ...(data.start_date && { start_date: data.start_date }),
+        ...(data.due_date && { due_date: data.due_date }),
+        ...(data.full_mark && { full_mark: data.full_mark }),
+      },
+    });
+  }
+
+  async deleteHomework(homeworkId: number): Promise<void> {
+    const homework = await prisma.homeworks.findUnique({
+      where: { id: homeworkId },
+    });
+
+    if (!homework) {
+      throw new AppError("Homework not found", 404);
+    }
+
+    // Soft delete
+    await prisma.homeworks.update({
+      where: { id: homeworkId },
+      data: { deletedAt: new Date() },
+    });
+  }
+
+  async gradeHomeworkSubmission(
+    data: GradeHomeworkSubmissionDTO,
+    graderName?: string,
+  ): Promise<void> {
+    const submission = await prisma.homework_submissions.findUnique({
+      where: {
+        student_id_homework_id: {
+          student_id: data.student_id,
+          homework_id: data.homework_id,
+        },
+      },
+    });
+
+    if (!submission) {
+      throw new AppError("Homework submission not found", 404);
+    }
+
+    await prisma.homework_submissions.update({
+      where: {
+        student_id_homework_id: {
+          student_id: data.student_id,
+          homework_id: data.homework_id,
+        },
+      },
+      data: {
+        grade: data.grade,
+        gradeUpdatedAt: new Date(),
+        gradeUpdatedByName: graderName,
+      },
+    });
   }
 }
 export default TeacherHomeworkService;

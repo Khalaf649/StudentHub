@@ -12,8 +12,6 @@ import {
   GradeQuizAssignmentDTO,
 } from "../dtos/teacherExtended.dto.ts";
 import TeacherQuizService from "../Services/teacherQuizService.ts";
-import prisma from "../lib/prisma.ts";
-import { AppError } from "../errors/AppError.ts";
 import { ResponseHandler } from "../utils/responseWrapper.ts";
 
 class TeacherQuizController {
@@ -55,22 +53,7 @@ class TeacherQuizController {
       const quizId = Number(req.params.id);
       const data: UpdateQuizDTO = req.body;
 
-      const quiz = await prisma.quizzes.findUnique({
-        where: { id: quizId },
-      });
-
-      if (!quiz) {
-        throw new AppError("Quiz not found", 404);
-      }
-
-      await prisma.quizzes.update({
-        where: { id: quizId },
-        data: {
-          ...(data.title && { title: data.title }),
-          ...(data.description && { description: data.description }),
-          ...(data.full_mark && { full_mark: data.full_mark }),
-        },
-      });
+      await this.teacherQuizService.updateQuiz(quizId, data);
 
       res
         .status(200)
@@ -84,19 +67,7 @@ class TeacherQuizController {
     try {
       const quizId = Number(req.params.id);
 
-      const quiz = await prisma.quizzes.findUnique({
-        where: { id: quizId },
-      });
-
-      if (!quiz) {
-        throw new AppError("Quiz not found", 404);
-      }
-
-      // Soft delete
-      await prisma.quizzes.update({
-        where: { id: quizId },
-        data: { deletedAt: new Date() },
-      });
+      await this.teacherQuizService.deleteQuiz(quizId);
 
       res
         .status(200)
@@ -114,32 +85,7 @@ class TeacherQuizController {
     try {
       const data: GradeQuizAssignmentDTO = req.body;
 
-      const assignment = await prisma.quizAssignments.findUnique({
-        where: {
-          student_id_quiz_id: {
-            student_id: data.student_id,
-            quiz_id: data.quiz_id,
-          },
-        },
-      });
-
-      if (!assignment) {
-        throw new AppError("Quiz assignment not found", 404);
-      }
-
-      await prisma.quizAssignments.update({
-        where: {
-          student_id_quiz_id: {
-            student_id: data.student_id,
-            quiz_id: data.quiz_id,
-          },
-        },
-        data: {
-          grade: data.grade,
-          gradeUpdatedAt: new Date(),
-          gradeUpdatedByName: req.user?.name,
-        },
-      });
+      await this.teacherQuizService.gradeQuizAssignment(data, req.user?.name);
 
       res
         .status(200)
