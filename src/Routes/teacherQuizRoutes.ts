@@ -3,12 +3,10 @@ import {
   createQuiz,
   assignQuiz,
   getQuizzes,
-} from "../Controllers/teacherQuizController.ts";
-import {
   updateQuiz,
   deleteQuiz,
   gradeQuizAssignment,
-} from "../Controllers/teacherExtendedController.ts";
+} from "../Controllers/teacherQuizController.ts";
 import authMiddleware from "../Middlewares/authMiddleware.ts";
 import roleMiddleware from "../Middlewares/roleMiddleware.ts";
 import { quizValidator } from "../Validations/quizValidator.ts";
