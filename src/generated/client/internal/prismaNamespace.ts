@@ -385,6 +385,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   centers: 'centers',
+  admins: 'admins',
   homeworks: 'homeworks',
   parents: 'parents',
   quizzes: 'quizzes',
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "centers" | "homeworks" | "parents" | "quizzes" | "sessions" | "student_parents" | "students" | "teachers" | "attendances" | "quizAssignments" | "homework_submissions"
+    modelProps: "centers" | "admins" | "homeworks" | "parents" | "quizzes" | "sessions" | "student_parents" | "students" | "teachers" | "attendances" | "quizAssignments" | "homework_submissions"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -485,6 +486,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.centersCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CentersCountAggregateOutputType> | number
+        }
+      }
+    }
+    admins: {
+      payload: Prisma.$adminsPayload<ExtArgs>
+      fields: Prisma.adminsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.adminsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.adminsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>
+        }
+        findFirst: {
+          args: Prisma.adminsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.adminsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>
+        }
+        findMany: {
+          args: Prisma.adminsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>[]
+        }
+        create: {
+          args: Prisma.adminsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>
+        }
+        createMany: {
+          args: Prisma.adminsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.adminsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>[]
+        }
+        delete: {
+          args: Prisma.adminsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>
+        }
+        update: {
+          args: Prisma.adminsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>
+        }
+        deleteMany: {
+          args: Prisma.adminsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.adminsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.adminsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>[]
+        }
+        upsert: {
+          args: Prisma.adminsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$adminsPayload>
+        }
+        aggregate: {
+          args: Prisma.AdminsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdmins>
+        }
+        groupBy: {
+          args: Prisma.adminsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.adminsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdminsCountAggregateOutputType> | number
         }
       }
     }
@@ -1280,6 +1355,23 @@ export const CentersScalarFieldEnum = {
 export type CentersScalarFieldEnum = (typeof CentersScalarFieldEnum)[keyof typeof CentersScalarFieldEnum]
 
 
+export const AdminsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  password: 'password',
+  emailVerified: 'emailVerified',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetExpiry: 'passwordResetExpiry',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type AdminsScalarFieldEnum = (typeof AdminsScalarFieldEnum)[keyof typeof AdminsScalarFieldEnum]
+
+
 export const HomeworksScalarFieldEnum = {
   id: 'id',
   session_id: 'session_id',
@@ -1301,6 +1393,10 @@ export const ParentsScalarFieldEnum = {
   name: 'name',
   phone: 'phone',
   email: 'email',
+  password: 'password',
+  emailVerified: 'emailVerified',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetExpiry: 'passwordResetExpiry',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -1343,6 +1439,10 @@ export const Student_parentsScalarFieldEnum = {
   student_id: 'student_id',
   parent_id: 'parent_id',
   role: 'role',
+  status: 'status',
+  linkedByAdminId: 'linkedByAdminId',
+  linkedAt: 'linkedAt',
+  approvedAt: 'approvedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1500,6 +1600,13 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'section'
  */
 export type EnumsectionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'section'>
@@ -1528,9 +1635,16 @@ export type ListEnumparent_roleFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
- * Reference to a field of type 'Boolean'
+ * Reference to a field of type 'linkage_status'
  */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+export type Enumlinkage_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'linkage_status'>
+    
+
+
+/**
+ * Reference to a field of type 'linkage_status[]'
+ */
+export type ListEnumlinkage_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'linkage_status[]'>
     
 
 
@@ -1657,6 +1771,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   centers?: Prisma.centersOmit
+  admins?: Prisma.adminsOmit
   homeworks?: Prisma.homeworksOmit
   parents?: Prisma.parentsOmit
   quizzes?: Prisma.quizzesOmit

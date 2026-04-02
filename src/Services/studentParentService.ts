@@ -5,19 +5,32 @@ import {
   createStudentParentDTO,
   getStudentParentsDTO,
 } from "../dtos/studentParent.dto.ts";
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 10;
 
 class StudentParentService implements IStudentParentService {
   async createStudentParent(
     studentId: number,
     data: createStudentParentDTO
   ): Promise<void> {
-    const { name, phone, relationship } = data;
+    const { name, phone, relationship, email, password } = data as any;
+
+    // Email and password are now required for parent authentication
+    if (!email || !password) {
+      throw new Error("Email and password are required for parent creation");
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     // Create the parent
     const parent = await prisma.parents.create({
       data: {
         name,
         phone,
+        email,
+        password: hashedPassword,
       },
     });
 
@@ -40,6 +53,7 @@ class StudentParentService implements IStudentParentService {
             id: true,
             name: true,
             phone: true,
+            email: true,
           },
         },
       },

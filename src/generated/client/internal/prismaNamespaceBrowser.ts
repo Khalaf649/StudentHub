@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   centers: 'centers',
+  admins: 'admins',
   homeworks: 'homeworks',
   parents: 'parents',
   quizzes: 'quizzes',
@@ -93,6 +94,23 @@ export const CentersScalarFieldEnum = {
 export type CentersScalarFieldEnum = (typeof CentersScalarFieldEnum)[keyof typeof CentersScalarFieldEnum]
 
 
+export const AdminsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  password: 'password',
+  emailVerified: 'emailVerified',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetExpiry: 'passwordResetExpiry',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type AdminsScalarFieldEnum = (typeof AdminsScalarFieldEnum)[keyof typeof AdminsScalarFieldEnum]
+
+
 export const HomeworksScalarFieldEnum = {
   id: 'id',
   session_id: 'session_id',
@@ -114,6 +132,10 @@ export const ParentsScalarFieldEnum = {
   name: 'name',
   phone: 'phone',
   email: 'email',
+  password: 'password',
+  emailVerified: 'emailVerified',
+  passwordResetToken: 'passwordResetToken',
+  passwordResetExpiry: 'passwordResetExpiry',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -156,6 +178,10 @@ export const Student_parentsScalarFieldEnum = {
   student_id: 'student_id',
   parent_id: 'parent_id',
   role: 'role',
+  status: 'status',
+  linkedByAdminId: 'linkedByAdminId',
+  linkedAt: 'linkedAt',
+  approvedAt: 'approvedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

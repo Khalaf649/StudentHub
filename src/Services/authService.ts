@@ -2,6 +2,9 @@ import prisma from "../lib/prisma.ts";
 import { IAuthService } from "./interfaces/auth.service.interface.ts";
 import {
   RegisterStudentDTO,
+  RegisterTeacherDTO,
+  RegisterAdminDTO,
+  RegisterParentDTO,
   LoginDTO,
   TokenDTO,
   LoginResponsetDTO,
@@ -14,10 +17,12 @@ import { AppError } from "../errors/AppError.ts";
 const SALT_ROUNDS = 10;
 const JWT_SECRET = process.env.JWT_SECRET as string;
 const JWT_EXPIRES_IN = "1h";
-const roleModelMap: Record<user_role, any> = {
+
+const roleModelMap: Record<string, any> = {
   [user_role.student]: prisma.students,
   [user_role.teacher]: prisma.teachers,
-  [user_role.admin]: prisma.teachers, // Admin uses teacher model for now
+  [user_role.admin]: prisma.admins,
+  parent: prisma.parents,
 };
 
 class AuthService implements IAuthService {
@@ -37,7 +42,7 @@ class AuthService implements IAuthService {
     });
   }
 
-  async registerTeacher(data: any): Promise<void> {
+  async registerTeacher(data: RegisterTeacherDTO): Promise<void> {
     const { name, phone, email, password } = data;
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
@@ -51,10 +56,38 @@ class AuthService implements IAuthService {
     });
   }
 
+  async registerAdmin(data: RegisterAdminDTO): Promise<void> {
+    const { name, phone, email, password } = data;
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    await prisma.admins.create({
+      data: {
+        name,
+        phone,
+        email,
+        password: hashedPassword,
+      },
+    });
+  }
+
+  async registerParent(data: RegisterParentDTO): Promise<void> {
+    const { name, phone, email, password } = data;
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    await prisma.parents.create({
+      data: {
+        name,
+        phone,
+        email,
+        password: hashedPassword,
+      },
+    });
+  }
+
   async login(data: LoginDTO): Promise<LoginResponsetDTO> {
     const { email, password, role } = data;
 
-    const model = roleModelMap[role as user_role];
+    const model = roleModelMap[role];
     if (!model) throw new AppError("Invalid role", 400);
 
     const user = await model.findUnique({

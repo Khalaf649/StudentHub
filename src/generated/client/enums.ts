@@ -43,3 +43,12 @@ export const user_role = {
 } as const
 
 export type user_role = (typeof user_role)[keyof typeof user_role]
+
+
+export const linkage_status = {
+  active: 'active',
+  pending: 'pending',
+  inactive: 'inactive'
+} as const
+
+export type linkage_status = (typeof linkage_status)[keyof typeof linkage_status]

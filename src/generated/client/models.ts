@@ -9,6 +9,7 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/centers.ts'
+export type * from './models/admins.ts'
 export type * from './models/homeworks.ts'
 export type * from './models/parents.ts'
 export type * from './models/quizzes.ts'

@@ -45,6 +45,11 @@ export { Prisma }
  */
 export type centers = Prisma.centersModel
 /**
+ * Model admins
+ * 
+ */
+export type admins = Prisma.adminsModel
+/**
  * Model homeworks
  * 
  */

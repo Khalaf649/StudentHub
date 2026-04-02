@@ -629,10 +629,6 @@ export type studentsUpdateOneRequiredWithoutStudent_parentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.studentsUpdateToOneWithWhereWithoutStudent_parentsInput, Prisma.studentsUpdateWithoutStudent_parentsInput>, Prisma.studentsUncheckedUpdateWithoutStudent_parentsInput>
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type studentsCreateNestedOneWithoutAttendancesInput = {
   create?: Prisma.XOR<Prisma.studentsCreateWithoutAttendancesInput, Prisma.studentsUncheckedCreateWithoutAttendancesInput>
   connectOrCreate?: Prisma.studentsCreateOrConnectWithoutAttendancesInput

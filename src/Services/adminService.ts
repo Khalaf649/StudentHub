@@ -34,9 +34,29 @@ class AdminService implements IAdminService {
           center_id,
         },
       });
-    } else if (role === "teacher" || role === "admin") {
+    } else if (role === "teacher") {
       const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
       await prisma.teachers.create({
+        data: {
+          name,
+          email,
+          phone,
+          password: hashedPassword,
+        },
+      });
+    } else if (role === "admin") {
+      const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+      await prisma.admins.create({
+        data: {
+          name,
+          email,
+          phone,
+          password: hashedPassword,
+        },
+      });
+    } else if (role === "parent") {
+      const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+      await prisma.parents.create({
         data: {
           name,
           email,
@@ -229,6 +249,172 @@ class AdminService implements IAdminService {
     }
 
     throw new AppError("User not found", 404);
+  }
+
+  // Parent-Student Linkage Management
+  async linkParentToStudent(data: any, adminId: number): Promise<void> {
+    const { studentId, parentId, role } = data;
+
+    // Verify student exists
+    const student = await prisma.students.findUnique({
+      where: { id: studentId },
+    });
+    if (!student) throw new AppError("Student not found", 404);
+
+    // Verify parent exists
+    const parent = await prisma.parents.findUnique({
+      where: { id: parentId },
+    });
+    if (!parent) throw new AppError("Parent not found", 404);
+
+    // Create linkage
+    await prisma.student_parents.create({
+      data: {
+        student_id: studentId,
+        parent_id: parentId,
+        role,
+        status: "active",
+        linkedByAdminId: adminId,
+        approvedAt: new Date(),
+      },
+    });
+  }
+
+  async unlinkParentFromStudent(
+    studentId: number,
+    parentId: number,
+  ): Promise<void> {
+    const linkage = await prisma.student_parents.findFirst({
+      where: {
+        student_id: studentId,
+        parent_id: parentId,
+      },
+    });
+
+    if (!linkage) {
+      throw new AppError("Parent-Student linkage not found", 404);
+    }
+
+    // Soft delete by setting status to inactive
+    await prisma.student_parents.update({
+      where: { id: linkage.id },
+      data: { status: "inactive" },
+    });
+  }
+
+  async getStudentParents(studentId: number): Promise<any[]> {
+    const student = await prisma.students.findUnique({
+      where: { id: studentId },
+    });
+    if (!student) throw new AppError("Student not found", 404);
+
+    const parentLinkages = await prisma.student_parents.findMany({
+      where: {
+        student_id: studentId,
+        status: "active",
+      },
+      include: {
+        parents: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+          },
+        },
+      },
+    });
+
+    return parentLinkages.map((linkage) => ({
+      parentId: linkage.parents.id,
+      parentName: linkage.parents.name,
+      email: linkage.parents.email,
+      phone: linkage.parents.phone,
+      role: linkage.role,
+      status: linkage.status,
+      linkedAt: linkage.linkedAt,
+    }));
+  }
+
+  async getParentStudents(parentId: number): Promise<any[]> {
+    const parent = await prisma.parents.findUnique({
+      where: { id: parentId },
+    });
+    if (!parent) throw new AppError("Parent not found", 404);
+
+    const studentLinkages = await prisma.student_parents.findMany({
+      where: {
+        parent_id: parentId,
+        status: "active",
+      },
+      include: {
+        students: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            section: true,
+          },
+        },
+      },
+    });
+
+    return studentLinkages.map((linkage) => ({
+      studentId: linkage.students.id,
+      studentName: linkage.students.name,
+      email: linkage.students.email,
+      section: linkage.students.section,
+      parentRole: linkage.role,
+      status: linkage.status,
+    }));
+  }
+
+  async approvePendingLinkage(
+    studentId: number,
+    parentId: number,
+  ): Promise<void> {
+    const linkage = await prisma.student_parents.findFirst({
+      where: {
+        student_id: studentId,
+        parent_id: parentId,
+      },
+    });
+
+    if (!linkage) {
+      throw new AppError("Parent-Student linkage not found", 404);
+    }
+
+    await prisma.student_parents.update({
+      where: { id: linkage.id },
+      data: {
+        status: "active",
+        approvedAt: new Date(),
+      },
+    });
+  }
+
+  async updateLinkageStatus(
+    studentId: number,
+    parentId: number,
+    data: any,
+  ): Promise<void> {
+    const linkage = await prisma.student_parents.findFirst({
+      where: {
+        student_id: studentId,
+        parent_id: parentId,
+      },
+    });
+
+    if (!linkage) {
+      throw new AppError("Parent-Student linkage not found", 404);
+    }
+
+    await prisma.student_parents.update({
+      where: { id: linkage.id },
+      data: {
+        status: data.status,
+      },
+    });
   }
 }
 

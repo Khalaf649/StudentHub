@@ -23,6 +23,11 @@ export * from './enums.ts';
  */
 export type centers = Prisma.centersModel
 /**
+ * Model admins
+ * 
+ */
+export type admins = Prisma.adminsModel
+/**
  * Model homeworks
  * 
  */

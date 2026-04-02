@@ -2,7 +2,6 @@ generator client {
   provider = "prisma-client"
   output   = "../src/generated/client"
 }
-
 datasource db {
   provider = "postgresql"
 }
@@ -17,6 +16,20 @@ model centers {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   deletedAt DateTime?
+}
+
+model admins {
+  id                  Int       @id @default(autoincrement())
+  name                String    @db.VarChar(255)
+  email               String    @unique @db.VarChar(255)
+  phone               String    @unique @db.VarChar(255)
+  password            String    @db.VarChar(255)
+  emailVerified       Boolean   @default(false)
+  passwordResetToken  String?
+  passwordResetExpiry DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
 }
 
 model homeworks {
@@ -35,14 +48,18 @@ model homeworks {
 }
 
 model parents {
-  id              Int               @id @default(autoincrement())
-  name            String            @db.VarChar(100)
-  phone           String            @db.VarChar(20)
-  email           String?           @db.VarChar(255)
-  student_parents student_parents[]
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  deletedAt       DateTime?
+  id                  Int               @id @default(autoincrement())
+  name                String            @db.VarChar(100)
+  phone               String            @unique @db.VarChar(20)
+  email               String            @unique @db.VarChar(255)
+  password            String            @db.VarChar(255)
+  emailVerified       Boolean           @default(false)
+  passwordResetToken  String?
+  passwordResetExpiry DateTime?
+  student_parents     student_parents[]
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  deletedAt           DateTime?
 }
 
 model quizzes {
@@ -76,14 +93,18 @@ model sessions {
 }
 
 model student_parents {
-  id        Int         @id @default(autoincrement())
-  student_id Int
-  parent_id  Int
-  role      parent_role
-  parents   parents     @relation(fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent")
-  students  students    @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id              Int               @id @default(autoincrement())
+  student_id      Int
+  parent_id       Int
+  role            parent_role
+  status          linkage_status    @default(active)
+  linkedByAdminId Int?
+  linkedAt        DateTime          @default(now())
+  approvedAt      DateTime?
+  parents         parents           @relation(fields: [parent_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_parent")
+  students        students          @relation(fields: [student_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_student")
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 
   @@unique([student_id, parent_id, role], map: "unique_student_parent")
 }
@@ -191,4 +212,10 @@ enum user_role {
   student
   teacher
   admin
+}
+
+enum linkage_status {
+  active
+  pending
+  inactive
 }
